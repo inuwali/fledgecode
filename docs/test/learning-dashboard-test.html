@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Dashboard Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .test-section {
+            margin-bottom: 30px;
+            padding: 15px;
+            border-left: 4px solid #007bff;
+            background: #f8f9fa;
+        }
+        .test-controls {
+            margin: 20px 0;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+        .output {
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-left: 4px solid #007bff;
+            border-radius: 4px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 0.85rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .error {
+            border-left-color: #dc3545;
+            background: #f8d7da;
+        }
+        .success {
+            border-left-color: #28a745;
+            background: #d4edda;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            background: #e9ecef;
+            font-weight: bold;
+        }
+        iframe {
+            width: 100%;
+            height: 400px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 Learning Dashboard Test</h1>
+        <p>Test the enhanced learning dashboard integration with AI chat interface</p>
+
+        <div class="status" id="status">Loading test environment...</div>
+
+        <div class="test-section">
+            <h3>Step 1: Load Main Application</h3>
+            <p>Load the main application with the enhanced learning dashboard:</p>
+            <div class="test-controls">
+                <button id="load-app-btn">Load Application</button>
+                <button id="check-dashboard-btn" disabled>Check Dashboard Status</button>
+            </div>
+            
+            <div id="app-frame-container">
+                <!-- Application iframe will be loaded here -->
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3>Step 2: Test Dashboard Functionality</h3>
+            <p>Test various dashboard features:</p>
+            <div class="test-controls">
+                <button id="test-current-learning-btn" disabled>Test Current Learning Display</button>
+                <button id="test-progression-btn" disabled>Test "What's Next" Flow</button>
+                <button id="test-objective-tracking-btn" disabled>Test Objective Tracking</button>
+                <button id="test-concept-selection-btn" disabled>Test Concept Selection</button>
+            </div>
+            
+            <div id="dashboard-output" class="output">
+                Click "Load Application" to start testing the dashboard functionality.
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3>Step 3: Test Integration with AI Chat</h3>
+            <p>Verify that AI chat and learning dashboard work together:</p>
+            <div class="test-controls">
+                <button id="test-ai-integration-btn" disabled>Test AI + Learning Integration</button>
+                <button id="simulate-code-generation-btn" disabled>Simulate Code Generation</button>
+                <button id="test-objective-detection-btn" disabled>Test Objective Detection</button>
+            </div>
+            
+            <div id="integration-output" class="output">
+                Load the application first to test AI integration.
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3>Step 4: Manual Testing Instructions</h3>
+            <div style="background: #fff3cd; padding: 12px; border-radius: 4px; margin: 10px 0;">
+                <strong>Manual Testing Checklist:</strong>
+                <ol style="margin: 8px 0; padding-left: 20px;">
+                    <li>✅ AI chat interface is visible at the top</li>
+                    <li>✅ Learning dashboard appears below AI chat</li>
+                    <li>✅ Current learning concept is displayed</li>
+                    <li>✅ "What's Next?" button appears when appropriate</li>
+                    <li>✅ Concept selection shows available options</li>
+                    <li>✅ Objective tracking updates when code is written</li>
+                    <li>✅ Progress indicators work correctly</li>
+                    <li>✅ Concept progression system functions</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { OntologyEngine } from '../js/ontology.js';
+        import { LearnerProfile } from '../js/learner.js';
+        import { LearningDashboard } from '../js/learning-dashboard.js';
+
+        class LearningDashboardTester {
+            constructor() {
+                this.ontologyEngine = null;
+                this.learnerProfile = null;
+                this.learningDashboard = null;
+                this.appFrame = null;
+                this.isReady = false;
+            }
+
+            async init() {
+                try {
+                    this.updateStatus('Initializing test environment...');
+                    
+                    // Initialize components for standalone testing
+                    this.ontologyEngine = new OntologyEngine();
+                    const ontologyLoaded = await this.ontologyEngine.loadOntology();
+                    
+                    if (!ontologyLoaded) {
+                        throw new Error('Failed to load ontology');
+                    }
+
+                    this.learnerProfile = new LearnerProfile(this.ontologyEngine);
+                    const profileInitialized = this.learnerProfile.initializeProfile();
+                    
+                    if (!profileInitialized) {
+                        throw new Error('Failed to initialize learner profile');
+                    }
+
+                    this.learningDashboard = new LearningDashboard(this.ontologyEngine, this.learnerProfile);
+
+                    this.updateStatus('Test environment ready!', 'success');
+                    this.setupEventListeners();
+                    this.isReady = true;
+
+                } catch (error) {
+                    console.error('Test initialization failed:', error);
+                    this.updateStatus(`Test initialization failed: ${error.message}`, 'error');
+                }
+            }
+
+            setupEventListeners() {
+                document.getElementById('load-app-btn').onclick = () => {
+                    this.loadApplication();
+                };
+
+                document.getElementById('check-dashboard-btn').onclick = () => {
+                    this.checkDashboardStatus();
+                };
+
+                document.getElementById('test-current-learning-btn').onclick = () => {
+                    this.testCurrentLearning();
+                };
+
+                document.getElementById('test-progression-btn').onclick = () => {
+                    this.testProgression();
+                };
+
+                document.getElementById('test-objective-tracking-btn').onclick = () => {
+                    this.testObjectiveTracking();
+                };
+
+                document.getElementById('test-concept-selection-btn').onclick = () => {
+                    this.testConceptSelection();
+                };
+
+                document.getElementById('test-ai-integration-btn').onclick = () => {
+                    this.testAIIntegration();
+                };
+
+                document.getElementById('simulate-code-generation-btn').onclick = () => {
+                    this.simulateCodeGeneration();
+                };
+
+                document.getElementById('test-objective-detection-btn').onclick = () => {
+                    this.testObjectiveDetection();
+                };
+            }
+
+            loadApplication() {
+                this.updateStatus('Loading main application...');
+                
+                const container = document.getElementById('app-frame-container');
+                container.innerHTML = `
+                    <iframe id="app-frame" src="../index.html" style="width: 100%; height: 600px; border: 1px solid #ddd; border-radius: 4px;">
+                    </iframe>
+                `;
+
+                this.appFrame = document.getElementById('app-frame');
+                
+                this.appFrame.onload = () => {
+                    this.updateStatus('Application loaded successfully!', 'success');
+                    this.enableTestButtons();
+                };
+
+                this.appFrame.onerror = () => {
+                    this.updateStatus('Failed to load application', 'error');
+                };
+            }
+
+            enableTestButtons() {
+                const buttons = [
+                    'check-dashboard-btn',
+                    'test-current-learning-btn', 
+                    'test-progression-btn',
+                    'test-objective-tracking-btn',
+                    'test-concept-selection-btn',
+                    'test-ai-integration-btn',
+                    'simulate-code-generation-btn',
+                    'test-objective-detection-btn'
+                ];
+
+                buttons.forEach(btnId => {
+                    const btn = document.getElementById(btnId);
+                    if (btn) btn.disabled = false;
+                });
+            }
+
+            checkDashboardStatus() {
+                if (!this.learningDashboard) {
+                    this.outputDashboard('Dashboard not initialized', 'error');
+                    return;
+                }
+
+                const status = this.learningDashboard.getState();
+                this.outputDashboard(JSON.stringify(status, null, 2), 'success');
+            }
+
+            testCurrentLearning() {
+                if (!this.isReady) {
+                    this.outputDashboard('Test environment not ready', 'error');
+                    return;
+                }
+
+                try {
+                    // Initialize dashboard standalone
+                    this.learningDashboard.init();
+                    
+                    const currentConcept = this.learnerProfile.getCurrentConcept();
+                    const availableConcepts = this.learnerProfile.getAvailableConcepts();
+                    
+                    const result = {
+                        currentConcept,
+                        availableConcepts: availableConcepts.map(c => ({ id: c.id, name: c.name })),
+                        dashboardState: this.learningDashboard.getState()
+                    };
+                    
+                    this.outputDashboard(JSON.stringify(result, null, 2), 'success');
+                    
+                } catch (error) {
+                    this.outputDashboard(`Error testing current learning: ${error.message}`, 'error');
+                }
+            }
+
+            testProgression() {
+                if (!this.isReady) {
+                    this.outputDashboard('Test environment not ready', 'error');
+                    return;
+                }
+
+                try {
+                    const currentConceptId = this.learnerProfile.getCurrentConcept();
+                    const nextConcepts = this.learningDashboard.getNextAvailableConcepts(currentConceptId);
+                    
+                    const result = {
+                        currentConcept: currentConceptId,
+                        nextAvailableConcepts: nextConcepts.map(c => ({
+                            id: c.id,
+                            name: c.name,
+                            description: c.description,
+                            unlockInfo: this.learningDashboard.getUnlockInfo(c)
+                        }))
+                    };
+                    
+                    this.outputDashboard(JSON.stringify(result, null, 2), 'success');
+                    
+                } catch (error) {
+                    this.outputDashboard(`Error testing progression: ${error.message}`, 'error');
+                }
+            }
+
+            testObjectiveTracking() {
+                if (!this.isReady) {
+                    this.outputDashboard('Test environment not ready', 'error');
+                    return;
+                }
+
+                try {
+                    // Simulate code execution with different P5.js functions
+                    const testCodes = [
+                        'ellipse(200, 200, 50, 50);',
+                        'fill(255, 0, 0); rect(100, 100, 50, 50);',
+                        'background(220); strokeWeight(5);'
+                    ];
+
+                    const results = [];
+                    
+                    testCodes.forEach((code, index) => {
+                        this.learningDashboard.onCodeExecuted(code);
+                        results.push({
+                            code,
+                            detectedObjectives: [...this.learningDashboard.detectedObjectives]
+                        });
+                    });
+                    
+                    this.outputDashboard(JSON.stringify(results, null, 2), 'success');
+                    
+                } catch (error) {
+                    this.outputDashboard(`Error testing objective tracking: ${error.message}`, 'error');
+                }
+            }
+
+            testConceptSelection() {
+                if (!this.isReady) {
+                    this.outputDashboard('Test environment not ready', 'error');
+                    return;
+                }
+
+                try {
+                    const availableConcepts = this.learnerProfile.getAvailableConcepts();
+                    
+                    if (availableConcepts.length > 1) {
+                        // Test selecting a different concept
+                        const newConceptId = availableConcepts[1].id;
+                        this.learningDashboard.selectConcept(newConceptId);
+                        
+                        const result = {
+                            selectedConcept: newConceptId,
+                            newCurrentConcept: this.learnerProfile.getCurrentConcept(),
+                            dashboardState: this.learningDashboard.getState()
+                        };
+                        
+                        this.outputDashboard(JSON.stringify(result, null, 2), 'success');
+                    } else {
+                        this.outputDashboard('Not enough concepts available for selection test', 'error');
+                    }
+                    
+                } catch (error) {
+                    this.outputDashboard(`Error testing concept selection: ${error.message}`, 'error');
+                }
+            }
+
+            testAIIntegration() {
+                this.outputIntegration('AI Integration test requires manual verification in the main application:\n\n1. Open the main application\n2. Type a request in the AI chat\n3. Verify the learning dashboard updates appropriately\n4. Check that both systems work together', 'success');
+            }
+
+            simulateCodeGeneration() {
+                this.outputIntegration('Code Generation simulation:\n\n1. The AI would generate code based on user request\n2. The learning dashboard would detect objectives in the generated code\n3. Progress would be updated in real-time\n4. "What\'s Next?" button would appear when appropriate', 'success');
+            }
+
+            testObjectiveDetection() {
+                if (!this.isReady) {
+                    this.outputIntegration('Test environment not ready', 'error');
+                    return;
+                }
+
+                try {
+                    // Simulate a comprehensive code example
+                    const comprehensiveCode = `
+function setup() {
+  createCanvas(400, 400);
+}
+
+function draw() {
+  background(220);
+  
+  fill(255, 0, 0);
+  ellipse(mouseX, mouseY, 50, 50);
+  
+  stroke(0);
+  strokeWeight(3);
+  rect(100, 100, 100, 100);
+  
+  noFill();
+  ellipse(300, 300, 80, 80);
+}
+                    `;
+
+                    this.learningDashboard.onCodeExecuted(comprehensiveCode);
+                    
+                    const result = {
+                        detectedObjectives: this.learningDashboard.detectedObjectives,
+                        dashboardState: this.learningDashboard.getState()
+                    };
+                    
+                    this.outputIntegration(JSON.stringify(result, null, 2), 'success');
+                    
+                } catch (error) {
+                    this.outputIntegration(`Error testing objective detection: ${error.message}`, 'error');
+                }
+            }
+
+            updateStatus(message, type = 'normal') {
+                const statusEl = document.getElementById('status');
+                statusEl.textContent = message;
+                statusEl.className = `status ${type}`;
+            }
+
+            outputDashboard(text, type = 'normal') {
+                const output = document.getElementById('dashboard-output');
+                output.textContent = text;
+                output.className = `output ${type}`;
+            }
+
+            outputIntegration(text, type = 'normal') {
+                const output = document.getElementById('integration-output');
+                output.textContent = text;
+                output.className = `output ${type}`;
+            }
+        }
+
+        // Initialize tester when page loads
+        const tester = new LearningDashboardTester();
+        tester.init();
+    </script>
+</body>
+</html>

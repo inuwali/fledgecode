@@ -1,0 +1,5 @@
+.claude
+.nova
+.vercel
+.env*.local
+docs/js/config.js

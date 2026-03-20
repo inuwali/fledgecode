@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Handling Test</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            max-width: 800px; 
+            margin: 0 auto; 
+            padding: 20px; 
+        }
+        .test-section {
+            background: #f5f5f5;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .test-section h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        button {
+            background: #007cba;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #005a87;
+        }
+        .error-log {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .status {
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .status.good { background: #d4edda; color: #155724; }
+        .status.bad { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Error Handling Test Suite</h1>
+    <p>Test different types of errors to ensure proper categorization and handling.</p>
+
+    <div class="test-section">
+        <h3>✅ User Code Errors (Should NOT trigger global error handler)</h3>
+        <p>These should be handled by the existing P5.js error system with subtle notifications.</p>
+        
+        <button onclick="testSyntaxError()">Test Syntax Error</button>
+        <button onclick="testReferenceError()">Test Reference Error</button>
+        <button onclick="testP5FunctionError()">Test P5.js Function Error</button>
+        
+        <div id="user-error-status" class="status" style="display: none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>⚠️ System Errors (Should trigger global error handler)</h3>
+        <p>These should show the new error notifications with recovery options.</p>
+        
+        <button onclick="testSystemError()">Test System Error</button>
+        <button onclick="testNetworkError()">Test Network Error</button>
+        <button onclick="testStorageError()">Test Storage Error</button>
+        
+        <div id="system-error-status" class="status" style="display: none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>📊 Error Log Monitor</h3>
+        <button onclick="clearErrorLog()">Clear Log</button>
+        <div id="error-log" class="error-log">No errors logged yet...</div>
+    </div>
+
+    <script type="module">
+        import { globalErrorHandler } from '../js/error-handler.js';
+        
+        let errorLog = [];
+        
+        // Override console.error to capture error logs
+        const originalConsoleError = console.error;
+        console.error = (...args) => {
+            errorLog.push(`[${new Date().toLocaleTimeString()}] ${args.join(' ')}`);
+            updateErrorLog();
+            originalConsoleError.apply(console, args);
+        };
+        
+        // Monitor global error handler
+        let globalErrorHandlerTriggered = false;
+        const originalHandleError = globalErrorHandler.handleError;
+        globalErrorHandler.handleError = function(...args) {
+            globalErrorHandlerTriggered = true;
+            errorLog.push(`[${new Date().toLocaleTimeString()}] GLOBAL ERROR HANDLER: ${args[0]} - ${args[1]}`);
+            updateErrorLog();
+            return originalHandleError.apply(this, args);
+        };
+        
+        function updateErrorLog() {
+            const logElement = document.getElementById('error-log');
+            logElement.textContent = errorLog.length ? errorLog.join('\n') : 'No errors logged yet...';
+            logElement.scrollTop = logElement.scrollHeight;
+        }
+        
+        function showUserStatus(message, isGood) {
+            const status = document.getElementById('user-error-status');
+            status.textContent = message;
+            status.className = `status ${isGood ? 'good' : 'bad'}`;
+            status.style.display = 'block';
+        }
+        
+        function showSystemStatus(message, isGood) {
+            const status = document.getElementById('system-error-status');
+            status.textContent = message;
+            status.className = `status ${isGood ? 'good' : 'bad'}`;
+            status.style.display = 'block';
+        }
+        
+        // Test functions
+        window.testSyntaxError = function() {
+            globalErrorHandlerTriggered = false;
+            
+            try {
+                // This will cause a syntax error
+                eval('function test() { this is invalid syntax }');
+            } catch (e) {
+                // Expected to be caught here
+            }
+            
+            setTimeout(() => {
+                if (!globalErrorHandlerTriggered) {
+                    showUserStatus('✅ GOOD: Syntax error did not trigger global error handler', true);
+                } else {
+                    showUserStatus('❌ BAD: Syntax error triggered global error handler', false);
+                }
+            }, 100);
+        };
+        
+        window.testReferenceError = function() {
+            globalErrorHandlerTriggered = false;
+            
+            try {
+                // This will cause a reference error for P5.js function
+                eval('mouseX + 10'); // mouseX is undefined
+            } catch (e) {
+                // Expected to be caught here
+            }
+            
+            setTimeout(() => {
+                if (!globalErrorHandlerTriggered) {
+                    showUserStatus('✅ GOOD: P5.js reference error did not trigger global error handler', true);
+                } else {
+                    showUserStatus('❌ BAD: P5.js reference error triggered global error handler', false);
+                }
+            }, 100);
+        };
+        
+        window.testP5FunctionError = function() {
+            globalErrorHandlerTriggered = false;
+            
+            try {
+                // This will cause a reference error for P5.js function
+                eval('background(220)'); // background is undefined outside P5 context
+            } catch (e) {
+                // Expected to be caught here
+            }
+            
+            setTimeout(() => {
+                if (!globalErrorHandlerTriggered) {
+                    showUserStatus('✅ GOOD: P5.js function error did not trigger global error handler', true);
+                } else {
+                    showUserStatus('❌ BAD: P5.js function error triggered global error handler', false);
+                }
+            }, 100);
+        };
+        
+        window.testSystemError = function() {
+            globalErrorHandlerTriggered = false;
+            
+            // Simulate a system error
+            globalErrorHandler.handleSystemError('test_system_error', new Error('Test system error'), {
+                component: 'test',
+                severity: 'high'
+            });
+            
+            setTimeout(() => {
+                if (globalErrorHandlerTriggered) {
+                    showSystemStatus('✅ GOOD: System error triggered global error handler', true);
+                } else {
+                    showSystemStatus('❌ BAD: System error did not trigger global error handler', false);
+                }
+            }, 100);
+        };
+        
+        window.testNetworkError = function() {
+            globalErrorHandlerTriggered = false;
+            
+            // Simulate a network error
+            globalErrorHandler.handleError('network_failure', new Error('Network connection failed'), {
+                type: 'timeout',
+                url: 'https://example.com/api'
+            });
+            
+            setTimeout(() => {
+                if (globalErrorHandlerTriggered) {
+                    showSystemStatus('✅ GOOD: Network error triggered global error handler', true);
+                } else {
+                    showSystemStatus('❌ BAD: Network error did not trigger global error handler', false);
+                }
+            }, 100);
+        };
+        
+        window.testStorageError = function() {
+            globalErrorHandlerTriggered = false;
+            
+            // Simulate a storage error
+            globalErrorHandler.handleError('storage_failure', new Error('QuotaExceededError: Storage quota exceeded'), {
+                operation: 'save_session',
+                storageType: 'localStorage'
+            });
+            
+            setTimeout(() => {
+                if (globalErrorHandlerTriggered) {
+                    showSystemStatus('✅ GOOD: Storage error triggered global error handler', true);
+                } else {
+                    showSystemStatus('❌ BAD: Storage error did not trigger global error handler', false);
+                }
+            }, 100);
+        };
+        
+        window.clearErrorLog = function() {
+            errorLog = [];
+            updateErrorLog();
+            document.getElementById('user-error-status').style.display = 'none';
+            document.getElementById('system-error-status').style.display = 'none';
+        };
+        
+        // Initial log update
+        updateErrorLog();
+    </script>
+</body>
+</html>

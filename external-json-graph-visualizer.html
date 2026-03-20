@@ -1,0 +1,1948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Objectives Dependency Graph</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f7fa;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .file-input {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .file-input input[type="file"] {
+            margin: 10px;
+            padding: 10px;
+            border: 2px dashed #3498db;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+        
+        .controls {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .control-group label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #666;
+            text-transform: uppercase;
+        }
+        
+        select, input, button {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        button:hover {
+            background: #2980b9;
+        }
+        
+        button:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+        }
+        
+        .main-content {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .graph-wrapper {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .graph-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            position: relative;
+            min-height: 600px;
+        }
+
+        .editor-pane {
+            width: 350px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            overflow-y: auto;
+            max-height: 600px;
+        }
+
+        .editor-pane h3 {
+            margin: 0 0 15px 0;
+            color: #2c3e50;
+            font-size: 16px;
+        }
+
+        .editor-empty {
+            color: #999;
+            font-size: 14px;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .editor-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-group label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 13px;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .prerequisites-list {
+            font-size: 13px;
+            background: #f8f9fa;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            padding: 10px;
+            min-height: 40px;
+        }
+
+        .prerequisite-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .prerequisite-item:last-child {
+            border-bottom: none;
+        }
+
+        .prerequisite-item button {
+            font-size: 11px;
+            padding: 2px 6px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .prerequisite-item button:hover {
+            background: #c0392b;
+        }
+
+        .editor-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .editor-buttons button {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 13px;
+            cursor: pointer;
+            background: white;
+        }
+
+        .editor-buttons .save-btn {
+            background: #27ae60;
+            color: white;
+            border-color: #27ae60;
+        }
+
+        .editor-buttons .save-btn:hover {
+            background: #229954;
+        }
+
+        .editor-buttons .delete-btn {
+            background: #e74c3c;
+            color: white;
+            border-color: #e74c3c;
+        }
+
+        .editor-buttons .delete-btn:hover {
+            background: #c0392b;
+        }
+
+        .disclosure {
+            margin-top: 15px;
+        }
+
+        .disclosure-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            user-select: none;
+            font-weight: 600;
+            font-size: 13px;
+            color: #2c3e50;
+        }
+
+        .disclosure-header:hover {
+            background: #f0f1f3;
+        }
+
+        .disclosure-toggle {
+            display: inline-block;
+            transition: transform 0.2s;
+            width: 16px;
+            height: 16px;
+            font-size: 12px;
+            line-height: 16px;
+        }
+
+        .disclosure.open .disclosure-toggle {
+            transform: rotate(90deg);
+        }
+
+        .disclosure-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .disclosure.open .disclosure-content {
+            max-height: 1000px;
+            transition: max-height 0.3s ease-in;
+        }
+
+        .disclosure-content > div {
+            padding: 15px 10px 0 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .metadata-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .metadata-row .form-group {
+            flex: 1;
+        }
+
+        .metadata-row .form-group label {
+            font-size: 11px;
+        }
+
+        .loading, .error {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 300px;
+            font-size: 18px;
+            color: #666;
+        }
+        
+        .error {
+            color: #e74c3c;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .tooltip {
+            position: absolute;
+            background: rgba(0,0,0,0.9);
+            color: white;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            pointer-events: none;
+            z-index: 1000;
+            max-width: 350px;
+            line-height: 1.4;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        
+        .tooltip h4 {
+            margin: 0 0 8px 0;
+            color: #3498db;
+            font-size: 14px;
+        }
+        
+        .tooltip .code {
+            background: rgba(255,255,255,0.1);
+            padding: 4px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            margin: 4px 0;
+            display: block;
+        }
+        
+        .legend {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.95);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-size: 12px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+        }
+        
+        .legend-size {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 8px;
+        }
+        
+        .stats {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3498db;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+        
+        /* Node and link styles */
+        .node {
+            fill: #E8E8E8;
+            stroke: #fff;
+            stroke-width: 2px;
+            cursor: pointer;
+            paint-order: stroke;
+            /* Disable transitions to prevent visual shifts from class changes */
+        }
+
+        .node:hover {
+            stroke-width: 2px;
+            filter: drop-shadow(0 0 6px rgba(52, 152, 219, 0.6)) brightness(1.1);
+        }
+
+        .node.highlighted {
+            stroke: #e74c3c;
+            stroke-width: 2px;
+            filter: drop-shadow(0 0 8px rgba(231, 76, 60, 0.8)) brightness(1.2);
+        }
+
+        .node.prerequisite {
+            stroke: #f39c12;
+            stroke-width: 2px;
+            filter: drop-shadow(0 0 4px rgba(243, 156, 18, 0.6));
+        }
+
+        .node.dependent {
+            stroke: #27ae60;
+            stroke-width: 2px;
+            filter: drop-shadow(0 0 4px rgba(39, 174, 96, 0.6));
+        }
+        
+        .link {
+            stroke: #999;
+            stroke-width: 2px;
+            stroke-opacity: 0.6;
+            marker-end: url(#arrowhead);
+        }
+        
+        .link.highlighted {
+            stroke: #e74c3c;
+            stroke-width: 3px;
+            stroke-opacity: 1;
+        }
+        
+        .link.prerequisite-path {
+            stroke: #f39c12;
+            stroke-width: 3px;
+            stroke-opacity: 0.8;
+        }
+        
+        .link.dependent-path {
+            stroke: #27ae60;
+            stroke-width: 3px;
+            stroke-opacity: 0.8;
+        }
+        
+        .node-label {
+            font-size: 10px;
+            font-weight: 600;
+            text-anchor: middle;
+            dominant-baseline: central;
+            pointer-events: none;
+            fill: #2c3e50;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+        }
+        
+        .zoom-controls {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .zoom-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.9);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #3498db;
+        }
+        
+        .zoom-btn:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+        
+        .sample-data-btn {
+            background: #27ae60;
+            color: white;
+            margin-left: 10px;
+        }
+        
+        .sample-data-btn:hover {
+            background: #219a52;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Learning Objectives Dependency Graph</h1>
+            <p>Interactive visualization of creative coding learning objective prerequisites</p>
+        </div>
+        
+        <div class="file-input">
+            <h3>Load Learning Objectives Data</h3>
+            <p>Select a JSON file containing learning objectives data structure</p>
+            <input type="file" id="jsonFileInput" accept=".json" />
+            <button class="sample-data-btn" id="loadSampleData">Load Sample Data</button>
+            <div id="fileStatus"></div>
+        </div>
+        
+        <div class="controls" style="display: none;" id="controlsPanel">
+            <div class="control-group">
+                <label>Layout Algorithm</label>
+                <select id="layoutSelect">
+                    <option value="force">Force-Directed</option>
+                    <option value="hierarchical">Hierarchical</option>
+                    <option value="radial">Radial</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label>Filter by Category</label>
+                <select id="categoryFilter">
+                    <option value="all">All Categories</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label>Filter by Difficulty</label>
+                <select id="difficultyFilter">
+                    <option value="all">All Difficulties</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label>Search Objectives</label>
+                <input type="text" id="searchInput" placeholder="Search objectives...">
+            </div>
+
+            <div class="control-group">
+                <label>Node Size</label>
+                <select id="nodeSizeBy">
+                    <option value="difficulty">By Difficulty</option>
+                    <option value="dependencies">By Dependencies</option>
+                    <option value="uniform">Uniform</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label>Compactness <span id="compactnessValue">1.0x</span></label>
+                <input type="range" id="compactnessSlider" min="0.3" max="2.0" step="0.1" value="1.0" style="width: 150px;">
+            </div>
+
+            <button id="resetButton">Reset View</button>
+            <button id="fitButton">Fit to Screen</button>
+            <button id="saveButton" style="background: #27ae60;">Save to File</button>
+        </div>
+        
+        <div class="main-content">
+            <div class="graph-wrapper">
+                <div class="graph-container" id="graphContainer">
+                    <div class="loading" id="loadingMessage">
+                        Select a JSON file to visualize learning objectives
+                    </div>
+                    <svg id="graph" style="display: none;"></svg>
+
+                    <div class="zoom-controls" style="display: none;" id="zoomControls">
+                        <button class="zoom-btn" id="zoomIn" title="Zoom In">+</button>
+                        <button class="zoom-btn" id="zoomOut" title="Zoom Out">−</button>
+                        <button class="zoom-btn" id="zoomReset" title="Reset Zoom">⌂</button>
+                    </div>
+
+                    <div class="tooltip" style="display: none;" id="tooltip"></div>
+                </div>
+            </div>
+
+            <div class="editor-pane" id="editorPane">
+                <h3>Editor</h3>
+                <div class="editor-empty">Select a node to edit</div>
+            </div>
+        </div>
+        
+        <div class="stats" style="display: none;" id="statsPanel">
+            <div class="stat-item">
+                <div class="stat-value" id="totalNodes">0</div>
+                <div class="stat-label">Total Objectives</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="totalLinks">0</div>
+                <div class="stat-label">Dependencies</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="visibleNodes">0</div>
+                <div class="stat-label">Visible Nodes</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="selectedNode">None</div>
+                <div class="stat-label">Selected</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="maxDepth">0</div>
+                <div class="stat-label">Max Depth</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="avgDependencies">0</div>
+                <div class="stat-label">Avg Dependencies</div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        // Import OntologyEngine
+        import { OntologyEngine } from './docs/js/ontology.js';
+
+        // Global variables
+        let ontologyEngine = new OntologyEngine();
+        let learningData = null;
+        let originalFileData = null; // Track the original file structure
+        let svg, width, height, simulation, tooltip, zoom;
+        let nodes = [], links = [];
+        let allNodes = [], allLinks = [];
+        let selectedNode = null;
+        let categoryColors = {};
+        let difficultySize = {};
+        let compactnessFactor = 1.0; // 0.5 = very compact, 2.0 = very spread out
+
+        // Memoization cache for prerequisite chains (avoid recalculating on every hover)
+        let prerequisiteCache = {};
+        let dependentCache = {};
+
+        // Track disclosure state
+        let disclosureOpen = false;
+
+        // Initialize the application
+        function init() {
+            setupEventListeners();
+            setupSVG();
+            tooltip = d3.select('#tooltip');
+
+            // Attempt to auto-load production ontology data using OntologyEngine
+            autoLoadProductionData();
+        }
+
+        // Auto-load production ontology data using OntologyEngine
+        async function autoLoadProductionData() {
+            try {
+                console.log('Starting ontology load...');
+                const loaded = await ontologyEngine.loadOntology('docs/ontology/processing-concept-hierarchy.json');
+                console.log('Ontology loaded:', loaded);
+
+                if (!loaded) {
+                    throw new Error('OntologyEngine failed to load ontology');
+                }
+
+                // Get validation result
+                const validation = ontologyEngine.validatePrerequisiteChains();
+                console.log('Validation result:', validation);
+
+                if (!validation.valid) {
+                    console.warn('Ontology validation issues:', validation.errors);
+                    document.getElementById('fileStatus').innerHTML = '<div style="color: #f39c12;">⚠ Ontology loaded with warnings (see console)</div>';
+                } else {
+                    document.getElementById('fileStatus').innerHTML = '<div style="color: #27ae60;">✓ Production ontology loaded and validated (68 fine-grained learning objectives)</div>';
+                }
+
+                // Get the raw file data to preserve structure
+                const response = await fetch('docs/ontology/processing-concept-hierarchy.json');
+                const fileData = await response.json();
+
+                // Preserve original file structure
+                originalFileData = JSON.parse(JSON.stringify(fileData));
+
+                // Build learningData from ontology engine for visualization
+                learningData = {
+                    creativeCodingConcepts: ontologyEngine.getAllConcepts(),
+                    learningObjectives: ontologyEngine.getAllFineGrainedObjectives()
+                };
+
+                console.log('Data ready for visualization:', learningData);
+                initializeVisualization();
+            } catch (error) {
+                console.error('Auto-load error:', error);
+                document.getElementById('fileStatus').innerHTML = '<div style="color: #e74c3c;">✗ Error: ' + error.message + ' (check console)</div>';
+            }
+        }
+
+        function setupEventListeners() {
+            // File input
+            document.getElementById('jsonFileInput').addEventListener('change', handleFileSelect);
+            document.getElementById('loadSampleData').addEventListener('click', loadSampleData);
+            
+            // Controls
+            document.getElementById('layoutSelect').addEventListener('change', (e) => updateLayout(e.target.value));
+            document.getElementById('categoryFilter').addEventListener('change', updateVisualization);
+            document.getElementById('difficultyFilter').addEventListener('change', updateVisualization);
+            document.getElementById('searchInput').addEventListener('input', updateVisualization);
+            document.getElementById('nodeSizeBy').addEventListener('change', updateVisualization);
+            document.getElementById('compactnessSlider').addEventListener('input', (e) => {
+                compactnessFactor = parseFloat(e.target.value);
+                document.getElementById('compactnessValue').textContent = e.target.value + 'x';
+                // Re-apply current layout with new compactness
+                const currentLayout = document.getElementById('layoutSelect').value;
+                updateLayout(currentLayout);
+            });
+            document.getElementById('resetButton').addEventListener('click', resetView);
+            document.getElementById('fitButton').addEventListener('click', fitToScreen);
+            document.getElementById('saveButton').addEventListener('click', saveToFile);
+            
+            // Zoom controls
+            document.getElementById('zoomIn').addEventListener('click', () => zoomGraph(1.5));
+            document.getElementById('zoomOut').addEventListener('click', () => zoomGraph(0.75));
+            document.getElementById('zoomReset').addEventListener('click', resetZoom);
+        }
+
+        function setupSVG() {
+            const container = document.getElementById('graphContainer');
+            width = container.clientWidth;
+            height = 600;
+
+            // Ensure minimum width
+            if (width < 300) width = 300;
+
+            svg = d3.select('#graph')
+                .attr('width', width)
+                .attr('height', height);
+
+            // Set up zoom behavior
+            zoom = d3.zoom()
+                .scaleExtent([0.1, 4])
+                .on('zoom', handleZoom);
+
+            svg.call(zoom);
+
+            // Add main group for zoomable content
+            svg.append('g').attr('id', 'main-group');
+
+            // Set up interactions after SVG is ready
+            setupSVGInteractions();
+        }
+
+        function handleZoom(event) {
+            d3.select('#main-group').attr('transform', event.transform);
+        }
+
+        function zoomGraph(factor) {
+            svg.transition().duration(300).call(
+                zoom.scaleBy, factor
+            );
+        }
+
+        function resetZoom() {
+            svg.transition().duration(500).call(
+                zoom.transform,
+                d3.zoomIdentity
+            );
+        }
+
+        async function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            document.getElementById('fileStatus').innerHTML = '<div style="color: #3498db;">Loading...</div>';
+
+            try {
+                const text = await file.text();
+                const data = JSON.parse(text);
+
+                if (validateDataStructure(data)) {
+                    // Preserve the original file structure
+                    originalFileData = JSON.parse(JSON.stringify(data));
+                    // Use the file data directly instead of engine since it's a custom file
+                    learningData = data;
+                    document.getElementById('fileStatus').innerHTML = '<div style="color: #27ae60;">✓ File loaded successfully</div>';
+                    initializeVisualization();
+                } else {
+                    throw new Error('Invalid data structure');
+                }
+            } catch (error) {
+                document.getElementById('fileStatus').innerHTML = `<div style="color: #e74c3c;">✗ Error: ${error.message}</div>`;
+                console.error('Error loading file:', error);
+            }
+        }
+
+        function loadSampleData() {
+            // Load sample data structure for testing
+            learningData = {
+                "creativeCodingConcepts": [
+                    {
+                        "id": "simpleDrawing",
+                        "category": "basics",
+                        "name": "Simple Drawing",
+                        "difficulty": "beginner",
+                        "description": "Creating fundamental visual elements",
+                        "learningObjectives": [
+                            "setupAndDraw",
+                            "ellipse",
+                            "rectangle"
+                        ]
+                    },
+                    {
+                        "id": "colors",
+                        "category": "basics",
+                        "name": "Colors",
+                        "difficulty": "beginner",
+                        "description": "Working with colors",
+                        "learningObjectives": [
+                            "fill",
+                            "stroke"
+                        ]
+                    },
+                    {
+                        "id": "variables",
+                        "category": "basics",
+                        "name": "Variables",
+                        "difficulty": "intermediate",
+                        "description": "Using variables",
+                        "learningObjectives": [
+                            "variableDeclaration",
+                            "variableModification"
+                        ]
+                    },
+                    {
+                        "id": "interactivity",
+                        "category": "expressivity",
+                        "name": "Interactivity",
+                        "difficulty": "intermediate",
+                        "description": "User interaction",
+                        "learningObjectives": [
+                            "mousePosition",
+                            "mouseClick"
+                        ]
+                    }
+                ],
+                "learningObjectives": [
+                    {
+                        "id": "setupAndDraw",
+                        "name": "Setup and draw",
+                        "description": "Core p5.js functions",
+                        "prerequisites": [],
+                        "concepts": ["simpleDrawing"]
+                    },
+                    {
+                        "id": "ellipse",
+                        "name": "Ellipse",
+                        "description": "Drawing circles and ellipses",
+                        "prerequisites": ["setupAndDraw"],
+                        "concepts": ["simpleDrawing"]
+                    },
+                    {
+                        "id": "rectangle",
+                        "name": "Rectangle",
+                        "description": "Drawing rectangles",
+                        "prerequisites": ["setupAndDraw"],
+                        "concepts": ["simpleDrawing"]
+                    },
+                    {
+                        "id": "fill",
+                        "name": "Fill",
+                        "description": "Setting fill colors",
+                        "prerequisites": ["setupAndDraw"],
+                        "concepts": ["colors"]
+                    },
+                    {
+                        "id": "stroke",
+                        "name": "Stroke",
+                        "description": "Setting stroke colors",
+                        "prerequisites": ["setupAndDraw"],
+                        "concepts": ["colors"]
+                    },
+                    {
+                        "id": "variableDeclaration",
+                        "name": "Variable Declaration",
+                        "description": "Creating variables",
+                        "prerequisites": ["setupAndDraw"],
+                        "concepts": ["variables"]
+                    },
+                    {
+                        "id": "variableModification",
+                        "name": "Variable Modification",
+                        "description": "Changing variables",
+                        "prerequisites": ["variableDeclaration"],
+                        "concepts": ["variables"]
+                    },
+                    {
+                        "id": "mousePosition",
+                        "name": "Mouse Position",
+                        "description": "Reading mouse coordinates",
+                        "prerequisites": ["variableDeclaration"],
+                        "concepts": ["interactivity"]
+                    },
+                    {
+                        "id": "mouseClick",
+                        "name": "Mouse Click",
+                        "description": "Detecting mouse clicks",
+                        "prerequisites": ["mousePosition"],
+                        "concepts": ["interactivity"]
+                    }
+                ]
+            };
+
+            document.getElementById('fileStatus').innerHTML = '<div style="color: #27ae60;">✓ Sample data loaded</div>';
+            initializeVisualization();
+        }
+
+        function validateDataStructure(data) {
+            // Validate fine-grained structure with top-level learningObjectives array
+            if (!data || !data.creativeCodingConcepts || !Array.isArray(data.creativeCodingConcepts) ||
+                !data.learningObjectives || !Array.isArray(data.learningObjectives)) {
+                return false;
+            }
+
+            // Validate concepts have ID references and basic info
+            const validConcepts = data.creativeCodingConcepts.every(concept =>
+                concept.id && concept.category && concept.name &&
+                concept.learningObjectives && Array.isArray(concept.learningObjectives)
+            );
+
+            // Validate top-level learning objectives have required fields
+            const validObjectives = data.learningObjectives.every(obj =>
+                obj.id && obj.name && obj.description && Array.isArray(obj.prerequisites)
+            );
+
+            return validConcepts && validObjectives;
+        }
+
+        function initializeVisualization() {
+            // Show controls and hide loading
+            document.getElementById('controlsPanel').style.display = 'flex';
+            document.getElementById('statsPanel').style.display = 'grid';
+            document.getElementById('loadingMessage').style.display = 'none';
+            document.getElementById('graph').style.display = 'block';
+            document.getElementById('zoomControls').style.display = 'flex';
+
+            // Process data
+            processData();
+
+            // Populate filter options
+            populateFilterOptions();
+
+            // Initial render
+            updateVisualization();
+        }
+
+        function processData() {
+            allNodes = [];
+            allLinks = [];
+
+            // Clear memoization caches when data changes
+            prerequisiteCache = {};
+            dependentCache = {};
+
+            // Create color mapping for categories - use light gray palette
+            const lightGrayPalette = ['#E8E8E8', '#D9D9D9', '#CACACA', '#BBBBBB', '#ACACAC', '#9D9D9D', '#8E8E8E', '#7F7F7F', '#707070', '#616161'];
+            const categories = [...new Set(learningData.creativeCodingConcepts.map(c => c.category))];
+            const colorScale = d3.scaleOrdinal(lightGrayPalette);
+            categories.forEach((cat, i) => {
+                categoryColors[cat] = colorScale(i);
+            });
+
+            // Create size mapping for difficulties
+            const difficulties = [...new Set(learningData.creativeCodingConcepts.map(c => c.difficulty))];
+            const sizeScale = d3.scaleOrdinal().domain(difficulties).range([15, 20, 25, 30, 35]);
+            difficulties.forEach(diff => {
+                difficultySize[diff] = sizeScale(diff);
+            });
+
+            // Process fine-grained learning objectives from top-level array
+            learningData.learningObjectives.forEach(obj => {
+                // Find primary concept for this objective
+                const primaryConceptId = obj.concepts?.[0];
+                const concept = primaryConceptId
+                    ? learningData.creativeCodingConcepts.find(c => c.id === primaryConceptId)
+                    : learningData.creativeCodingConcepts[0];
+
+                allNodes.push({
+                    id: obj.id,
+                    name: obj.name,
+                    description: obj.description,
+                    code: obj.signatures?.join(', ') || obj.code || '',
+                    category: obj.category || concept.category,
+                    difficulty: concept.difficulty,
+                    conceptName: concept.name,
+                    prerequisites: obj.prerequisites || [],
+                    dependencyCount: obj.prerequisites ? obj.prerequisites.length : 0
+                });
+            });
+
+            // Create links from prerequisites
+            allNodes.forEach(node => {
+                node.prerequisites.forEach(prereqId => {
+                    const source = allNodes.find(n => n.id === prereqId);
+                    if (source) {
+                        allLinks.push({
+                            source: source,
+                            target: node,
+                            id: `${prereqId}-${node.id}`
+                        });
+                    }
+                });
+            });
+
+            // Calculate dependent counts
+            allNodes.forEach(node => {
+                node.dependentCount = allLinks.filter(link => link.source.id === node.id).length;
+            });
+
+            console.log(`Processed ${allNodes.length} nodes and ${allLinks.length} links`);
+        }
+
+        function populateFilterOptions() {
+            // Populate category filter
+            const categorySelect = document.getElementById('categoryFilter');
+            categorySelect.innerHTML = '<option value="all">All Categories</option>';
+            const categories = [...new Set(allNodes.map(n => n.category))];
+            categories.forEach(cat => {
+                const option = document.createElement('option');
+                option.value = cat;
+                option.textContent = cat.charAt(0).toUpperCase() + cat.slice(1);
+                categorySelect.appendChild(option);
+            });
+
+            // Populate difficulty filter
+            const difficultySelect = document.getElementById('difficultyFilter');
+            difficultySelect.innerHTML = '<option value="all">All Difficulties</option>';
+            const difficulties = [...new Set(allNodes.map(n => n.difficulty))];
+            difficulties.forEach(diff => {
+                const option = document.createElement('option');
+                option.value = diff;
+                option.textContent = diff.charAt(0).toUpperCase() + diff.slice(1);
+                difficultySelect.appendChild(option);
+            });
+        }
+
+        function updateLegend() {
+            // Category legend
+            const categoryLegend = document.getElementById('categoryLegend');
+            categoryLegend.innerHTML = '';
+            Object.entries(categoryColors).forEach(([category, color]) => {
+                const item = document.createElement('div');
+                item.className = 'legend-item';
+                item.innerHTML = `
+                    <div class="legend-color" style="background: ${color};"></div>
+                    <span>${category.charAt(0).toUpperCase() + category.slice(1)}</span>
+                `;
+                categoryLegend.appendChild(item);
+            });
+
+            // Size legend
+            const sizeLegend = document.getElementById('sizeLegend');
+            const nodeSizeBy = document.getElementById('nodeSizeBy').value;
+            sizeLegend.innerHTML = '';
+            
+            if (nodeSizeBy === 'difficulty') {
+                Object.entries(difficultySize).forEach(([difficulty, size]) => {
+                    const item = document.createElement('div');
+                    item.className = 'legend-size';
+                    item.innerHTML = `
+                        <div style="width: ${size}px; height: ${size}px; background: #ccc; border-radius: 50%; display: inline-block;"></div>
+                        <span>${difficulty}</span>
+                    `;
+                    sizeLegend.appendChild(item);
+                });
+            } else if (nodeSizeBy === 'dependencies') {
+                sizeLegend.innerHTML = '<div style="font-size: 10px;">Size = dependency count</div>';
+            } else {
+                sizeLegend.innerHTML = '<div style="font-size: 10px;">Uniform size</div>';
+            }
+        }
+
+        function updateVisualization() {
+            const categoryFilter = document.getElementById('categoryFilter').value;
+            const difficultyFilter = document.getElementById('difficultyFilter').value;
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+
+            // Filter nodes
+            nodes = allNodes.filter(node => {
+                const categoryMatch = categoryFilter === 'all' || node.category === categoryFilter;
+                const difficultyMatch = difficultyFilter === 'all' || node.difficulty === difficultyFilter;
+                const searchMatch = searchTerm === '' ||
+                    node.name.toLowerCase().includes(searchTerm) ||
+                    node.description.toLowerCase().includes(searchTerm) ||
+                    node.conceptName.toLowerCase().includes(searchTerm);
+
+                return categoryMatch && difficultyMatch && searchMatch;
+            });
+
+            // Filter links to only include those between visible nodes
+            const nodeIds = new Set(nodes.map(n => n.id));
+            links = allLinks.filter(link =>
+                nodeIds.has(link.source.id) && nodeIds.has(link.target.id)
+            );
+
+            // Validate selected node is still visible after filtering
+            if (selectedNode && !nodeIds.has(selectedNode.id)) {
+                // Selected node was filtered out, deselect it
+                selectedNode = null;
+                d3.selectAll('.node').classed('highlighted', false);
+                d3.selectAll('.node').classed('prerequisite', false);
+                d3.selectAll('.node').classed('dependent', false);
+                d3.selectAll('.link').classed('highlighted', false);
+                d3.selectAll('.link').classed('prerequisite-path', false);
+                d3.selectAll('.link').classed('dependent-path', false);
+            }
+
+            // Update statistics
+            updateStats();
+
+            // Render the graph
+            renderGraph();
+        }
+
+        function updateStats() {
+            const maxDepth = calculateMaxDepth();
+            const avgDeps = nodes.length > 0 ? 
+                (nodes.reduce((sum, n) => sum + n.dependencyCount, 0) / nodes.length).toFixed(1) : 0;
+
+            document.getElementById('totalNodes').textContent = allNodes.length;
+            document.getElementById('totalLinks').textContent = allLinks.length;
+            document.getElementById('visibleNodes').textContent = nodes.length;
+            document.getElementById('selectedNode').textContent = selectedNode ? selectedNode.name : 'None';
+            document.getElementById('maxDepth').textContent = maxDepth;
+            document.getElementById('avgDependencies').textContent = avgDeps;
+        }
+
+        function calculateMaxDepth() {
+            let maxDepth = 0;
+            
+            function getDepth(nodeId, visited = new Set()) {
+                if (visited.has(nodeId)) return 0;
+                visited.add(nodeId);
+                
+                const node = allNodes.find(n => n.id === nodeId);
+                if (!node || !node.prerequisites.length) return 0;
+                
+                return 1 + Math.max(...node.prerequisites.map(prereq => getDepth(prereq, new Set(visited))));
+            }
+            
+            allNodes.forEach(node => {
+                maxDepth = Math.max(maxDepth, getDepth(node.id));
+            });
+            
+            return maxDepth;
+        }
+
+        function getNodeSize(node) {
+            const nodeSizeBy = document.getElementById('nodeSizeBy').value;
+            
+            switch (nodeSizeBy) {
+                case 'difficulty':
+                    return difficultySize[node.difficulty] || 20;
+                case 'dependencies':
+                    return Math.max(10, (node.dependencyCount + node.dependentCount) * 3 + 10);
+                case 'uniform':
+                default:
+                    return 20;
+            }
+        }
+
+        function renderGraph() {
+            // Clear previous content but keep defs
+            d3.select('#main-group').selectAll('*').remove();
+
+            // Add arrow marker
+            svg.select('defs').remove();
+            svg.append('defs').append('marker')
+                .attr('id', 'arrowhead')
+                .attr('viewBox', '0 -5 10 10')
+                .attr('refX', 15)
+                .attr('refY', 0)
+                .attr('markerWidth', 6)
+                .attr('markerHeight', 6)
+                .attr('orient', 'auto')
+                .append('path')
+                .attr('d', 'M0,-5L10,0L0,5')
+                .attr('fill', '#999');
+
+            // Create simulation with fixed point masses for stable physics
+            // Visual node sizes are determined by getNodeSize() but don't affect physics
+            simulation = d3.forceSimulation(nodes)
+                .force('link', d3.forceLink(links).id(d => d.id).distance(80))
+                .force('charge', d3.forceManyBody().strength(-400))
+                .force('center', d3.forceCenter(width / 2, height / 2))
+                .force('collision', d3.forceCollide().radius(8)); // Fixed point mass for stable physics
+
+            const mainGroup = d3.select('#main-group');
+
+            // Add links
+            const link = mainGroup.append('g')
+                .attr('class', 'links')
+                .selectAll('line')
+                .data(links)
+                .join('line')
+                .attr('class', 'link')
+                .attr('stroke', '#999')
+                .attr('stroke-width', 2)
+                .attr('stroke-opacity', 0.6)
+                .attr('marker-end', 'url(#arrowhead)');
+
+            // Add nodes
+            const node = mainGroup.append('g')
+                .attr('class', 'nodes')
+                .selectAll('circle')
+                .data(nodes)
+                .join('circle')
+                .attr('class', 'node')
+                .attr('r', d => getNodeSize(d))
+                .attr('fill', d => categoryColors[d.category])
+                .call(drag(simulation))
+                .on('click', handleNodeClick)
+                .on('mouseover', handleNodeMouseOver)
+                .on('mouseout', handleNodeMouseOut);
+
+            // Add labels
+            const label = mainGroup.append('g')
+                .attr('class', 'labels')
+                .selectAll('text')
+                .data(nodes)
+                .join('text')
+                .attr('class', 'node-label')
+                .attr('text-anchor', 'middle')
+                .attr('dominant-baseline', 'central')
+                .style('font-size', '10px')
+                .style('font-weight', '600')
+                .style('fill', '#2c3e50')
+                .style('pointer-events', 'none')
+                .text(d => d.name.length > 12 ? d.name.substring(0, 10) + '...' : d.name);
+
+            // Update positions on simulation tick
+            simulation.on('tick', () => {
+                link
+                    .attr('x1', d => d.source.x)
+                    .attr('y1', d => d.source.y)
+                    .attr('x2', d => d.target.x)
+                    .attr('y2', d => d.target.y);
+
+                node
+                    .attr('cx', d => d.x)
+                    .attr('cy', d => d.y);
+
+                label
+                    .attr('x', d => d.x)
+                    .attr('y', d => d.y);
+            });
+
+            // Restart simulation
+            simulation.alpha(1).restart();
+        }
+
+        function drag(simulation) {
+            function dragstarted(event, d) {
+                if (!event.active) simulation.alphaTarget(0.3).restart();
+                d.fx = d.x;
+                d.fy = d.y;
+            }
+
+            function dragged(event, d) {
+                d.fx = event.x;
+                d.fy = event.y;
+            }
+
+            function dragended(event, d) {
+                if (!event.active) simulation.alphaTarget(0);
+                d.fx = null;
+                d.fy = null;
+            }
+
+            return d3.drag()
+                .on('start', dragstarted)
+                .on('drag', dragged)
+                .on('end', dragended);
+        }
+
+        function handleNodeClick(event, d) {
+            event.stopPropagation();
+
+            // Clear previous selection
+            d3.selectAll('.node').classed('highlighted', false);
+            d3.selectAll('.node').classed('prerequisite', false);
+            d3.selectAll('.node').classed('dependent', false);
+            d3.selectAll('.link').classed('highlighted', false);
+            d3.selectAll('.link').classed('prerequisite-path', false);
+            d3.selectAll('.link').classed('dependent-path', false);
+
+            if (selectedNode === d) {
+                // Deselect if clicking the same node
+                selectedNode = null;
+                populateEditor(null);
+            } else {
+                // Select new node
+                selectedNode = d;
+
+                // Highlight selected node
+                d3.selectAll('.node')
+                    .filter(node => node.id === d.id)
+                    .classed('highlighted', true);
+
+                // Highlight prerequisites
+                const prerequisites = getPrerequisiteChain(d.id);
+                prerequisites.forEach(prereq => {
+                    d3.selectAll('.node')
+                        .filter(node => node.id === prereq.id)
+                        .classed('prerequisite', true);
+                });
+
+                // Highlight dependents
+                const dependents = getDependents(d.id);
+                dependents.forEach(dep => {
+                    d3.selectAll('.node')
+                        .filter(node => node.id === dep.id)
+                        .classed('dependent', true);
+                });
+
+                // Highlight related links
+                d3.selectAll('.link')
+                    .classed('prerequisite-path', link =>
+                        prerequisites.some(p => p.id === link.source.id) && link.target.id === d.id ||
+                        prerequisites.some(p => p.id === link.target.id) && prerequisites.some(p2 => p2.id === link.source.id)
+                    )
+                    .classed('dependent-path', link =>
+                        link.source.id === d.id && dependents.some(dep => dep.id === link.target.id) ||
+                        dependents.some(dep => dep.id === link.source.id) && dependents.some(dep2 => dep2.id === link.target.id)
+                    );
+
+                // Populate editor pane
+                populateEditor(d);
+            }
+
+            updateStats();
+        }
+
+        function syncNodePrerequisites() {
+            // Sync prerequisites from learningData back to allNodes
+            allNodes.forEach(node => {
+                const objective = learningData.learningObjectives.find(obj => obj.id === node.id);
+                if (objective) {
+                    node.prerequisites = objective.prerequisites;
+                    node.dependencyCount = objective.prerequisites.length;
+                }
+            });
+        }
+
+        function rebuildLinks() {
+            // First sync prerequisites from learningData
+            syncNodePrerequisites();
+
+            // Clear memoization caches when data changes
+            prerequisiteCache = {};
+            dependentCache = {};
+
+            // Rebuild allLinks from current learningData structure
+            allLinks = [];
+            allNodes.forEach(node => {
+                node.prerequisites.forEach(prereqId => {
+                    const source = allNodes.find(n => n.id === prereqId);
+                    if (source) {
+                        allLinks.push({
+                            source: source,
+                            target: node,
+                            id: `${prereqId}-${node.id}`
+                        });
+                    }
+                });
+            });
+
+            // Recalculate dependent counts
+            allNodes.forEach(node => {
+                node.dependentCount = allLinks.filter(link => link.source.id === node.id).length;
+            });
+
+            console.log(`Rebuilt ${allLinks.length} links`);
+        }
+
+        function populateEditor(node) {
+            const editorPane = document.getElementById('editorPane');
+
+            if (!node) {
+                editorPane.innerHTML = '<h3>Editor</h3><div class="editor-empty">Select a node to edit</div>';
+                return;
+            }
+
+            // Find the actual objective from learningData
+            const objective = learningData.learningObjectives.find(obj => obj.id === node.id);
+            if (!objective) return;
+
+            // Build prerequisites list HTML
+            const prereqsHtml = objective.prerequisites.length > 0
+                ? objective.prerequisites.map(prereqId => {
+                    const prereqObj = learningData.learningObjectives.find(obj => obj.id === prereqId);
+                    const prereqName = prereqObj ? prereqObj.name : prereqId;
+                    return `<div class="prerequisite-item">
+                        <span>${prereqName}</span>
+                        <button type="button" data-prereq="${prereqId}">Remove</button>
+                    </div>`;
+                  }).join('')
+                : '<div style="color: #999; font-size: 12px;">No prerequisites</div>';
+
+            editorPane.innerHTML = `
+                <h3>${node.name}</h3>
+                <div class="editor-form">
+                    <div class="form-group">
+                        <label>ID</label>
+                        <input type="text" class="field-id" value="${objective.id}" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" class="field-name" value="${objective.name}">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea class="field-description">${objective.description}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Prerequisites</label>
+                        <div class="prerequisites-list">${prereqsHtml}</div>
+                    </div>
+                    <div class="form-group">
+                        <label>Add Prerequisite</label>
+                        <select class="add-prerequisite">
+                            <option value="">-- Select a prerequisite --</option>
+                            ${learningData.learningObjectives
+                                .filter(obj => obj.id !== node.id && !objective.prerequisites.includes(obj.id))
+                                .map(obj => `<option value="${obj.id}">${obj.name}</option>`)
+                                .join('')}
+                        </select>
+                    </div>
+
+                    <div class="disclosure">
+                        <div class="disclosure-header">
+                            <span class="disclosure-toggle">▶</span>
+                            <span>Additional Metadata</span>
+                        </div>
+                        <div class="disclosure-content">
+                            <div>
+                                <div class="form-group">
+                                    <label>Category</label>
+                                    <input type="text" class="field-category" value="${objective.category || ''}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Subcategory</label>
+                                    <input type="text" class="field-subcategory" value="${objective.subcategory || ''}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Type</label>
+                                    <input type="text" class="field-type" value="${objective.type || ''}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Signatures</label>
+                                    <textarea class="field-signatures" style="min-height: 40px;">${(objective.signatures || []).join('\n')}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Regex Patterns</label>
+                                    <textarea class="field-regex" style="min-height: 40px;">${(objective.regexPatterns || []).join('\n')}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Related Functions</label>
+                                    <textarea class="field-related" style="min-height: 40px;">${(objective.relatedFunctions || []).join('\n')}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Concepts</label>
+                                    <textarea class="field-concepts" style="min-height: 40px;">${(objective.concepts || []).join('\n')}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="editor-buttons">
+                        <button class="save-btn">Save Changes</button>
+                    </div>
+                </div>
+            `;
+
+            // Wire up disclosure toggle
+            const disclosureHeader = editorPane.querySelector('.disclosure-header');
+            const disclosure = editorPane.querySelector('.disclosure');
+
+            // Restore disclosure state
+            if (disclosureOpen) {
+                disclosure.classList.add('open');
+            }
+
+            disclosureHeader.addEventListener('click', () => {
+                disclosure.classList.toggle('open');
+                disclosureOpen = disclosure.classList.contains('open');
+            });
+
+            // Wire up event listeners
+            const addSelect = editorPane.querySelector('.add-prerequisite');
+            addSelect.addEventListener('change', (e) => {
+                if (e.target.value) {
+                    objective.prerequisites.push(e.target.value);
+                    rebuildLinks(); // Rebuild links from updated prerequisites
+                    rebuildLinks();
+                    // Update visualization but keep selection
+                    const nodeIds = new Set(nodes.map(n => n.id));
+                    links = allLinks.filter(link =>
+                        nodeIds.has(link.source.id) && nodeIds.has(link.target.id)
+                    );
+                    renderGraph();
+                    populateEditor(selectedNode);
+                }
+            });
+
+            // Wire up prerequisite remove buttons
+            editorPane.querySelectorAll('.prerequisite-item button').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const prereqId = e.target.dataset.prereq;
+                    objective.prerequisites = objective.prerequisites.filter(id => id !== prereqId);
+                    rebuildLinks(); // Rebuild links from updated prerequisites
+                    // Update visualization but keep selection
+                    const nodeIds = new Set(nodes.map(n => n.id));
+                    links = allLinks.filter(link =>
+                        nodeIds.has(link.source.id) && nodeIds.has(link.target.id)
+                    );
+                    renderGraph();
+                    populateEditor(selectedNode);
+                });
+            });
+
+            // Wire up save button - no modal
+            editorPane.querySelector('.save-btn').addEventListener('click', () => {
+                objective.name = editorPane.querySelector('.field-name').value;
+                objective.description = editorPane.querySelector('.field-description').value;
+                objective.category = editorPane.querySelector('.field-category').value;
+                objective.subcategory = editorPane.querySelector('.field-subcategory').value;
+                objective.type = editorPane.querySelector('.field-type').value;
+                objective.signatures = editorPane.querySelector('.field-signatures').value.split('\n').filter(s => s.trim());
+                objective.regexPatterns = editorPane.querySelector('.field-regex').value.split('\n').filter(s => s.trim());
+                objective.relatedFunctions = editorPane.querySelector('.field-related').value.split('\n').filter(s => s.trim());
+                objective.concepts = editorPane.querySelector('.field-concepts').value.split('\n').filter(s => s.trim());
+
+                // Update the node in the graph
+                node.name = objective.name;
+                node.description = objective.description;
+                node.category = objective.category;
+
+                // Update visualization but keep selection
+                renderGraph();
+                populateEditor(selectedNode);
+            });
+        }
+
+        function handleNodeMouseOver(event, d) {
+            const [x, y] = d3.pointer(event, document.body);
+            
+            const prerequisites = d.prerequisites.map(id => {
+                const prereq = allNodes.find(n => n.id === id);
+                return prereq ? prereq.name : id;
+            }).join(', ') || 'None';
+
+            const dependents = getDependents(d.id).map(dep => dep.name).join(', ') || 'None';
+
+            tooltip
+                .style('display', 'block')
+                .style('left', (x + 10) + 'px')
+                .style('top', (y - 10) + 'px')
+                .html(`
+                    <h4>${d.name}</h4>
+                    <div><strong>Concept:</strong> ${d.conceptName}</div>
+                    <div><strong>Category:</strong> ${d.category}</div>
+                    <div><strong>Difficulty:</strong> ${d.difficulty}</div>
+                    <div><strong>Description:</strong> ${d.description}</div>
+                    ${d.code ? `<div class="code">${d.code}</div>` : ''}
+                    <div><strong>Prerequisites:</strong> ${prerequisites}</div>
+                    <div><strong>Used by:</strong> ${dependents}</div>
+                `);
+        }
+
+        function handleNodeMouseOut() {
+            tooltip.style('display', 'none');
+        }
+
+        function getPrerequisiteChain(nodeId, visited = new Set()) {
+            // Return memoized result if available
+            if (prerequisiteCache[nodeId]) {
+                return prerequisiteCache[nodeId];
+            }
+
+            if (visited.has(nodeId)) return [];
+            visited.add(nodeId);
+
+            const node = allNodes.find(n => n.id === nodeId);
+            if (!node || !node.prerequisites.length) {
+                prerequisiteCache[nodeId] = [];
+                return [];
+            }
+
+            let chain = [];
+            node.prerequisites.forEach(prereqId => {
+                const prereq = allNodes.find(n => n.id === prereqId);
+                if (prereq) {
+                    chain.push(prereq);
+                    chain = chain.concat(getPrerequisiteChain(prereqId, new Set(visited)));
+                }
+            });
+
+            const result = [...new Set(chain)]; // Remove duplicates
+            prerequisiteCache[nodeId] = result;
+            return result;
+        }
+
+        function getDependents(nodeId) {
+            // Return memoized result if available
+            if (dependentCache[nodeId]) {
+                return dependentCache[nodeId];
+            }
+
+            const result = allNodes.filter(node =>
+                node.prerequisites && node.prerequisites.includes(nodeId)
+            );
+
+            dependentCache[nodeId] = result;
+            return result;
+        }
+
+        function updateLayout(layoutType) {
+            if (!simulation) return;
+
+            // Stop current simulation
+            simulation.stop();
+
+            // Clear fixed positions to prevent interference from previous layout
+            nodes.forEach(node => {
+                node.fx = null;
+                node.fy = null;
+                node.vx = 0;
+                node.vy = 0;
+            });
+
+            // Detach old tick handler to prevent duplicate updates
+            if (simulation.on) {
+                simulation.on('tick', null);
+            }
+
+            switch (layoutType) {
+                case 'hierarchical':
+                    applyHierarchicalLayout();
+                    break;
+                case 'radial':
+                    applyRadialLayout();
+                    break;
+                case 'force':
+                default:
+                    applyForceLayout();
+                    break;
+            }
+        }
+
+        function applyForceLayout() {
+            // Adaptive parameters based on node count for better stability
+            const nodeCount = nodes.length;
+            const linkCount = links.length;
+
+            // Adaptive link distance: decrease with more nodes for tighter packing
+            // Apply compactness factor: lower factor = tighter, higher factor = more spread
+            const baseLinkDistance = Math.max(40, Math.min(100, 3000 / Math.sqrt(nodeCount)));
+            const linkDistance = baseLinkDistance * compactnessFactor;
+
+            // Adaptive charge strength: increase repulsion with more nodes
+            // Apply compactness factor: lower factor = stronger attraction, higher factor = more repulsion
+            const baseChargeStrength = Math.min(-200, -5000 / Math.sqrt(nodeCount));
+            const chargeStrength = baseChargeStrength * compactnessFactor;
+
+            // Adaptive friction: increase with more nodes to dampen oscillations
+            const friction = Math.max(0.3, Math.min(0.9, nodeCount / 100));
+
+            simulation = d3.forceSimulation(nodes)
+                .force('link', d3.forceLink(links).id(d => d.id).distance(linkDistance))
+                .force('charge', d3.forceManyBody().strength(chargeStrength))
+                .force('center', d3.forceCenter(width / 2, height / 2))
+                .force('collision', d3.forceCollide().radius(8)); // Fixed point mass for stable physics
+
+            // Set friction (higher = more damping, more stable)
+            simulation.velocityDecay(friction);
+
+            simulation.on('tick', updatePositions);
+            simulation.alpha(1).restart();
+        }
+
+        function applyHierarchicalLayout() {
+            // Calculate hierarchy levels with cycle detection
+            const levels = {};
+            const inProgress = new Set();
+            const maxAttempts = 100;
+
+            function calculateLevel(nodeId, depth = 0) {
+                // Prevent infinite recursion from cycles
+                if (depth > maxAttempts) return 0;
+                if (levels[nodeId] !== undefined) return levels[nodeId];
+                if (inProgress.has(nodeId)) return 0; // Cycle detected, assign level 0
+
+                inProgress.add(nodeId);
+
+                const node = nodes.find(n => n.id === nodeId);
+                if (!node || !node.prerequisites.length) {
+                    levels[nodeId] = 0;
+                } else {
+                    // Find max level among prerequisites, filter for visible nodes only
+                    const prereqLevels = node.prerequisites
+                        .filter(prereqId => nodes.some(n => n.id === prereqId))
+                        .map(prereqId => calculateLevel(prereqId, depth + 1));
+
+                    levels[nodeId] = (prereqLevels.length > 0 ? Math.max(...prereqLevels) : 0) + 1;
+                }
+
+                inProgress.delete(nodeId);
+                return levels[nodeId];
+            }
+
+            nodes.forEach(node => calculateLevel(node.id));
+
+            // Position nodes by level with improved spacing
+            const maxLevel = Math.max(...Object.values(levels), 0);
+            const levelHeight = height / (maxLevel + 2);
+            const levelNodes = {};
+
+            Object.entries(levels).forEach(([nodeId, level]) => {
+                if (!levelNodes[level]) levelNodes[level] = [];
+                levelNodes[level].push(nodeId);
+            });
+
+            // Sort nodes within each level by ID for consistent positioning
+            Object.entries(levelNodes).forEach(([level, nodeIds]) => {
+                nodeIds.sort();
+                const levelWidth = width / (nodeIds.length + 1);
+                nodeIds.forEach((nodeId, index) => {
+                    const node = nodes.find(n => n.id === nodeId);
+                    if (node) {
+                        // Use strong positioning to keep nodes in place
+                        node.fx = levelWidth * (index + 1);
+                        node.fy = levelHeight * (parseInt(level) + 1);
+                    }
+                });
+            });
+
+            // Apply compactness factor to hierarchical layout fine-tuning
+            const linkDistance = 50 * compactnessFactor;
+            const chargeStrength = -100 * compactnessFactor;
+
+            simulation = d3.forceSimulation(nodes)
+                .force('link', d3.forceLink(links).id(d => d.id).distance(linkDistance).strength(0.5))
+                .force('charge', d3.forceManyBody().strength(chargeStrength))
+                .force('collision', d3.forceCollide().radius(8)); // Fixed point mass for stable physics
+
+            simulation.on('tick', updatePositions);
+            // Use lower alpha for faster stabilization with fixed positions
+            simulation.alpha(0.1).restart();
+        }
+
+        function applyRadialLayout() {
+            // Find root nodes (no prerequisites)
+            const rootNodes = nodes.filter(n => !n.prerequisites.length);
+            const centerX = width / 2;
+            const centerY = height / 2;
+
+            if (rootNodes.length === 0) {
+                applyForceLayout();
+                return;
+            }
+
+            // Place root nodes in center
+            rootNodes.forEach((node, index) => {
+                const angle = (2 * Math.PI * index) / rootNodes.length;
+                node.fx = centerX + Math.cos(angle) * 50;
+                node.fy = centerY + Math.sin(angle) * 50;
+            });
+
+            // Place other nodes in concentric circles
+            const processed = new Set(rootNodes.map(n => n.id));
+            let radius = 100;
+            let level = 1;
+
+            while (processed.size < nodes.length && level < 10) {
+                const currentLevel = nodes.filter(n => 
+                    !processed.has(n.id) && 
+                    n.prerequisites.some(prereq => processed.has(prereq))
+                );
+
+                if (currentLevel.length === 0) break;
+
+                currentLevel.forEach((node, index) => {
+                    const angle = (2 * Math.PI * index) / currentLevel.length;
+                    node.fx = centerX + Math.cos(angle) * radius;
+                    node.fy = centerY + Math.sin(angle) * radius;
+                    processed.add(node.id);
+                });
+
+                radius += 80;
+                level++;
+            }
+
+            // Apply compactness factor to radial layout fine-tuning
+            const linkDistance = 60 * compactnessFactor;
+            const chargeStrength = -150 * compactnessFactor;
+
+            simulation = d3.forceSimulation(nodes)
+                .force('link', d3.forceLink(links).id(d => d.id).distance(linkDistance).strength(0.3))
+                .force('charge', d3.forceManyBody().strength(chargeStrength))
+                .force('collision', d3.forceCollide().radius(8)); // Fixed point mass for stable physics
+
+            simulation.on('tick', updatePositions);
+            simulation.alpha(0.3).restart();
+        }
+
+        function updatePositions() {
+            d3.selectAll('.link')
+                .attr('x1', d => d.source.x)
+                .attr('y1', d => d.source.y)
+                .attr('x2', d => d.target.x)
+                .attr('y2', d => d.target.y);
+
+            d3.selectAll('.node')
+                .attr('cx', d => d.x)
+                .attr('cy', d => d.y);
+
+            d3.selectAll('.node-label')
+                .attr('x', d => d.x)
+                .attr('y', d => d.y);
+        }
+
+        function resetView() {
+            selectedNode = null;
+
+            // Clear all highlights
+            d3.selectAll('.node').classed('highlighted', false);
+            d3.selectAll('.node').classed('prerequisite', false);
+            d3.selectAll('.node').classed('dependent', false);
+            d3.selectAll('.link').classed('highlighted', false);
+            d3.selectAll('.link').classed('prerequisite-path', false);
+            d3.selectAll('.link').classed('dependent-path', false);
+
+            // Reset filters
+            document.getElementById('categoryFilter').value = 'all';
+            document.getElementById('difficultyFilter').value = 'all';
+            document.getElementById('searchInput').value = '';
+            document.getElementById('compactnessSlider').value = 1.0;
+            document.getElementById('compactnessValue').textContent = '1.0x';
+            compactnessFactor = 1.0;
+
+            // Reset zoom
+            resetZoom();
+
+            // Update visualization
+            updateVisualization();
+        }
+
+        function fitToScreen() {
+            if (nodes.length === 0) return;
+
+            const bounds = {
+                minX: Math.min(...nodes.map(n => n.x)) - 50,
+                maxX: Math.max(...nodes.map(n => n.x)) + 50,
+                minY: Math.min(...nodes.map(n => n.y)) - 50,
+                maxY: Math.max(...nodes.map(n => n.y)) + 50
+            };
+
+            const graphWidth = bounds.maxX - bounds.minX;
+            const graphHeight = bounds.maxY - bounds.minY;
+
+            const scale = Math.min(width / graphWidth, height / graphHeight) * 0.9;
+            const translateX = (width - graphWidth * scale) / 2 - bounds.minX * scale;
+            const translateY = (height - graphHeight * scale) / 2 - bounds.minY * scale;
+
+            svg.transition().duration(750).call(
+                zoom.transform,
+                d3.zoomIdentity.translate(translateX, translateY).scale(scale)
+            );
+        }
+
+        function setupSVGInteractions() {
+            // Click outside to deselect
+            svg.on('click', function(event) {
+                if (event.target === this) {
+                    selectedNode = null;
+                    d3.selectAll('.node').classed('highlighted', false);
+                    d3.selectAll('.node').classed('prerequisite', false);
+                    d3.selectAll('.node').classed('dependent', false);
+                    d3.selectAll('.link').classed('highlighted', false);
+                    d3.selectAll('.link').classed('prerequisite-path', false);
+                    d3.selectAll('.link').classed('dependent-path', false);
+                    updateStats();
+                }
+            });
+        }
+
+        function saveToFile() {
+            if (!learningData || !originalFileData) {
+                console.warn('No data to save (load a file first)');
+                return;
+            }
+
+            try {
+                // Create a copy of the original file structure
+                const exportData = JSON.parse(JSON.stringify(originalFileData));
+
+                // Only replace the learningObjectives array with the current state
+                exportData.learningObjectives = learningData.learningObjectives;
+
+                // Create blob and download
+                const dataStr = JSON.stringify(exportData, null, 2);
+                const dataBlob = new Blob([dataStr], { type: 'application/json' });
+                const url = URL.createObjectURL(dataBlob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'processing-concept-hierarchy.json';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+
+                console.log('File saved successfully');
+            } catch (error) {
+                console.error('Save error:', error);
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

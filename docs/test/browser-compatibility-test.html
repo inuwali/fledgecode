@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser Compatibility Test - Vibe Coding Instructor</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-header {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            background: white;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-section h3 {
+            background: #2196F3;
+            color: white;
+            margin: 0;
+            padding: 15px 20px;
+        }
+        .test-list {
+            padding: 20px;
+        }
+        .test-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .test-item:last-child {
+            border-bottom: none;
+        }
+        .test-result {
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            min-width: 80px;
+            text-align: center;
+        }
+        .result-pass { background: #4CAF50; color: white; }
+        .result-fail { background: #f44336; color: white; }
+        .result-pending { background: #FF9800; color: white; }
+        
+        .browser-info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        
+        .test-controls {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .test-btn {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+        
+        .test-btn:hover {
+            background: #1976D2;
+        }
+        
+        .test-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .summary {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .iframe-container {
+            margin: 20px 0;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        #app-iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+        
+        .instructions {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            border-left: 4px solid #ff9800;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-header">
+        <h1>🧪 Browser Compatibility Test Suite</h1>
+        <p>Systematic testing of Vibe Coding Instructor across different browsers</p>
+        
+        <div class="browser-info">
+            <strong>Current Browser:</strong> <span id="browser-info">Detecting...</span><br>
+            <strong>User Agent:</strong> <span id="user-agent"></span><br>
+            <strong>ES6 Module Support:</strong> <span id="es6-support">Testing...</span><br>
+            <strong>LocalStorage Support:</strong> <span id="localstorage-support">Testing...</span>
+        </div>
+    </div>
+
+    <div class="instructions">
+        <h3>📋 Testing Instructions</h3>
+        <ol>
+            <li><strong>Run Automated Tests:</strong> Click "Run All Tests" to check basic browser capabilities</li>
+            <li><strong>Manual Application Testing:</strong> Use the embedded app below to test user scenarios</li>
+            <li><strong>Mark Results:</strong> Click on test results to manually mark pass/fail for interactive tests</li>
+            <li><strong>Document Issues:</strong> Note any problems in the console and report section</li>
+        </ol>
+    </div>
+
+    <div class="test-controls">
+        <button class="test-btn" id="run-all-tests">🚀 Run All Tests</button>
+        <button class="test-btn" id="reset-tests">🔄 Reset Tests</button>
+        <button class="test-btn" id="open-main-app">🔗 Open Main App</button>
+    </div>
+
+    <!-- Core Feature Tests -->
+    <div class="test-section">
+        <h3>🔧 Core System Tests</h3>
+        <div class="test-list">
+            <div class="test-item">
+                <span>ES6 Module Loading</span>
+                <div class="test-result result-pending" data-test="es6-modules">PENDING</div>
+            </div>
+            <div class="test-item">
+                <span>LocalStorage Access</span>
+                <div class="test-result result-pending" data-test="localstorage">PENDING</div>
+            </div>
+            <div class="test-item">
+                <span>Monaco Editor CDN Loading</span>
+                <div class="test-result result-pending" data-test="monaco-cdn">PENDING</div>
+            </div>
+            <div class="test-item">
+                <span>P5.js CDN Loading</span>
+                <div class="test-result result-pending" data-test="p5-cdn">PENDING</div>
+            </div>
+            <div class="test-item">
+                <span>CSS Grid Support</span>
+                <div class="test-result result-pending" data-test="css-grid">PENDING</div>
+            </div>
+            <div class="test-item">
+                <span>CSS Flexbox Support</span>
+                <div class="test-result result-pending" data-test="css-flexbox">PENDING</div>
+            </div>
+            <div class="test-item">
+                <span>File Download Support</span>
+                <div class="test-result result-pending" data-test="file-download">PENDING</div>
+            </div>
+            <div class="test-item">
+                <span>File Upload Support</span>
+                <div class="test-result result-pending" data-test="file-upload">PENDING</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Feature Tests -->
+    <div class="test-section">
+        <h3>🎮 Interactive Feature Tests (Manual)</h3>
+        <div class="test-list">
+            <div class="test-item">
+                <span>Monaco Editor Loads and Functions</span>
+                <div class="test-result result-pending" data-test="monaco-interactive" onclick="toggleTestResult(this)">CLICK TO TEST</div>
+            </div>
+            <div class="test-item">
+                <span>P5.js Canvas Rendering</span>
+                <div class="test-result result-pending" data-test="p5-canvas" onclick="toggleTestResult(this)">CLICK TO TEST</div>
+            </div>
+            <div class="test-item">
+                <span>Code Execution (draw circle)</span>
+                <div class="test-result result-pending" data-test="code-execution" onclick="toggleTestResult(this)">CLICK TO TEST</div>
+            </div>
+            <div class="test-item">
+                <span>Undo/Redo System</span>
+                <div class="test-result result-pending" data-test="undo-redo" onclick="toggleTestResult(this)">CLICK TO TEST</div>
+            </div>
+            <div class="test-item">
+                <span>Save/Load Files</span>
+                <div class="test-result result-pending" data-test="save-load" onclick="toggleTestResult(this)">CLICK TO TEST</div>
+            </div>
+            <div class="test-item">
+                <span>Session Recovery (after refresh)</span>
+                <div class="test-result result-pending" data-test="session-recovery" onclick="toggleTestResult(this)">CLICK TO TEST</div>
+            </div>
+            <div class="test-item">
+                <span>Keyboard Shortcuts (Ctrl+Enter, Ctrl+Z, Ctrl+Y)</span>
+                <div class="test-result result-pending" data-test="keyboard-shortcuts" onclick="toggleTestResult(this)">CLICK TO TEST</div>
+            </div>
+            <div class="test-item">
+                <span>Learning Dashboard Updates</span>
+                <div class="test-result result-pending" data-test="learning-dashboard" onclick="toggleTestResult(this)">CLICK TO TEST</div>
+            </div>
+            <div class="test-item">
+                <span>AI Code Generation (with API key)</span>
+                <div class="test-result result-pending" data-test="ai-generation" onclick="toggleTestResult(this)">CLICK TO TEST</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Embedded Application for Testing -->
+    <div class="test-section">
+        <h3>🖥️ Manual Testing Controls</h3>
+        <div style="padding: 20px; text-align: center;">
+            <p><strong>For manual testing, open the main application in a new tab/window:</strong></p>
+            <button class="test-btn" onclick="window.open('../index.html', '_blank', 'width=1400,height=900')">
+                🚀 Open Application for Testing
+            </button>
+            <p style="margin-top: 15px; color: #666; font-size: 14px;">
+                This opens the full application in a new window for proper testing of all features including file operations, keyboard shortcuts, and session management.
+            </p>
+        </div>
+    </div>
+
+    <!-- Test Results Summary -->
+    <div class="summary">
+        <h3>📊 Test Results Summary</h3>
+        <div id="test-summary">
+            <p>Click "Run All Tests" to begin testing</p>
+        </div>
+    </div>
+
+    <script>
+        // Browser detection and basic capability testing
+        
+        class BrowserCompatibilityTester {
+            constructor() {
+                this.testResults = new Map();
+                this.init();
+            }
+            
+            init() {
+                this.detectBrowser();
+                this.setupEventListeners();
+            }
+            
+            detectBrowser() {
+                const ua = navigator.userAgent;
+                document.getElementById('user-agent').textContent = ua;
+                
+                let browser = 'Unknown';
+                if (ua.includes('Chrome') && !ua.includes('Edge')) browser = 'Chrome';
+                else if (ua.includes('Firefox')) browser = 'Firefox';
+                else if (ua.includes('Safari') && !ua.includes('Chrome')) browser = 'Safari';
+                else if (ua.includes('Edge')) browser = 'Edge';
+                
+                document.getElementById('browser-info').textContent = browser;
+                
+                // Test ES6 module support
+                this.testES6Support();
+                
+                // Test LocalStorage support
+                this.testLocalStorageSupport();
+            }
+            
+            testES6Support() {
+                try {
+                    new Function('import("data:text/javascript,export default 1")')();
+                    document.getElementById('es6-support').textContent = '✅ Supported';
+                    this.setTestResult('es6-modules', true);
+                } catch (e) {
+                    document.getElementById('es6-support').textContent = '❌ Not Supported';
+                    this.setTestResult('es6-modules', false);
+                }
+            }
+            
+            testLocalStorageSupport() {
+                try {
+                    localStorage.setItem('test', 'test');
+                    localStorage.removeItem('test');
+                    document.getElementById('localstorage-support').textContent = '✅ Supported';
+                    this.setTestResult('localstorage', true);
+                } catch (e) {
+                    document.getElementById('localstorage-support').textContent = '❌ Not Supported';
+                    this.setTestResult('localstorage', false);
+                }
+            }
+            
+            async runAllTests() {
+                document.getElementById('run-all-tests').disabled = true;
+                document.getElementById('run-all-tests').textContent = '🔄 Running Tests...';
+                
+                // Test CDN loading
+                await this.testMonacoCDN();
+                await this.testP5CDN();
+                
+                // Test CSS features
+                this.testCSSGrid();
+                this.testCSSFlexbox();
+                
+                // Test file operations
+                this.testFileDownload();
+                this.testFileUpload();
+                
+                this.updateSummary();
+                
+                document.getElementById('run-all-tests').disabled = false;
+                document.getElementById('run-all-tests').textContent = '✅ Tests Complete';
+            }
+            
+            async testMonacoCDN() {
+                try {
+                    const response = await fetch('https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js', { method: 'HEAD' });
+                    this.setTestResult('monaco-cdn', response.ok);
+                } catch (e) {
+                    this.setTestResult('monaco-cdn', false);
+                }
+            }
+            
+            async testP5CDN() {
+                try {
+                    const response = await fetch('https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js', { method: 'HEAD' });
+                    this.setTestResult('p5-cdn', response.ok);
+                } catch (e) {
+                    this.setTestResult('p5-cdn', false);
+                }
+            }
+            
+            testCSSGrid() {
+                const testElement = document.createElement('div');
+                testElement.style.display = 'grid';
+                this.setTestResult('css-grid', testElement.style.display === 'grid');
+            }
+            
+            testCSSFlexbox() {
+                const testElement = document.createElement('div');
+                testElement.style.display = 'flex';
+                this.setTestResult('css-flexbox', testElement.style.display === 'flex');
+            }
+            
+            testFileDownload() {
+                // Test if URL.createObjectURL is available
+                const supported = typeof URL !== 'undefined' && typeof URL.createObjectURL === 'function';
+                this.setTestResult('file-download', supported);
+            }
+            
+            testFileUpload() {
+                // Test if FileReader is available
+                const supported = typeof FileReader !== 'undefined';
+                this.setTestResult('file-upload', supported);
+            }
+            
+            setTestResult(testName, passed) {
+                this.testResults.set(testName, passed);
+                const element = document.querySelector(`[data-test="${testName}"]`);
+                if (element) {
+                    element.className = `test-result result-${passed ? 'pass' : 'fail'}`;
+                    element.textContent = passed ? 'PASS' : 'FAIL';
+                }
+            }
+            
+            resetTests() {
+                this.testResults.clear();
+                document.querySelectorAll('.test-result').forEach(el => {
+                    el.className = 'test-result result-pending';
+                    el.textContent = el.onclick ? 'CLICK TO TEST' : 'PENDING';
+                });
+                document.getElementById('run-all-tests').textContent = '🚀 Run All Tests';
+                document.getElementById('run-all-tests').disabled = false;
+                this.updateSummary();
+            }
+            
+            updateSummary() {
+                const total = this.testResults.size;
+                const passed = Array.from(this.testResults.values()).filter(Boolean).length;
+                const failed = total - passed;
+                
+                const summaryEl = document.getElementById('test-summary');
+                if (total === 0) {
+                    summaryEl.innerHTML = '<p>No tests run yet</p>';
+                } else {
+                    const passRate = Math.round((passed / total) * 100);
+                    summaryEl.innerHTML = `
+                        <div style="display: flex; justify-content: center; gap: 30px; margin: 20px 0;">
+                            <div><strong>Total:</strong> ${total}</div>
+                            <div style="color: #4CAF50;"><strong>Passed:</strong> ${passed}</div>
+                            <div style="color: #f44336;"><strong>Failed:</strong> ${failed}</div>
+                            <div><strong>Pass Rate:</strong> ${passRate}%</div>
+                        </div>
+                        <div style="margin-top: 15px;">
+                            ${passRate >= 90 ? '🎉 Excellent browser compatibility!' : 
+                              passRate >= 75 ? '✅ Good browser compatibility with minor issues' :
+                              '⚠️ Browser compatibility issues detected'}
+                        </div>
+                    `;
+                }
+            }
+            
+            setupEventListeners() {
+                document.getElementById('run-all-tests').addEventListener('click', () => this.runAllTests());
+                document.getElementById('reset-tests').addEventListener('click', () => this.resetTests());
+                document.getElementById('open-main-app').addEventListener('click', () => {
+                    window.open('../index.html', '_blank');
+                });
+            }
+        }
+        
+        // Manual test result toggling
+        function toggleTestResult(element) {
+            const currentClass = element.className;
+            if (currentClass.includes('result-pending')) {
+                element.className = 'test-result result-pass';
+                element.textContent = 'PASS';
+            } else if (currentClass.includes('result-pass')) {
+                element.className = 'test-result result-fail';
+                element.textContent = 'FAIL';
+            } else {
+                element.className = 'test-result result-pending';
+                element.textContent = 'CLICK TO TEST';
+            }
+        }
+        
+        // Initialize tester
+        const tester = new BrowserCompatibilityTester();
+        
+        // Auto-run basic tests on load
+        setTimeout(() => {
+            tester.runAllTests();
+        }, 1000);
+    </script>
+</body>
+</html>

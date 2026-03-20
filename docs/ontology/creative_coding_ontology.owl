@@ -1,0 +1,307 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://example.org/creativecoding#"
+     xml:base="http://example.org/creativecoding"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <owl:Ontology rdf:about="http://example.org/creativecoding">
+        <dc:title>Creative Coding Concepts Ontology</dc:title>
+        <dc:description>An ontology for describing creative coding concepts, learning objectives, and artistic pathways</dc:description>
+        <owl:versionInfo>1.0</owl:versionInfo>
+    </owl:Ontology>
+    
+    <!-- 
+    //////////////////////////////////////////////////////////////////
+    //
+    //    Object Properties
+    //
+    //////////////////////////////////////////////////////////////////
+     -->
+
+    <!-- http://example.org/creativecoding#hasLearningObjective -->
+    <owl:ObjectProperty rdf:about="http://example.org/creativecoding#hasLearningObjective">
+        <rdfs:domain rdf:resource="http://example.org/creativecoding#CreativeCodingConcept"/>
+        <rdfs:range rdf:resource="http://example.org/creativecoding#LearningObjective"/>
+        <rdfs:comment>Associates a creative coding concept with its learning objectives</rdfs:comment>
+        <rdfs:label>has learning objective</rdfs:label>
+    </owl:ObjectProperty>
+    
+    <!-- http://example.org/creativecoding#hasPrerequisite -->
+    <owl:ObjectProperty rdf:about="http://example.org/creativecoding#hasPrerequisite">
+        <rdfs:domain rdf:resource="http://example.org/creativecoding#CreativeCodingConcept"/>
+        <rdfs:range rdf:resource="http://example.org/creativecoding#CreativeCodingConcept"/>
+        <rdfs:comment>Indicates that one concept requires another concept as a prerequisite</rdfs:comment>
+        <rdfs:label>has prerequisite</rdfs:label>
+    </owl:ObjectProperty>
+    
+    <!-- http://example.org/creativecoding#enablesCreativeApplication -->
+    <owl:ObjectProperty rdf:about="http://example.org/creativecoding#enablesCreativeApplication">
+        <rdfs:domain rdf:resource="http://example.org/creativecoding#CreativeCodingConcept"/>
+        <rdfs:range rdf:resource="http://example.org/creativecoding#CreativeApplication"/>
+        <rdfs:comment>Indicates what creative applications a concept enables</rdfs:comment>
+        <rdfs:label>enables creative application</rdfs:label>
+    </owl:ObjectProperty>
+    
+    <!-- http://example.org/creativecoding#supportsExpressionGoal -->
+    <owl:ObjectProperty rdf:about="http://example.org/creativecoding#supportsExpressionGoal">
+        <rdfs:domain rdf:resource="http://example.org/creativecoding#CreativeCodingConcept"/>
+        <rdfs:range rdf:resource="http://example.org/creativecoding#ExpressionGoal"/>
+        <rdfs:comment>Indicates what expression goals a concept supports</rdfs:comment>
+        <rdfs:label>supports expression goal</rdfs:label>
+    </owl:ObjectProperty>
+    
+    <!-- http://example.org/creativecoding#includesConcept -->
+    <owl:ObjectProperty rdf:about="http://example.org/creativecoding#includesConcept">
+        <rdfs:domain rdf:resource="http://example.org/creativecoding#CreativePathway"/>
+        <rdfs:range rdf:resource="http://example.org/creativecoding#CreativeCodingConcept"/>
+        <rdfs:comment>Indicates which concepts are included in a creative pathway</rdfs:comment>
+        <rdfs:label>includes concept</rdfs:label>
+    </owl:ObjectProperty>
+    
+    <!-- http://example.org/creativecoding#suggestsConcept -->
+    <owl:ObjectProperty rdf:about="http://example.org/creativecoding#suggestsConcept">
+        <rdfs:domain rdf:resource="http://example.org/creativecoding#ArtisticGoal"/>
+        <rdfs:range rdf:resource="http://example.org/creativecoding#CreativeCodingConcept"/>
+        <rdfs:comment>Indicates which concepts are suggested for an artistic goal</rdfs:comment>
+        <rdfs:label>suggests concept</rdfs:label>
+    </owl:ObjectProperty>
+    
+    <!-- http://example.org/creativecoding#hasProjectIdea -->
+    <owl:ObjectProperty rdf:about="http://example.org/creativecoding#hasProjectIdea">
+        <rdfs:domain rdf:resource="http://example.org/creativecoding#ArtisticGoal"/>
+        <rdfs:range rdf:resource="http://example.org/creativecoding#ProjectIdea"/>
+        <rdfs:comment>Associates an artistic goal with project ideas</rdfs:comment>
+        <rdfs:label>has project idea</rdfs:label>
+    </owl:ObjectProperty>
+
+    <!-- 
+    //////////////////////////////////////////////////////////////////
+    //
+    //    Data Properties
+    //
+    //////////////////////////////////////////////////////////////////
+     -->
+
+    <!-- http://example.org/creativecoding#hasIdentifier -->
+    <owl:DatatypeProperty rdf:about="http://example.org/creativecoding#hasIdentifier">
+        <rdfs:domain rdf:resource="http://example.org/creativecoding#CreativeCodingConcept"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Unique identifier for a creative coding concept</rdfs:comment>
+        <rdfs:label>has identifier</rdfs:label>
+    </owl:DatatypeProperty>
+    
+    <!-- http://example.org/creativecoding#hasName -->
+    <owl:DatatypeProperty rdf:about="http://example.org/creativecoding#hasName">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://example.org/creativecoding#CreativeCodingConcept"/>
+                    <rdf:Description rdf:about="http://example.org/creativecoding#LearningObjective"/>
+                    <rdf:Description rdf:about="http://example.org/creativecoding#CreativePathway"/>
+                    <rdf:Description rdf:about="http://example.org/creativecoding#ArtisticGoal"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>The name of an entity</rdfs:comment>
+        <rdfs:label>has name</rdfs:label>
+    </owl:DatatypeProperty>
+    
+    <!-- http://example.org/creativecoding#hasDescription -->
+    <owl:DatatypeProperty rdf:about="http://example.org/creativecoding#hasDescription">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://example.org/creativecoding#CreativeCodingConcept"/>
+                    <rdf:Description rdf:about="http://example.org/creativecoding#LearningObjective"/>
+                    <rdf:Description rdf:about="http://example.org/creativecoding#ArtisticGoal"/>
+                    <rdf:Description rdf:about="http://example.org/creativecoding#ProjectIdea"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>A description of an entity</rdfs:comment>
+        <rdfs:label>has description</rdfs:label>
+    </owl:DatatypeProperty>
+    
+    <!-- http://example.org/creativecoding#hasCategory -->
+    <owl:DatatypeProperty rdf:about="http://example.org/creativecoding#hasCategory">
+        <rdfs:domain rdf:resource="http://example.org/creativecoding#CreativeCodingConcept"/>
+        <rdfs:range rdf:resource="http://example.org/creativecoding#ConceptCategory"/>
+        <rdfs:comment>The category of a creative coding concept</rdfs:comment>
+        <rdfs:label>has category</rdfs:label>
+    </owl:DatatypeProperty>
+    
+    <!-- http://example.org/creativecoding#hasDifficulty -->
+    <owl:DatatypeProperty rdf:about="http://example.org/creativecoding#hasDifficulty">
+        <rdfs:domain rdf:resource="http://example.org/creativecoding#CreativeCodingConcept"/>
+        <rdfs:range rdf:resource="http://example.org/creativecoding#DifficultyLevel"/>
+        <rdfs:comment>The difficulty level of a creative coding concept</rdfs:comment>
+        <rdfs:label>has difficulty</rdfs:label>
+    </owl:DatatypeProperty>
+    
+    <!-- http://example.org/creativecoding#hasCode -->
+    <owl:DatatypeProperty rdf:about="http://example.org/creativecoding#hasCode">
+        <rdfs:domain rdf:resource="http://example.org/creativecoding#LearningObjective"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Example code associated with a learning objective</rdfs:comment>
+        <rdfs:label>has code</rdfs:label>
+    </owl:DatatypeProperty>
+    
+    <!-- http://example.org/creativecoding#hasRegexPattern -->
+    <owl:DatatypeProperty rdf:about="http://example.org/creativecoding#hasRegexPattern">
+        <rdfs:domain rdf:resource="http://example.org/creativecoding#LearningObjective"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>Regular expression pattern for detecting code usage associated with a learning objective</rdfs:comment>
+        <rdfs:label>has regex pattern</rdfs:label>
+    </owl:DatatypeProperty>
+    
+    <!-- http://example.org/creativecoding#hasTitle -->
+    <owl:DatatypeProperty rdf:about="http://example.org/creativecoding#hasTitle">
+        <rdfs:domain rdf:resource="http://example.org/creativecoding#ProjectIdea"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>The title of a project idea</rdfs:comment>
+        <rdfs:label>has title</rdfs:label>
+    </owl:DatatypeProperty>
+
+    <!-- 
+    //////////////////////////////////////////////////////////////////
+    //
+    //    Classes
+    //
+    //////////////////////////////////////////////////////////////////
+     -->
+
+    <!-- http://example.org/creativecoding#CreativeCodingConcept -->
+    <owl:Class rdf:about="http://example.org/creativecoding#CreativeCodingConcept">
+        <rdfs:comment>A fundamental concept in creative coding that students can learn</rdfs:comment>
+        <rdfs:label>Creative Coding Concept</rdfs:label>
+    </owl:Class>
+    
+    <!-- http://example.org/creativecoding#LearningObjective -->
+    <owl:Class rdf:about="http://example.org/creativecoding#LearningObjective">
+        <rdfs:comment>A specific skill or technique within a creative coding concept</rdfs:comment>
+        <rdfs:label>Learning Objective</rdfs:label>
+    </owl:Class>
+    
+    <!-- http://example.org/creativecoding#CreativeApplication -->
+    <owl:Class rdf:about="http://example.org/creativecoding#CreativeApplication">
+        <rdfs:comment>A type of creative work that can be created using coding concepts</rdfs:comment>
+        <rdfs:label>Creative Application</rdfs:label>
+    </owl:Class>
+    
+    <!-- http://example.org/creativecoding#ExpressionGoal -->
+    <owl:Class rdf:about="http://example.org/creativecoding#ExpressionGoal">
+        <rdfs:comment>An artistic or expressive objective that can be achieved through coding</rdfs:comment>
+        <rdfs:label>Expression Goal</rdfs:label>
+    </owl:Class>
+    
+    <!-- http://example.org/creativecoding#CreativePathway -->
+    <owl:Class rdf:about="http://example.org/creativecoding#CreativePathway">
+        <rdfs:comment>A suggested sequence of concepts for achieving specific creative outcomes</rdfs:comment>
+        <rdfs:label>Creative Pathway</rdfs:label>
+    </owl:Class>
+    
+    <!-- http://example.org/creativecoding#ArtisticGoal -->
+    <owl:Class rdf:about="http://example.org/creativecoding#ArtisticGoal">
+        <rdfs:comment>A high-level artistic objective that guides learning and creation</rdfs:comment>
+        <rdfs:label>Artistic Goal</rdfs:label>
+    </owl:Class>
+    
+    <!-- http://example.org/creativecoding#ProjectIdea -->
+    <owl:Class rdf:about="http://example.org/creativecoding#ProjectIdea">
+        <rdfs:comment>A specific project suggestion for an artistic goal</rdfs:comment>
+        <rdfs:label>Project Idea</rdfs:label>
+    </owl:Class>
+
+    <!-- 
+    //////////////////////////////////////////////////////////////////
+    //
+    //    Enumerated Classes (using OneOf)
+    //
+    //////////////////////////////////////////////////////////////////
+     -->
+
+    <!-- http://example.org/creativecoding#ConceptCategory -->
+    <owl:Class rdf:about="http://example.org/creativecoding#ConceptCategory">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://example.org/creativecoding#basics"/>
+                    <rdf:Description rdf:about="http://example.org/creativecoding#expressivity"/>
+                    <rdf:Description rdf:about="http://example.org/creativecoding#patterns"/>
+                    <rdf:Description rdf:about="http://example.org/creativecoding#advancedExpression"/>
+                </owl:oneOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:comment>Categories for organizing creative coding concepts</rdfs:comment>
+        <rdfs:label>Concept Category</rdfs:label>
+    </owl:Class>
+    
+    <!-- http://example.org/creativecoding#DifficultyLevel -->
+    <owl:Class rdf:about="http://example.org/creativecoding#DifficultyLevel">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://example.org/creativecoding#beginner"/>
+                    <rdf:Description rdf:about="http://example.org/creativecoding#beginnerIntermediate"/>
+                    <rdf:Description rdf:about="http://example.org/creativecoding#intermediate"/>
+                    <rdf:Description rdf:about="http://example.org/creativecoding#intermediateAdvanced"/>
+                    <rdf:Description rdf:about="http://example.org/creativecoding#advanced"/>
+                </owl:oneOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:comment>Difficulty levels for creative coding concepts</rdfs:comment>
+        <rdfs:label>Difficulty Level</rdfs:label>
+    </owl:Class>
+
+    <!-- 
+    //////////////////////////////////////////////////////////////////
+    //
+    //    Individuals (Enumeration Values)
+    //
+    //////////////////////////////////////////////////////////////////
+     -->
+
+    <!-- Category Individuals -->
+    <owl:NamedIndividual rdf:about="http://example.org/creativecoding#basics">
+        <rdfs:label>basics</rdfs:label>
+    </owl:NamedIndividual>
+    
+    <owl:NamedIndividual rdf:about="http://example.org/creativecoding#expressivity">
+        <rdfs:label>expressivity</rdfs:label>
+    </owl:NamedIndividual>
+    
+    <owl:NamedIndividual rdf:about="http://example.org/creativecoding#patterns">
+        <rdfs:label>patterns</rdfs:label>
+    </owl:NamedIndividual>
+    
+    <owl:NamedIndividual rdf:about="http://example.org/creativecoding#advancedExpression">
+        <rdfs:label>advancedExpression</rdfs:label>
+    </owl:NamedIndividual>
+    
+    <!-- Difficulty Level Individuals -->
+    <owl:NamedIndividual rdf:about="http://example.org/creativecoding#beginner">
+        <rdfs:label>beginner</rdfs:label>
+    </owl:NamedIndividual>
+    
+    <owl:NamedIndividual rdf:about="http://example.org/creativecoding#beginnerIntermediate">
+        <rdfs:label>beginner-intermediate</rdfs:label>
+    </owl:NamedIndividual>
+    
+    <owl:NamedIndividual rdf:about="http://example.org/creativecoding#intermediate">
+        <rdfs:label>intermediate</rdfs:label>
+    </owl:NamedIndividual>
+    
+    <owl:NamedIndividual rdf:about="http://example.org/creativecoding#intermediateAdvanced">
+        <rdfs:label>intermediate-advanced</rdfs:label>
+    </owl:NamedIndividual>
+    
+    <owl:NamedIndividual rdf:about="http://example.org/creativecoding#advanced">
+        <rdfs:label>advanced</rdfs:label>
+    </owl:NamedIndividual>
+
+</rdf:RDF>

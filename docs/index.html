@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Coding Instructor</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/diff.css">
+
+    <script type="module">
+        import config from './js/config.js';
+
+        // Load analytics if configured
+        if (config.analytics && config.analytics.src) {
+            const s = document.createElement('script');
+            s.defer = true;
+            s.src = config.analytics.src;
+            s.dataset.doNotTrack = 'true';
+            if (config.analytics.websiteId) s.dataset.websiteId = config.analytics.websiteId;
+            if (config.analytics.domains) s.dataset.domains = config.analytics.domains;
+            document.head.appendChild(s);
+        }
+
+        // Configure feedback button
+        const feedbackBtn = document.getElementById('feedback-btn');
+        if (feedbackBtn) {
+            if (config.feedbackUrl) {
+                feedbackBtn.onclick = () => window.open(config.feedbackUrl, '_blank');
+            } else {
+                feedbackBtn.style.display = 'none';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>Vibe Coding Instructor</h1>
+            <div class="controls">
+                <button id="help-btn" class="help-btn" title="Help & Welcome" onclick="showWelcome()">❓ Help</button>
+                <button id="feedback-btn" class="feedback-btn" title="Send Feedback">📝 Feedback</button>
+            </div>
+        </header>
+        
+        <main class="main-panels">
+            <div class="panel editor-panel">
+                <div class="panel-header">
+                    <div class="editor-actions">
+                        <button id="undo-btn" class="undo-btn" title="Undo (Ctrl+Z)" disabled>↶ Undo</button>
+                        <button id="redo-btn" class="redo-btn" title="Redo (Ctrl+Y)" disabled>↷ Redo</button>
+                        <button id="format-code-btn" class="format-btn" title="Format code">📐 Format</button>
+                        <button id="save-code-btn" class="save-btn" title="Save code (Ctrl+S)">💾 Save</button>
+                        <button id="load-code-btn" class="load-btn" title="Load code file">📁 Load</button>
+                        <button id="api-settings-btn" class="settings-btn" title="API Settings">⚙️ API</button>
+                        
+                        <!-- Save options dropdown -->
+                        <div id="save-options" class="save-options-dropdown hidden">
+                            <div class="dropdown-content">
+                                <button id="save-code-only" class="dropdown-item">💾 Save Code Only (.js)</button>
+                                <button id="save-full-project" class="dropdown-item">📦 Save Full Project (.json)</button>
+                                <hr class="dropdown-separator">
+                                <button id="copy-share-link" class="dropdown-item">🔗 Copy Share Link</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Session Recovery Notification -->
+                <div id="session-restore-notification" class="session-notification hidden">
+                    <div class="notification-content">
+                        <span class="notification-icon">🔄</span>
+                        <span class="notification-text">Code restored from previous session</span>
+                        <button id="start-fresh-notification-btn" class="notification-btn">Start Fresh</button>
+                        <button id="dismiss-notification-btn" class="notification-close">✕</button>
+                    </div>
+                </div>
+                
+                <div id="editor" class="editor-container"></div>
+                
+                <!-- Hidden file input for loading files -->
+                <input type="file" id="file-input" accept=".js,.txt,.json" style="display: none;" />
+            </div>
+            
+            <div class="panel chat-panel">
+                <div id="chat" class="chat-container">
+                    <!-- AI Chat Interface -->
+                    <div class="ai-input-section">
+                        <div class="input-header">
+                            <h3>🤖 Modify Your Code</h3>
+                            <p>Describe what you want to change or add to your P5.js sketch</p>
+                        </div>
+                        
+                        <div class="input-area">
+                            <textarea 
+                                id="user-request-input" 
+                                rows="3"
+                            ></textarea>
+                            
+                            <div class="input-actions">
+                                <button id="generate-from-input-btn" class="generate-input-btn">
+                                    ✨ Generate Code
+                                </button>
+                                <button id="clear-input-btn" class="clear-btn" title="Clear input">
+                                    🗑️ Clear
+                                </button>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <!-- Learning Dashboard -->
+                    <div class="learning-dashboard">
+                        <!-- Fixed Header Section -->
+                        <div class="learning-header-fixed">
+                            <div class="learning-status">
+                                <div class="status-text">
+                                    <span id="current-concept-name" class="concept-name">Basic Shapes</span>
+                                </div>
+                            </div>
+                            
+                            <button id="next-concept-btn" class="whats-next-btn">
+                                🔍 What's Next?
+                            </button>
+                        </div>
+
+                        <!-- Learning Objectives Header with Progress -->
+                        <div class="objectives-header-fixed">
+                            <div class="objectives-header-content">
+                                <div class="objectives-title-section">
+                                    <div class="grid-instructions">
+                                        <div class="instruction-row">
+                                            <span class="detected-indicator">🔵 In your code</span>
+                                            <span class="completed-indicator">✅ Click when comfortable</span>
+                                        </div>
+                                        <div class="progress-row">
+                                            <span class="progress-spacer"></span>
+                                            <div class="progress-metrics-inline">
+                                                <!-- Progress metrics will be populated by JavaScript -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Scrollable Learning Objectives -->
+                        <div class="objectives-scrollable">
+                            <div id="objectives-badges" class="objectives-badges">
+                                <!-- Objective badges will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Progress Confirmation Dialog -->
+                        <div id="progress-dialog" class="progress-dialog hidden">
+                            <div class="dialog-overlay"></div>
+                            <div class="dialog-content">
+                                <div class="dialog-header">
+                                    <h4 id="dialog-title">Continue Learning?</h4>
+                                </div>
+                                <div id="dialog-message" class="dialog-message">
+                                    <!-- Message will be populated by JavaScript -->
+                                </div>
+                                <div class="dialog-actions">
+                                    <button id="dialog-cancel" class="dialog-btn secondary">
+                                        Keep Practicing
+                                    </button>
+                                    <button id="dialog-continue" class="dialog-btn primary">
+                                        What's Next?
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="panel canvas-panel">
+                <div id="canvas-container" class="canvas-container">
+                    <div id="error-display" class="error-display hidden"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Developer UI Overlay -->
+    <div id="developer-ui" class="developer-ui hidden">
+        <div class="developer-header">
+            <h3>🔧 Developer Console</h3>
+            <div class="developer-controls">
+                <button id="reset-all-btn" class="reset-btn" title="Reset all localStorage data (onboarding, settings, etc.)">🗑️ Reset All</button>
+                <span class="shortcut-hint">Press Ctrl+` to toggle</span>
+                <button id="close-developer-ui" class="close-btn">✕</button>
+            </div>
+        </div>
+        
+        <div class="developer-content">
+            <div class="developer-tabs">
+                <button class="tab-btn active" data-tab="prompt">Latest Prompt</button>
+                <button class="tab-btn" data-tab="response">Latest Response</button>
+                <button class="tab-btn" data-tab="state">App State</button>
+                <button class="tab-btn" data-tab="ontology">Ontology Info</button>
+                <button class="tab-btn" data-tab="console">Console Logs</button>
+            </div>
+            
+            <div class="developer-panels">
+                <div id="prompt-panel" class="dev-panel active">
+                    <div class="panel-header">
+                        <h4>Most Recent LLM Prompt</h4>
+                        <button id="copy-prompt-btn" class="copy-btn">📋 Copy</button>
+                    </div>
+                    <div class="sub-tabs">
+                        <button class="sub-tab-btn active" data-subtab="main-prompt">Main Prompt</button>
+                        <button class="sub-tab-btn" data-subtab="explanations-prompt">Explanations Prompt</button>
+                    </div>
+                    <div class="sub-panels">
+                        <div id="main-prompt-panel" class="sub-panel active">
+                            <div class="prompt-display">
+                                <pre id="prompt-content">No prompt generated yet</pre>
+                            </div>
+                        </div>
+                        <div id="explanations-prompt-panel" class="sub-panel">
+                            <div class="prompt-display">
+                                <pre id="explanations-prompt-content">No explanations prompt (Tier 1 model)</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prompt-stats">
+                        <span id="prompt-model">Model: Unknown</span>
+                        <span id="prompt-length">Length: 0 chars</span>
+                        <span id="prompt-timestamp">Generated: Never</span>
+                    </div>
+                </div>
+
+                <div id="response-panel" class="dev-panel">
+                    <div class="panel-header">
+                        <h4>Most Recent LLM Response</h4>
+                        <button id="copy-response-btn" class="copy-btn">📋 Copy</button>
+                    </div>
+                    <div class="sub-tabs">
+                        <button class="sub-tab-btn active" data-subtab="code-response">Code</button>
+                        <button class="sub-tab-btn" data-subtab="explanations-response">Explanations</button>
+                    </div>
+                    <div class="sub-panels">
+                        <div id="code-response-panel" class="sub-panel active">
+                            <div class="prompt-display">
+                                <pre id="response-content">No response received yet</pre>
+                            </div>
+                        </div>
+                        <div id="explanations-response-panel" class="sub-panel">
+                            <div class="prompt-display">
+                                <pre id="explanations-response-content">No explanations data</pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prompt-stats">
+                        <span id="response-model">Model: Unknown</span>
+                        <span id="response-length">Length: 0 chars</span>
+                        <span id="response-timestamp">Received: Never</span>
+                    </div>
+                </div>
+
+                <div id="state-panel" class="dev-panel">
+                    <div class="panel-header">
+                        <h4>Application State</h4>
+                        <div>
+                            <button id="reset-progress-btn" class="clear-btn">🔄 Reset Progress</button>
+                            <button id="reset-history-btn" class="clear-btn">🗑️ Reset History</button>
+                            <button id="refresh-state-btn" class="refresh-btn">🔄 Refresh</button>
+                        </div>
+                    </div>
+
+                    <!-- Dev Mode: Persist API Key -->
+                    <div style="padding: 10px; background: #2d2d2d; border-bottom: 1px solid #444; margin-bottom: 10px;">
+                        <label style="display: flex; align-items: center; gap: 8px; color: #aaa; font-size: 12px; cursor: pointer;">
+                            <input type="checkbox" id="persist-api-key-checkbox" style="cursor: pointer;">
+                            <span>🔑 Persist API Key (Dev Mode)</span>
+                        </label>
+                        <div id="dev-api-key-status" style="margin-top: 5px; font-size: 11px; color: #888; padding-left: 20px;">Configure API key in Settings (⚙️ API button)</div>
+                    </div>
+
+                    <!-- Dev Mode: Custom Vercel Endpoint -->
+                    <div style="padding: 10px; background: #2d2d2d; border-bottom: 1px solid #444; margin-bottom: 10px;">
+                        <label style="display: block; color: #aaa; font-size: 12px; margin-bottom: 6px;">🌐 Custom Vercel Endpoint (Dev Mode)</label>
+                        <div style="display: flex; gap: 6px; align-items: center;">
+                            <input type="text" id="dev-endpoint-input" placeholder="https://your-branch.vercel.app/api" style="flex: 1; padding: 4px 8px; background: #1e1e1e; border: 1px solid #555; border-radius: 4px; color: #ccc; font-size: 12px;">
+                            <button id="reset-endpoint-btn" style="padding: 4px 8px; background: #3e3e42; border: 1px solid #555; border-radius: 4px; color: #ccc; font-size: 11px; cursor: pointer;">Reset</button>
+                        </div>
+                        <div id="dev-endpoint-status" style="margin-top: 5px; font-size: 11px; color: #888;">Using default endpoint</div>
+                    </div>
+
+                    <div class="state-display">
+                        <pre id="state-content">Click refresh to load state</pre>
+                    </div>
+                </div>
+                
+                <div id="ontology-panel" class="dev-panel">
+                    <div class="panel-header">
+                        <h4>Learning Context</h4>
+                        <button id="refresh-ontology-btn" class="refresh-btn">🔄 Refresh</button>
+                    </div>
+                    <div class="ontology-display">
+                        <pre id="ontology-content">Click refresh to load ontology info</pre>
+                    </div>
+                </div>
+                
+                <div id="console-panel" class="dev-panel">
+                    <div class="panel-header">
+                        <h4>Console Logs</h4>
+                        <button id="clear-logs-btn" class="clear-btn">🗑️ Clear</button>
+                    </div>
+                    <div class="console-display">
+                        <div id="console-logs">No logs captured yet</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Welcome Modal -->
+    <div id="welcome-modal" class="welcome-modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>👋 Welcome to Vibe Coding Instructor</h2>
+            </div>
+            
+            <div class="modal-body">
+                <div class="welcome-content">
+                    <p class="welcome-intro">
+                        Learn to code creatively with P5.js and AI assistance! This tool helps you build visual coding skills progressively, starting with simple concepts and growing your abilities step by step.
+                    </p>
+
+                    <div class="welcome-steps">
+                        <div class="welcome-step">
+                            <div class="step-icon">🔑</div>
+                            <div class="step-content">
+                                <h4>1. Set up your API key</h4>
+                                <p>Click the <strong>🔑 API Settings</strong> button in the top toolbar to configure your OpenAI API key. This enables AI-powered code generation.</p>
+                            </div>
+                        </div>
+
+                        <div class="welcome-step">
+                            <div class="step-icon">💭</div>
+                            <div class="step-content">
+                                <h4>2. Chat with the AI assistant</h4>
+                                <p>Use the chat panel to ask for help, request code changes, or learn new concepts. The AI will generate code appropriate to your current skill level.</p>
+                            </div>
+                        </div>
+
+                        <div class="welcome-step">
+                            <div class="step-icon">🎨</div>
+                            <div class="step-content">
+                                <h4>3. Create and experiment</h4>
+                                <p>Write code in the editor and see your creations come to life in the canvas. Use undo/redo, save your work, and build progressively more complex projects.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="welcome-tips">
+                        <h4>💡 Quick Tips:</h4>
+                        <ul>
+                            <li>Start with simple requests like "draw a circle" or "add some colors"</li>
+                            <li>The AI learns what you know and suggests appropriate next steps</li>
+                            <li>Your progress is saved automatically in your browser</li>
+                            <li>Use the menu for importing/exporting your projects</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button id="setup-api-key-btn" class="primary-btn">🔑 Set up API Key</button>
+                <button id="start-coding-btn" class="secondary-btn">Start Coding</button>
+                <div class="welcome-checkbox">
+                    <label>
+                        <input type="checkbox" id="dont-show-welcome">
+                        Don't show this again
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Settings Modal -->
+    <div id="api-settings-modal" class="api-settings-modal hidden">
+        <div class="modal-overlay" onclick="closeAPISettings()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🔑 API Settings</h3>
+                <button class="modal-close" onclick="closeAPISettings()">✕</button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Current Status -->
+                <div class="api-status-section">
+                    <div class="status-header">
+                        <div class="status-left">
+                            <h4>Current Status</h4>
+                            <span id="api-status-text" class="status-text">No API key configured</span>
+                        </div>
+                        <div id="api-status-indicator" class="status-indicator status-none">
+                            <span class="status-dot"></span>
+                        </div>
+                    </div>
+                    
+                    <div id="current-provider-info" class="provider-info hidden">
+                        <div class="provider-details">
+                            <strong>Provider:</strong> <span id="current-provider-name"></span><br>
+                            <strong>Model:</strong> <span id="current-model-name"></span><br>
+                            <strong>Key:</strong> <span id="current-api-key-masked"></span>
+                        </div>
+                        <button id="clear-api-key-btn" class="clear-btn">🗑️ Clear Key</button>
+                    </div>
+                </div>
+
+                <!-- Provider Selection -->
+                <div class="provider-selection-section">
+                    <h4>Choose Provider</h4>
+                    <div class="provider-buttons">
+                        <!-- Provider buttons will be generated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Model Selection -->
+                <div class="model-selection-section">
+                    <label for="model-select">Model:</label>
+                    <select id="model-select" disabled>
+                        <option value="">Select a provider first</option>
+                    </select>
+                </div>
+
+                <!-- API Key Input -->
+                <div id="api-key-input-section" class="api-key-section hidden">
+                    <h4 id="selected-provider-title">Enter API Key</h4>
+                    
+                    <!-- Instructions -->
+                    <div id="setup-instructions" class="setup-instructions">
+                        <div class="instructions-header">
+                            <span>📋 Setup Instructions</span>
+                            <button id="toggle-instructions" class="toggle-btn">Show</button>
+                        </div>
+                        <div id="instructions-content" class="instructions-content hidden">
+                            <ol id="instructions-list"></ol>
+                            <div class="instructions-footer">
+                                <a id="provider-docs-link" href="#" target="_blank" rel="noopener">📖 View Documentation</a>
+                                <div id="provider-notes" class="provider-notes"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Key Input -->
+                    <div class="key-input-container">
+                        <div class="input-group">
+                            <label for="api-key-input">API Key:</label>
+                            <input 
+                                type="password" 
+                                id="api-key-input" 
+                                placeholder="Enter your API key..."
+                                autocomplete="off"
+                                spellcheck="false"
+                            >
+                            <button id="toggle-key-visibility" class="visibility-btn" title="Show/Hide Key">👁️</button>
+                        </div>
+                        
+                        <div class="key-actions">
+                            <button id="test-api-key-btn" class="test-btn" disabled>🧪 Test Key</button>
+                            <button id="save-api-key-btn" class="save-btn" disabled>💾 Save Key</button>
+                        </div>
+                    </div>
+
+                    <!-- Test Results -->
+                    <div id="test-results" class="test-results hidden">
+                        <div class="result-header">
+                            <span>Test Results</span>
+                        </div>
+                        <div id="test-result-content"></div>
+                    </div>
+                </div>
+
+                <!-- Help Section -->
+                <div class="help-section">
+                    <h4>🆘 Need Help?</h4>
+                    <div class="help-content">
+                        <p><strong>Why do I need an API key?</strong></p>
+                        <p>API keys allow you to use your own account with AI providers. This gives you:</p>
+                        <ul>
+                            <li>Control over your usage and costs</li>
+                            <li>Access to the latest models</li>
+                            <li>Better privacy and security</li>
+                        </ul>
+                        
+                        <p><strong>Security:</strong> Your API key is stored securely in your browser session and never saved permanently.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Concept Selection Modal -->
+    <div id="concept-selection-modal" class="concept-selection-modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🌱 Choose Your Next Learning Adventure</h2>
+                <button class="modal-close" onclick="closeConceptSelection()">✕</button>
+            </div>
+            
+            <div class="modal-body">
+                <div id="concept-selection-progress" class="concept-progress-info">
+                    <!-- Progress info will be populated by JavaScript -->
+                </div>
+                
+                <div id="concept-selection-content" class="concept-selection-content">
+                    <!-- Concept options will be populated by JavaScript -->
+                </div>
+                
+                <div id="concept-selection-debug" class="concept-debug-info hidden">
+                    <!-- Debug info will be populated by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button id="stay-current-concept-btn" class="secondary-btn">
+                    Keep Practicing Current Topic
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Network Error Overlay -->
+    <div id="network-error-overlay" class="network-error-overlay hidden">
+        <div class="overlay-content">
+            <div class="error-icon">🌐</div>
+            <h2>Network Connection Issues</h2>
+            <p>Unable to load essential resources. Please check your internet connection and try refreshing the page.</p>
+            <div class="error-details">
+                <p>This application requires:</p>
+                <ul>
+                    <li>P5.js library for canvas rendering</li>
+                    <li>Monaco Editor for code editing</li>
+                    <li>Stable internet connection</li>
+                </ul>
+            </div>
+            <button id="retry-network-btn" class="retry-btn">🔄 Retry</button>
+        </div>
+    </div>
+
+    <!-- Dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js" onerror="handleNetworkError('p5js')"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js" onerror="handleNetworkError('monaco')"></script>
+
+    <!-- Application modules -->
+    <script type="module" src="js/app.js"></script>
+
+    <script>
+        // Network error detection
+        window.networkErrors = [];
+        
+        function handleNetworkError(resource) {
+            window.networkErrors.push(resource);
+            console.error(`Failed to load ${resource}`);
+            
+            // Show overlay after a brief delay to avoid flickering
+            setTimeout(() => {
+                if (window.networkErrors.length > 0) {
+                    const overlay = document.getElementById('network-error-overlay');
+                    if (overlay) {
+                        overlay.classList.remove('hidden');
+                    }
+                }
+            }, 1000);
+        }
+        
+        // Retry functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const retryBtn = document.getElementById('retry-network-btn');
+            if (retryBtn) {
+                retryBtn.addEventListener('click', () => {
+                    window.location.reload();
+                });
+            }
+        });
+        
+        // Global functions for modal control
+        function closeConceptSelection() {
+            if (window.vibeApp && window.vibeApp.learningDashboard) {
+                window.vibeApp.learningDashboard.hideConceptSelectionModal();
+            }
+        }
+        
+        function showWelcome() {
+            if (window.welcomeUI) {
+                window.welcomeUI.showWelcome();
+            }
+        }
+    </script>
+</body>
+</html>

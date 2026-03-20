@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embedded App Test - Vibe Coding Instructor</title>
+    
+    <!-- Test Framework Styles -->
+    <style>
+        .test-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10000;
+            background: #2c3e50;
+            color: white;
+            padding: 10px;
+            font-family: Arial, sans-serif;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .test-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .test-info {
+            font-size: 14px;
+        }
+        
+        .test-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .test-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .test-btn:hover {
+            background: #2980b9;
+        }
+        
+        .test-btn.pass {
+            background: #27ae60;
+        }
+        
+        .test-btn.fail {
+            background: #e74c3c;
+        }
+        
+        .browser-info {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+        
+        /* Adjust main app to account for test overlay */
+        body {
+            padding-top: 60px !important;
+        }
+        
+        .test-checklist {
+            position: fixed;
+            top: 60px;
+            right: 10px;
+            width: 300px;
+            background: white;
+            border: 2px solid #3498db;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            z-index: 9999;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+        }
+        
+        .test-checklist.visible {
+            display: block;
+        }
+        
+        .checklist-header {
+            background: #3498db;
+            color: white;
+            padding: 10px;
+            font-weight: bold;
+        }
+        
+        .checklist-item {
+            padding: 8px 10px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+        
+        .checklist-status {
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 10px;
+            cursor: pointer;
+        }
+        
+        .status-pending { background: #f39c12; color: white; }
+        .status-pass { background: #27ae60; color: white; }
+        .status-fail { background: #e74c3c; color: white; }
+    </style>
+    
+    <!-- Include the main application CSS -->
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <!-- Test Control Overlay -->
+    <div class="test-overlay">
+        <div class="test-controls">
+            <div class="test-info">
+                <strong>Browser Test Mode</strong>
+                <div class="browser-info" id="browser-info">Detecting browser...</div>
+            </div>
+            <div class="test-buttons">
+                <button class="test-btn" onclick="toggleChecklist()">📋 Test Checklist</button>
+                <button class="test-btn" onclick="openMainApp()">🔗 Open Clean App</button>
+                <button class="test-btn" onclick="resetApp()">🔄 Reset Test</button>
+                <button class="test-btn" onclick="exportResults()">📊 Export Results</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Test Checklist -->
+    <div id="test-checklist" class="test-checklist">
+        <div class="checklist-header">
+            Manual Test Checklist
+            <span style="float: right; cursor: pointer;" onclick="toggleChecklist()">✕</span>
+        </div>
+        
+        <div class="checklist-item">
+            <span>Monaco Editor Loads</span>
+            <div class="checklist-status status-pending" onclick="toggleStatus(this)">TEST</div>
+        </div>
+        
+        <div class="checklist-item">
+            <span>P5.js Canvas Renders</span>
+            <div class="checklist-status status-pending" onclick="toggleStatus(this)">TEST</div>
+        </div>
+        
+        <div class="checklist-item">
+            <span>Code Auto-Execution</span>
+            <div class="checklist-status status-pending" onclick="toggleStatus(this)">TEST</div>
+        </div>
+        
+        <div class="checklist-item">
+            <span>Undo/Redo (Ctrl+Z/Y)</span>
+            <div class="checklist-status status-pending" onclick="toggleStatus(this)">TEST</div>
+        </div>
+        
+        <div class="checklist-item">
+            <span>Save/Load Files</span>
+            <div class="checklist-status status-pending" onclick="toggleStatus(this)">TEST</div>
+        </div>
+        
+        <div class="checklist-item">
+            <span>Session Recovery</span>
+            <div class="checklist-status status-pending" onclick="toggleStatus(this)">TEST</div>
+        </div>
+        
+        <div class="checklist-item">
+            <span>Learning Dashboard</span>
+            <div class="checklist-status status-pending" onclick="toggleStatus(this)">TEST</div>
+        </div>
+        
+        <div class="checklist-item">
+            <span>Keyboard Shortcuts</span>
+            <div class="checklist-status status-pending" onclick="toggleStatus(this)">TEST</div>
+        </div>
+        
+        <div class="checklist-item">
+            <span>AI Code Generation</span>
+            <div class="checklist-status status-pending" onclick="toggleStatus(this)">TEST</div>
+        </div>
+        
+        <div class="checklist-item">
+            <span>Error Handling</span>
+            <div class="checklist-status status-pending" onclick="toggleStatus(this)">TEST</div>
+        </div>
+    </div>
+
+    <!-- FULL APPLICATION CONTENT EMBEDDED DIRECTLY -->
+    <div id="app">
+        <header>
+            <h1>Vibe Coding Instructor</h1>
+            <div class="controls">
+                <button id="help-btn" class="help-btn" title="Help & Welcome" onclick="showWelcome()">❓ Help</button>
+                <span id="status">Ready</span>
+            </div>
+        </header>
+        
+        <main class="main-panels">
+            <div class="panel editor-panel">
+                <div class="panel-header">
+                    <div class="editor-actions">
+                        <button id="undo-btn" class="undo-btn" title="Undo (Ctrl+Z)" disabled>↶ Undo</button>
+                        <button id="redo-btn" class="redo-btn" title="Redo (Ctrl+Y)" disabled>↷ Redo</button>
+                        <button id="format-code-btn" class="format-btn" title="Format code">📐 Format</button>
+                        <button id="save-code-btn" class="save-btn" title="Save code (Ctrl+S)">💾 Save</button>
+                        <button id="load-code-btn" class="load-btn" title="Load code file">📁 Load</button>
+                        
+                        <!-- Save options dropdown -->
+                        <div id="save-options" class="save-options-dropdown hidden">
+                            <div class="dropdown-content">
+                                <button id="save-code-only" class="dropdown-item">💾 Save Code Only (.js)</button>
+                                <button id="save-full-project" class="dropdown-item">📦 Save Full Project (.json)</button>
+                                <hr class="dropdown-separator">
+                                <button id="copy-share-link" class="dropdown-item">🔗 Copy Share Link</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Session Recovery Notification -->
+                <div id="session-restore-notification" class="session-notification hidden">
+                    <div class="notification-content">
+                        <span class="notification-icon">🔄</span>
+                        <span class="notification-text">Code restored from previous session</span>
+                        <button id="start-fresh-notification-btn" class="notification-btn">Start Fresh</button>
+                        <button id="dismiss-notification-btn" class="notification-close">✕</button>
+                    </div>
+                </div>
+                
+                <div id="editor" class="editor-container"></div>
+                
+                <!-- Hidden file input for loading files -->
+                <input type="file" id="file-input" accept=".js,.txt,.json" style="display: none;" />
+            </div>
+            
+            <div class="panel chat-panel">
+                <div id="chat" class="chat-container">
+                    <!-- AI Chat Interface -->
+                    <div class="ai-input-section">
+                        <div class="input-header">
+                            <h3>🤖 Modify Your Code</h3>
+                            <p>Describe what you want to change or add to your P5.js sketch</p>
+                        </div>
+                        
+                        <div class="input-area">
+                            <textarea 
+                                id="user-request-input" 
+                                placeholder="e.g., 'Make the circle change colors when I click' or 'Add a moving rectangle'"
+                                rows="3"
+                            ></textarea>
+                            
+                            <div class="input-actions">
+                                <button id="generate-from-input-btn" class="generate-input-btn">
+                                    ✨ Generate Code
+                                </button>
+                                <button id="clear-input-btn" class="clear-btn" title="Clear input">
+                                    🗑️ Clear
+                                </button>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <!-- Learning Dashboard -->
+                    <div class="learning-dashboard">
+                        <!-- Fixed Header Section -->
+                        <div class="learning-header-fixed">
+                            <div class="learning-status">
+                                <div class="status-text">
+                                    <span id="current-concept-name" class="concept-name">Basic Shapes</span>
+                                </div>
+                            </div>
+                            
+                            <button id="next-concept-btn" class="whats-next-btn">
+                                🔍 What's Next?
+                            </button>
+                        </div>
+
+                        <!-- Learning Objectives Header with Progress -->
+                        <div class="objectives-header-fixed">
+                            <div class="objectives-header-content">
+                                <div class="objectives-title-section">
+                                    <h4>🎯 Learning Objectives</h4>
+                                    <div class="grid-instructions">
+                                        <div class="instruction-row">
+                                            <span class="detected-indicator">🔵 In your code</span>
+                                            <span class="completed-indicator">✅ Click when comfortable</span>
+                                        </div>
+                                        <div class="progress-row">
+                                            <span class="progress-spacer"></span>
+                                            <div class="progress-metrics-inline">
+                                                <!-- Progress metrics will be populated by JavaScript -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Scrollable Learning Objectives -->
+                        <div class="objectives-scrollable">
+                            <div id="objectives-badges" class="objectives-badges">
+                                <!-- Objective badges will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <div id="concept-selection" class="concept-selection hidden">
+                            <div class="selection-header">
+                                <h4>🎓 Choose Your Next Topic</h4>
+                                <p>Based on your progress, here's what you can learn next:</p>
+                            </div>
+                            <div id="available-concepts" class="concept-buttons">
+                                <!-- Concept buttons will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Progress Confirmation Dialog -->
+                        <div id="progress-dialog" class="progress-dialog hidden">
+                            <div class="dialog-overlay"></div>
+                            <div class="dialog-content">
+                                <div class="dialog-header">
+                                    <h4 id="dialog-title">Continue Learning?</h4>
+                                </div>
+                                <div id="dialog-message" class="dialog-message">
+                                    <!-- Message will be populated by JavaScript -->
+                                </div>
+                                <div class="dialog-actions">
+                                    <button id="dialog-cancel" class="dialog-btn secondary">
+                                        Keep Practicing
+                                    </button>
+                                    <button id="dialog-continue" class="dialog-btn primary">
+                                        What's Next?
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="panel canvas-panel">
+                <div id="canvas-container" class="canvas-container">
+                    <div id="error-display" class="error-display hidden"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Developer UI Overlay -->
+    <div id="developer-ui" class="developer-ui hidden">
+        <div class="developer-header">
+            <h3>🔧 Developer Console</h3>
+            <div class="developer-controls">
+                <span class="shortcut-hint">Press Ctrl+` to toggle</span>
+                <button id="close-developer-ui" class="close-btn">✕</button>
+            </div>
+        </div>
+        
+        <div class="developer-content">
+            <div class="developer-tabs">
+                <button class="tab-btn active" data-tab="prompt">Latest Prompt</button>
+                <button class="tab-btn" data-tab="state">App State</button>
+                <button class="tab-btn" data-tab="ontology">Ontology Info</button>
+                <button class="tab-btn" data-tab="console">Console Logs</button>
+            </div>
+            
+            <div class="developer-panels">
+                <div id="prompt-panel" class="dev-panel active">
+                    <div class="panel-header">
+                        <h4>Most Recent LLM Prompt</h4>
+                        <button id="copy-prompt-btn" class="copy-btn">📋 Copy</button>
+                    </div>
+                    <div class="prompt-display">
+                        <pre id="prompt-content">No prompt generated yet</pre>
+                    </div>
+                    <div class="prompt-stats">
+                        <span id="prompt-length">Length: 0 chars</span>
+                        <span id="prompt-timestamp">Generated: Never</span>
+                    </div>
+                </div>
+                
+                <div id="state-panel" class="dev-panel">
+                    <div class="panel-header">
+                        <h4>Application State</h4>
+                        <div>
+                            <button id="reset-progress-btn" class="clear-btn">🔄 Reset Progress</button>
+                            <button id="reset-history-btn" class="clear-btn">🗑️ Reset History</button>
+                            <button id="refresh-state-btn" class="refresh-btn">🔄 Refresh</button>
+                        </div>
+                    </div>
+                    <div class="state-display">
+                        <pre id="state-content">Click refresh to load state</pre>
+                    </div>
+                </div>
+                
+                <div id="ontology-panel" class="dev-panel">
+                    <div class="panel-header">
+                        <h4>Learning Context</h4>
+                        <button id="refresh-ontology-btn" class="refresh-btn">🔄 Refresh</button>
+                    </div>
+                    <div class="ontology-display">
+                        <pre id="ontology-content">Click refresh to load ontology info</pre>
+                    </div>
+                </div>
+                
+                <div id="console-panel" class="dev-panel">
+                    <div class="panel-header">
+                        <h4>Console Logs</h4>
+                        <button id="clear-logs-btn" class="clear-btn">🗑️ Clear</button>
+                    </div>
+                    <div class="console-display">
+                        <div id="console-logs">No logs captured yet</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"></script>
+    
+    <!-- Test Framework JavaScript -->
+    <script>
+        // Browser detection
+        function detectBrowser() {
+            const ua = navigator.userAgent;
+            let browser = 'Unknown';
+            if (ua.includes('Chrome') && !ua.includes('Edge')) browser = 'Chrome';
+            else if (ua.includes('Firefox')) browser = 'Firefox';
+            else if (ua.includes('Safari') && !ua.includes('Chrome')) browser = 'Safari';
+            else if (ua.includes('Edge')) browser = 'Edge';
+            
+            document.getElementById('browser-info').textContent = `${browser} | ES6: ${typeof Symbol !== 'undefined' ? 'Yes' : 'No'} | Storage: ${typeof localStorage !== 'undefined' ? 'Yes' : 'No'}`;
+        }
+        
+        // Test controls
+        function toggleChecklist() {
+            const checklist = document.getElementById('test-checklist');
+            checklist.classList.toggle('visible');
+        }
+        
+        function toggleStatus(element) {
+            if (element.classList.contains('status-pending')) {
+                element.classList.remove('status-pending');
+                element.classList.add('status-pass');
+                element.textContent = 'PASS';
+            } else if (element.classList.contains('status-pass')) {
+                element.classList.remove('status-pass');
+                element.classList.add('status-fail');
+                element.textContent = 'FAIL';
+            } else {
+                element.classList.remove('status-fail');
+                element.classList.add('status-pending');
+                element.textContent = 'TEST';
+            }
+        }
+        
+        function openMainApp() {
+            window.open('../index.html', '_blank');
+        }
+        
+        function resetApp() {
+            localStorage.clear();
+            sessionStorage.clear();
+            location.reload();
+        }
+        
+        function exportResults() {
+            const results = {};
+            document.querySelectorAll('.checklist-status').forEach((el, i) => {
+                const item = el.parentElement.querySelector('span').textContent;
+                const status = el.classList.contains('status-pass') ? 'PASS' : 
+                             el.classList.contains('status-fail') ? 'FAIL' : 'PENDING';
+                results[item] = status;
+            });
+            
+            const report = {
+                browser: navigator.userAgent,
+                timestamp: new Date().toISOString(),
+                results: results
+            };
+            
+            const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `browser-test-results-${Date.now()}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        // Initialize
+        detectBrowser();
+    </script>
+    
+    <!-- Application modules -->
+    <script type="module" src="../js/app.js"></script>
+</body>
+</html>

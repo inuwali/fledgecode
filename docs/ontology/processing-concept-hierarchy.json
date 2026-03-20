@@ -1,0 +1,2430 @@
+{
+  "creativeCodingConcepts": [
+    {
+      "id": "simpleDrawing",
+      "category": "basics",
+      "name": "Simple Drawing",
+      "difficulty": "beginner",
+      "description": "Creating fundamental visual elements like circles, rectangles, and lines",
+      "learningObjectives": [
+        "setupAndDraw",
+        "namedColorFill",
+        "namedColorStroke",
+        "namedColorBackground",
+        "noFill",
+        "noStroke",
+        "ellipse",
+        "rectangle",
+        "line",
+        "triangle",
+        "point",
+        "quad",
+        "strokeWeight",
+        "rectangleMode",
+        "ellipseMode"
+      ],
+      "prerequisites": [],
+      "creativeApplications": [
+        "abstract compositions",
+        "geometric patterns",
+        "character design"
+      ],
+      "expressionGoals": [
+        "Creating a personal visual vocabulary",
+        "Understanding the canvas as a creative space"
+      ]
+    },
+    {
+      "id": "colors",
+      "category": "basics",
+      "name": "Colors and Palettes",
+      "difficulty": "beginner",
+      "description": "Using numeric definitions for colors to create precise hues",
+      "learningObjectives": [
+        "fill",
+        "stroke",
+        "background",
+        "colorMode"
+      ],
+      "prerequisites": [
+        "simpleDrawing"
+      ],
+      "creativeApplications": [
+        "emotive color schemes",
+        "gradients",
+        "color theory exploration"
+      ],
+      "expressionGoals": [
+        "Expressing emotions through color",
+        "Developing a personal color palette"
+      ]
+    },
+    {
+      "id": "transparency",
+      "category": "basics",
+      "name": "Transparency and Layering",
+      "difficulty": "beginner-intermediate",
+      "description": "Creating depth through transparent layers",
+      "learningObjectives": [
+        "alphaChannel",
+        "clear",
+        "eraseMode",
+        "blendMode"
+      ],
+      "prerequisites": [
+        "colors"
+      ],
+      "creativeApplications": [
+        "atmospheric effects",
+        "overlapping compositions",
+        "watercolor-like textures"
+      ],
+      "expressionGoals": [
+        "Creating depth and atmosphere",
+        "Exploring visual relationships between elements"
+      ]
+    },
+    {
+      "id": "variables",
+      "category": "basics",
+      "name": "Variables",
+      "difficulty": "beginner",
+      "description": "Using variables to represent values",
+      "learningObjectives": [
+        "variableDeclaration",
+        "variableModification",
+        "canvasSizeConstants",
+        "mathematicalOperations",
+        "colorValues",
+        "colorInterpolation"
+      ],
+      "prerequisites": [
+        "simpleDrawing",
+        "colors"
+      ],
+      "creativeApplications": [
+        "animated elements",
+        "growing/shrinking shapes",
+        "moving objects"
+      ],
+      "expressionGoals": [
+        "Bringing static compositions to life",
+        "Understanding change as an expressive element"
+      ]
+    },
+    {
+      "id": "conditionals",
+      "category": "expressivity",
+      "name": "Visual Decision Making",
+      "difficulty": "intermediate",
+      "description": "Creating different visuals based on conditions",
+      "learningObjectives": [
+        "ifStatement",
+        "ifElseStatement",
+        "multipleConditions",
+        "comparisonOperators",
+        "logicalOperators"
+      ],
+      "prerequisites": [
+        "variables"
+      ],
+      "creativeApplications": [
+        "responsive elements",
+        "day/night transitions",
+        "mood-based color schemes"
+      ],
+      "expressionGoals": [
+        "Creating works that change and adapt",
+        "Exploring visual cause and effect"
+      ]
+    },
+    {
+      "id": "randomness",
+      "category": "expressivity",
+      "name": "Creative Randomness",
+      "difficulty": "beginner-intermediate",
+      "description": "Using chance to create organic variety and spontaneity",
+      "learningObjectives": [
+        "random",
+        "randomSeed",
+        "perlinNoise",
+        "noiseSeed"
+      ],
+      "prerequisites": [
+        "variables"
+      ],
+      "creativeApplications": [
+        "organic patterns",
+        "generative art",
+        "natural-looking variation"
+      ],
+      "expressionGoals": [
+        "Balancing control with chance",
+        "Creating unique outputs each time"
+      ]
+    },
+    {
+      "id": "animation",
+      "category": "expressivity",
+      "name": "Basic Animation",
+      "difficulty": "intermediate",
+      "description": "Creating movement over time",
+      "learningObjectives": [
+        "frameRate",
+        "frameCounter",
+        "milliseconds"
+      ],
+      "prerequisites": [
+        "variables"
+      ],
+      "creativeApplications": [
+        "moving characters",
+        "kinetic typography",
+        "animated patterns"
+      ],
+      "expressionGoals": [
+        "Expressing ideas through movement",
+        "Creating visual narratives through time"
+      ]
+    },
+    {
+      "id": "interactivity",
+      "category": "expressivity",
+      "name": "User Interaction",
+      "difficulty": "intermediate",
+      "description": "Making art that responds to the viewer",
+      "learningObjectives": [
+        "mousePosition",
+        "previousMousePosition",
+        "mouseButtonState",
+        "keyState",
+        "currentKey",
+        "keyCode"
+      ],
+      "prerequisites": [
+        "variables",
+        "animation",
+        "conditionals"
+      ],
+      "creativeApplications": [
+        "interactive drawings",
+        "viewer-controlled experiences",
+        "responsive environments"
+      ],
+      "expressionGoals": [
+        "Creating dialogue between artwork and viewer",
+        "Designing experiences rather than static pieces"
+      ]
+    },
+    {
+      "id": "repetition",
+      "category": "patterns",
+      "name": "Patterns and Repetition",
+      "difficulty": "intermediate",
+      "description": "Creating complex visuals through repeated elements",
+      "learningObjectives": [
+        "forLoop",
+        "nestedLoops",
+        "whileLoop"
+      ],
+      "prerequisites": [
+        "variables",
+        "conditionals"
+      ],
+      "creativeApplications": [
+        "textured backgrounds",
+        "pattern design",
+        "complex mandalas"
+      ],
+      "expressionGoals": [
+        "Finding beauty in repetition and variation",
+        "Creating complex outputs from simple rules"
+      ]
+    },
+    {
+      "id": "reusableElements",
+      "category": "patterns",
+      "name": "Reusable Drawing Functions",
+      "difficulty": "intermediate",
+      "description": "Creating modular, reusable elements for complex compositions",
+      "learningObjectives": [
+        "functionDeclaration",
+        "returnValues",
+        "functionCalls"
+      ],
+      "prerequisites": [
+        "simpleDrawing",
+        "colors",
+        "variables"
+      ],
+      "creativeApplications": [
+        "custom brushes",
+        "repeated character elements",
+        "modular scenes"
+      ],
+      "expressionGoals": [
+        "Building a personal library of visual elements",
+        "Creating complex scenes from modular parts"
+      ]
+    },
+    {
+      "id": "customShapes",
+      "category": "patterns",
+      "name": "Custom Shapes and Drawing",
+      "difficulty": "intermediate",
+      "description": "Creating your own visual elements beyond basic shapes",
+      "learningObjectives": [
+        "beginEndShape",
+        "vertex",
+        "curveVertex",
+        "bezierVertex",
+        "arc"
+      ],
+      "prerequisites": [
+        "simpleDrawing"
+      ],
+      "creativeApplications": [
+        "organic forms",
+        "custom characters",
+        "complex illustrations"
+      ],
+      "expressionGoals": [
+        "Moving beyond geometric primitives",
+        "Developing a unique visual style"
+      ]
+    },
+    {
+      "id": "transformations",
+      "category": "patterns",
+      "name": "Visual Transformations",
+      "difficulty": "intermediate",
+      "description": "Manipulating elements with rotation, scaling, and translation",
+      "learningObjectives": [
+        "translate",
+        "rotate",
+        "scale",
+        "transformationState",
+        "angleMode"
+      ],
+      "prerequisites": [
+        "simpleDrawing",
+        "variables"
+      ],
+      "creativeApplications": [
+        "kaleidoscope effects",
+        "spirals",
+        "complex compositions"
+      ],
+      "expressionGoals": [
+        "Creating dynamic visual relationships",
+        "Understanding spatial composition"
+      ]
+    },
+    {
+      "id": "collections",
+      "category": "advancedExpression",
+      "name": "Visual Collections",
+      "difficulty": "intermediate-advanced",
+      "description": "Managing multiple elements as unified groups",
+      "learningObjectives": [
+        "arrayCreation",
+        "arrayAccess",
+        "arrayMethods",
+        "arrayIteration",
+        "arrayOfObjects"
+      ],
+      "prerequisites": [
+        "variables",
+        "repetition"
+      ],
+      "creativeApplications": [
+        "particle systems",
+        "flocking behaviors",
+        "multiple characters"
+      ],
+      "expressionGoals": [
+        "Creating emergent visual behaviors",
+        "Managing complexity through systems"
+      ]
+    }
+  ],
+  "creativePathways": {
+    "characterAnimation": [
+      "simpleDrawing",
+      "colors",
+      "variables",
+      "animation",
+      "customShapes",
+      "reusableElements"
+    ],
+    "generativeArt": [
+      "simpleDrawing",
+      "colors",
+      "randomness",
+      "repetition",
+      "transformations",
+      "collections"
+    ],
+    "interactiveExperiences": [
+      "simpleDrawing",
+      "colors",
+      "variables",
+      "animation",
+      "interactivity",
+      "conditionals"
+    ],
+    "visualStories": [
+      "simpleDrawing",
+      "colors",
+      "animation",
+      "customShapes",
+      "conditionals",
+      "reusableElements"
+    ],
+    "abstractPatterns": [
+      "simpleDrawing",
+      "colors",
+      "transparency",
+      "repetition",
+      "transformations",
+      "randomness"
+    ]
+  },
+  "artisticGoals": {
+    "selfExpression": {
+      "description": "Creating art that expresses personal emotions, ideas, or identity",
+      "suggestedConcepts": [
+        "colors",
+        "customShapes",
+        "interactivity",
+        "conditionals"
+      ],
+      "projectIdeas": [
+        "Interactive self-portrait that changes with mouse movement",
+        "Emotional landscape that reflects different moods",
+        "Visual diary that generates unique patterns each day"
+      ]
+    },
+    "visualStorytelling": {
+      "description": "Using code to tell stories or narratives",
+      "suggestedConcepts": [
+        "animation",
+        "customShapes",
+        "conditionals",
+        "reusableElements"
+      ],
+      "projectIdeas": [
+        "Animated character that responds to environment",
+        "Interactive storybook with scene transitions",
+        "Generative comic strip with variable elements"
+      ]
+    },
+    "environmentalAwareness": {
+      "description": "Creating works that connect to nature or environmental themes",
+      "suggestedConcepts": [
+        "randomness",
+        "collections",
+        "objects",
+        "animation"
+      ],
+      "projectIdeas": [
+        "Ecosystem simulation with interdependent elements",
+        "Weather-responsive landscape that changes with real data",
+        "Growing plant system that responds to user care"
+      ]
+    },
+    "socialConnection": {
+      "description": "Art that facilitates connection or communication",
+      "suggestedConcepts": [
+        "interactivity",
+        "conditionals",
+        "animation",
+        "colors"
+      ],
+      "projectIdeas": [
+        "Visual chat system where messages become part of a composition",
+        "Collaborative drawing canvas",
+        "Emotion translator that converts text to visual expression"
+      ]
+    },
+    "visualExploration": {
+      "description": "Exploring visual concepts and aesthetics for their own sake",
+      "suggestedConcepts": [
+        "transformations",
+        "repetition",
+        "randomness",
+        "transparency"
+      ],
+      "projectIdeas": [
+        "Color relationship explorer",
+        "Pattern generator with adjustable parameters",
+        "Visual music interpreter that translates sound to image"
+      ]
+    }
+  },
+  "learningObjectives": [
+    {
+      "id": "setupAndDraw",
+      "name": "Setup and draw",
+      "description": "Core functions",
+      "category": "p5Core",
+      "subcategory": "setup",
+      "type": "p5Function",
+      "signatures": [
+        "setup(), draw()"
+      ],
+      "regexPatterns": [
+        "function\\s+setup\\s*\\(\\)",
+        "function\\s+draw\\s*\\(\\)"
+      ],
+      "examples": [
+        "function setup() { createCanvas(400, 400); }",
+        "function draw() { background(220); }"
+      ],
+      "relatedFunctions": [],
+      "prerequisites": [],
+      "concepts": [
+        "simpleDrawing"
+      ]
+    },
+    {
+      "id": "namedColorFill",
+      "name": "Named color fill",
+      "description": "Setting the fill color for shapes using CSS color names",
+      "category": "p5Colors",
+      "subcategory": "basicColors",
+      "type": "p5Function",
+      "signatures": [
+        "fill('CSSColor')"
+      ],
+      "regexPatterns": [
+        "fill\\s*\\('[a-zA-Z]+'\\)"
+      ],
+      "examples": [
+        "fill('red')",
+        "fill('blue')"
+      ],
+      "relatedFunctions": [
+        "fill",
+        "stroke",
+        "background",
+        "noFill"
+      ],
+      "prerequisites": [
+        "setupAndDraw"
+      ],
+      "concepts": [
+        "simpleDrawing"
+      ]
+    },
+    {
+      "id": "namedColorStroke",
+      "name": "Named color stroke",
+      "description": "Setting the outline color for shapes using CSS color names",
+      "category": "p5Colors",
+      "subcategory": "basicColors",
+      "type": "p5Function",
+      "signatures": [
+        "stroke('CSSColor')"
+      ],
+      "regexPatterns": [
+        "stroke\\s*\\('[a-zA-Z]+'\\)"
+      ],
+      "examples": [
+        "stroke('red')",
+        "stroke('blue')"
+      ],
+      "relatedFunctions": [
+        "fill",
+        "stroke",
+        "background",
+        "noStroke"
+      ],
+      "prerequisites": [
+        "setupAndDraw"
+      ],
+      "concepts": [
+        "simpleDrawing"
+      ]
+    },
+    {
+      "id": "namedColorBackground",
+      "name": "Named color background",
+      "description": "Setting the background using CSS color names",
+      "category": "p5Colors",
+      "subcategory": "basicColors",
+      "type": "p5Function",
+      "signatures": [
+        "background('CSSColor')"
+      ],
+      "regexPatterns": [
+        "background\\s*\\('[a-zA-Z]+'\\)"
+      ],
+      "examples": [
+        "background('white')",
+        "background('black')"
+      ],
+      "relatedFunctions": [
+        "fill",
+        "stroke",
+        "background"
+      ],
+      "prerequisites": [
+        "setupAndDraw"
+      ],
+      "concepts": [
+        "simpleDrawing"
+      ]
+    },
+    {
+      "id": "noFill",
+      "name": "No fill",
+      "description": "Disabling shape filling",
+      "category": "p5Colors",
+      "subcategory": "styling",
+      "type": "p5Function",
+      "signatures": [
+        "noFill()"
+      ],
+      "regexPatterns": [
+        "noFill\\s*\\(\\)"
+      ],
+      "examples": [
+        "noFill()",
+        "noFill(); rect(10, 10, 50, 50);"
+      ],
+      "relatedFunctions": [
+        "fill",
+        "stroke",
+        "noStroke"
+      ],
+      "prerequisites": [
+        "setupAndDraw"
+      ],
+      "concepts": [
+        "simpleDrawing"
+      ]
+    },
+    {
+      "id": "noStroke",
+      "name": "No stroke",
+      "description": "Disabling shape outlines",
+      "category": "p5Colors",
+      "subcategory": "styling",
+      "type": "p5Function",
+      "signatures": [
+        "noStroke()"
+      ],
+      "regexPatterns": [
+        "noStroke\\s*\\(\\)"
+      ],
+      "examples": [
+        "noStroke()",
+        "noStroke(); ellipse(50, 50, 100, 100);"
+      ],
+      "relatedFunctions": [
+        "stroke",
+        "fill",
+        "noFill"
+      ],
+      "prerequisites": [
+        "setupAndDraw"
+      ],
+      "concepts": [
+        "simpleDrawing"
+      ]
+    },
+    {
+      "id": "ellipse",
+      "name": "Ellipse",
+      "description": "Drawing circles and ellipses",
+      "category": "p5Drawing",
+      "subcategory": "shapes",
+      "type": "p5Function",
+      "signatures": [
+        "ellipse(x, y, width, height)"
+      ],
+      "regexPatterns": [
+        "ellipse\\s*\\([^)]*\\)"
+      ],
+      "examples": [
+        "ellipse(100, 100, 50, 50)",
+        "ellipse(x, y, size, size)"
+      ],
+      "relatedFunctions": [
+        "rect",
+        "line",
+        "triangle",
+        "noFill",
+        "fill",
+        "stroke"
+      ],
+      "prerequisites": [
+        "setupAndDraw"
+      ],
+      "concepts": [
+        "simpleDrawing"
+      ]
+    },
+    {
+      "id": "rectangle",
+      "name": "Rectangle",
+      "description": "Drawing rectangles and squares",
+      "category": "p5Drawing",
+      "subcategory": "shapes",
+      "type": "p5Function",
+      "signatures": [
+        "rect(x, y, width, height)"
+      ],
+      "regexPatterns": [
+        "rect\\s*\\([^)]*\\)"
+      ],
+      "examples": [
+        "rect(10, 10, 50, 50)",
+        "rect(x, y, 100, 100)"
+      ],
+      "relatedFunctions": [
+        "ellipse",
+        "line",
+        "triangle",
+        "quad",
+        "point",
+        "noFill",
+        "fill",
+        "stroke"
+      ],
+      "prerequisites": [
+        "setupAndDraw"
+      ],
+      "concepts": [
+        "simpleDrawing"
+      ]
+    },
+    {
+      "id": "line",
+      "name": "Line",
+      "description": "Drawing straight lines between points",
+      "category": "p5Drawing",
+      "subcategory": "shapes",
+      "type": "p5Function",
+      "signatures": [
+        "line(x1, y1, x2, y2)"
+      ],
+      "regexPatterns": [
+        "line\\s*\\([^)]*\\)"
+      ],
+      "examples": [
+        "line(0, 0, 100, 100)",
+        "line(x1, y1, x2, y2)"
+      ],
+      "relatedFunctions": [
+        "rect",
+        "ellipse",
+        "triangle",
+        "strokeWeight"
+      ],
+      "prerequisites": [
+        "setupAndDraw"
+      ],
+      "concepts": [
+        "simpleDrawing"
+      ]
+    },
+    {
+      "id": "triangle",
+      "name": "Triangle",
+      "description": "Drawing triangles between three points",
+      "category": "p5Drawing",
+      "subcategory": "shapes",
+      "type": "p5Function",
+      "signatures": [
+        "triangle(x1, y1, x2, y2, x3, y3)"
+      ],
+      "regexPatterns": [
+        "triangle\\s*\\([^)]*\\)"
+      ],
+      "examples": [
+        "triangle(50, 0, 100, 100, 0, 100)",
+        "triangle(x1, y1, x2, y2, x3, y3)"
+      ],
+      "relatedFunctions": [
+        "rect",
+        "ellipse",
+        "quad",
+        "fill",
+        "stroke"
+      ],
+      "prerequisites": [
+        "setupAndDraw"
+      ],
+      "concepts": [
+        "simpleDrawing"
+      ]
+    },
+    {
+      "id": "point",
+      "name": "Point",
+      "description": "Drawing a single point",
+      "category": "p5Drawing",
+      "subcategory": "shapes",
+      "type": "p5Function",
+      "signatures": [
+        "point(x, y)"
+      ],
+      "regexPatterns": [
+        "point\\s*\\([^)]*\\)"
+      ],
+      "examples": [
+        "point(50, 50)",
+        "point(x, y)"
+      ],
+      "relatedFunctions": [
+        "line",
+        "strokeWeight"
+      ],
+      "prerequisites": [
+        "setupAndDraw"
+      ],
+      "concepts": [
+        "simpleDrawing"
+      ]
+    },
+    {
+      "id": "quad",
+      "name": "Quad",
+      "description": "Drawing quadrilaterals between four points",
+      "category": "p5Drawing",
+      "subcategory": "shapes",
+      "type": "p5Function",
+      "signatures": [
+        "quad(x1, y1, x2, y2, x3, y3, x4, y4)"
+      ],
+      "regexPatterns": [
+        "quad\\s*\\([^)]*\\)"
+      ],
+      "examples": [
+        "quad(38, 2, 86, 15, 86, 63, 38, 75)",
+        "quad(x1, y1, x2, y2, x3, y3, x4, y4)"
+      ],
+      "relatedFunctions": [
+        "rect",
+        "triangle",
+        "vertex"
+      ],
+      "prerequisites": [
+        "setupAndDraw"
+      ],
+      "concepts": [
+        "simpleDrawing"
+      ]
+    },
+    {
+      "id": "strokeWeight",
+      "name": "Stroke weight",
+      "description": "Setting the thickness of lines and outlines",
+      "category": "p5Colors",
+      "subcategory": "styling",
+      "type": "p5Function",
+      "signatures": [
+        "strokeWeight(weight)"
+      ],
+      "regexPatterns": [
+        "strokeWeight\\s*\\([^)]*\\)"
+      ],
+      "examples": [
+        "strokeWeight(1)",
+        "strokeWeight(10)"
+      ],
+      "relatedFunctions": [
+        "stroke",
+        "noStroke",
+        "line"
+      ],
+      "prerequisites": [
+        "setupAndDraw"
+      ],
+      "concepts": [
+        "simpleDrawing"
+      ]
+    },
+    {
+      "id": "rectangleMode",
+      "name": "Rectangle mode",
+      "description": "Changing how rectangle coordinates are interpreted (CENTER, CORNER, etc.)",
+      "category": "p5Colors",
+      "subcategory": "styling",
+      "type": "p5Function",
+      "signatures": [
+        "rectMode(mode)"
+      ],
+      "regexPatterns": [
+        "rectMode\\s*\\([^)]*\\)"
+      ],
+      "examples": [
+        "rectMode(CENTER)",
+        "rectMode(CORNER)"
+      ],
+      "relatedFunctions": [
+        "rect",
+        "ellipseMode"
+      ],
+      "prerequisites": [
+        "rectangle"
+      ],
+      "concepts": [
+        "simpleDrawing"
+      ]
+    },
+    {
+      "id": "ellipseMode",
+      "name": "Ellipse mode",
+      "description": "Changing how ellipse coordinates are interpreted (CENTER, RADIUS, etc.)",
+      "category": "p5Colors",
+      "subcategory": "styling",
+      "type": "p5Function",
+      "signatures": [
+        "ellipseMode(mode)"
+      ],
+      "regexPatterns": [
+        "ellipseMode\\s*\\([^)]*\\)"
+      ],
+      "examples": [
+        "ellipseMode(CENTER)",
+        "ellipseMode(RADIUS)"
+      ],
+      "relatedFunctions": [
+        "ellipse",
+        "rectangleMode"
+      ],
+      "prerequisites": [
+        "ellipse"
+      ],
+      "concepts": [
+        "simpleDrawing"
+      ]
+    },
+    {
+      "id": "fill",
+      "name": "Fill",
+      "description": "Setting the fill color for shapes",
+      "category": "p5Colors",
+      "subcategory": "rgbColors",
+      "type": "p5Function",
+      "signatures": [
+        "fill(r, g, b)"
+      ],
+      "regexPatterns": [
+        "fill\\s*\\([0-9]+\\s*,\\s*[0-9]+\\s*,\\s*[0-9]+\\)"
+      ],
+      "examples": [
+        "fill(255, 0, 0)",
+        "fill(100, 150, 200)"
+      ],
+      "relatedFunctions": [
+        "stroke",
+        "background",
+        "noFill",
+        "namedColorFill"
+      ],
+      "prerequisites": [
+        "namedColorFill"
+      ],
+      "concepts": [
+        "colors"
+      ]
+    },
+    {
+      "id": "stroke",
+      "name": "Stroke",
+      "description": "Setting the outline color for shapes",
+      "category": "p5Colors",
+      "subcategory": "rgbColors",
+      "type": "p5Function",
+      "signatures": [
+        "stroke(r, g, b)"
+      ],
+      "regexPatterns": [
+        "stroke\\s*\\([0-9]+\\s*,\\s*[0-9]+\\s*,\\s*[0-9]+\\)"
+      ],
+      "examples": [
+        "stroke(255, 0, 0)",
+        "stroke(100, 150, 200)"
+      ],
+      "relatedFunctions": [
+        "fill",
+        "background",
+        "noStroke",
+        "strokeWeight"
+      ],
+      "prerequisites": [
+        "namedColorStroke"
+      ],
+      "concepts": [
+        "colors"
+      ]
+    },
+    {
+      "id": "background",
+      "name": "Background",
+      "description": "Setting the canvas background color",
+      "category": "p5Colors",
+      "subcategory": "rgbColors",
+      "type": "p5Function",
+      "signatures": [
+        "background(r, g, b)"
+      ],
+      "regexPatterns": [
+        "background\\s*\\([0-9]+\\s*,\\s*[0-9]+\\s*,\\s*[0-9]+\\)"
+      ],
+      "examples": [
+        "background(255)",
+        "background(100, 150, 200)"
+      ],
+      "relatedFunctions": [
+        "fill",
+        "stroke",
+        "clear"
+      ],
+      "prerequisites": [
+        "namedColorBackground"
+      ],
+      "concepts": [
+        "colors"
+      ]
+    },
+    {
+      "id": "colorMode",
+      "name": "Color mode",
+      "description": "Switching between color systems (RGB, HSB)",
+      "category": "p5Colors",
+      "subcategory": "colorSystems",
+      "type": "p5Function",
+      "signatures": [
+        "colorMode(RGB) or colorMode(HSB)"
+      ],
+      "regexPatterns": [
+        "colorMode\\s*\\([^)]*\\)"
+      ],
+      "examples": [
+        "colorMode(RGB)",
+        "colorMode(HSB)"
+      ],
+      "relatedFunctions": [
+        "fill",
+        "stroke",
+        "background"
+      ],
+      "prerequisites": [
+        "fill",
+        "stroke"
+      ],
+      "concepts": [
+        "colors"
+      ]
+    },
+    {
+      "id": "alphaChannel",
+      "name": "Alpha channel",
+      "description": "Using transparency in colors",
+      "category": "p5Colors",
+      "subcategory": "transparency",
+      "type": "p5Function",
+      "signatures": [
+        "fill(r, g, b, a), stroke(r, g, b, a), background(r, g, b, a)"
+      ],
+      "regexPatterns": [
+        "(fill|stroke|background)\\s*\\([0-9]+\\s*,\\s*[0-9]+\\s*,\\s*[0-9]+\\s*,\\s*[0-9]+\\)"
+      ],
+      "examples": [
+        "fill(255, 0, 0, 100)",
+        "stroke(100, 150, 200, 150)"
+      ],
+      "relatedFunctions": [
+        "fill",
+        "stroke",
+        "background",
+        "blendMode"
+      ],
+      "prerequisites": [
+        "fill",
+        "stroke",
+        "background"
+      ],
+      "concepts": [
+        "transparency"
+      ]
+    },
+    {
+      "id": "clear",
+      "name": "Clear",
+      "description": "Clearing specific portions of the canvas",
+      "category": "p5Colors",
+      "subcategory": "transparency",
+      "type": "p5Function",
+      "signatures": [
+        "clear()"
+      ],
+      "regexPatterns": [
+        "clear\\s*\\(\\)"
+      ],
+      "examples": [
+        "clear()",
+        "clear(); background(220);"
+      ],
+      "relatedFunctions": [
+        "background",
+        "eraseMode"
+      ],
+      "prerequisites": [
+        "background"
+      ],
+      "concepts": [
+        "transparency"
+      ]
+    },
+    {
+      "id": "eraseMode",
+      "name": "Erase mode",
+      "description": "Erasing portions of already drawn elements",
+      "category": "p5Colors",
+      "subcategory": "transparency",
+      "type": "p5Function",
+      "signatures": [
+        "erase(), noErase()"
+      ],
+      "regexPatterns": [
+        "erase\\s*\\(\\)",
+        "noErase\\s*\\(\\)"
+      ],
+      "examples": [
+        "erase()",
+        "erase(); ellipse(50, 50, 100, 100); noErase();"
+      ],
+      "relatedFunctions": [
+        "clear",
+        "noErase",
+        "alphaChannel"
+      ],
+      "prerequisites": [
+        "clear"
+      ],
+      "concepts": [
+        "transparency"
+      ]
+    },
+    {
+      "id": "blendMode",
+      "name": "Blend mode",
+      "description": "Controlling how colors blend when layered",
+      "category": "p5Colors",
+      "subcategory": "transparency",
+      "type": "p5Function",
+      "signatures": [
+        "blendMode(BLEND/ADD/MULTIPLY/etc)"
+      ],
+      "regexPatterns": [
+        "blendMode\\s*\\([^)]*\\)"
+      ],
+      "examples": [
+        "blendMode(ADD)",
+        "blendMode(MULTIPLY)"
+      ],
+      "relatedFunctions": [
+        "alphaChannel",
+        "background"
+      ],
+      "prerequisites": [
+        "alphaChannel"
+      ],
+      "concepts": [
+        "transparency"
+      ]
+    },
+    {
+      "id": "variableDeclaration",
+      "name": "Variable declaration",
+      "description": "Creating and initializing variables",
+      "category": "jsLanguage",
+      "subcategory": "variables",
+      "type": "jsLanguage",
+      "signatures": [
+        "let x = 100;"
+      ],
+      "regexPatterns": [
+        "let\\s+[a-zA-Z_][a-zA-Z0-9_]*\\s*="
+      ],
+      "examples": [
+        "let x = 100;",
+        "let name = \"Alice\";"
+      ],
+      "relatedFunctions": [
+        "variableModification",
+        "mathematicalOperations"
+      ],
+      "prerequisites": [
+        "setupAndDraw"
+      ],
+      "concepts": [
+        "variables"
+      ]
+    },
+    {
+      "id": "variableModification",
+      "name": "Variable modification",
+      "description": "Changing variable values over time",
+      "category": "jsLanguage",
+      "subcategory": "variables",
+      "type": "jsLanguage",
+      "signatures": [
+        "x = x + 1;"
+      ],
+      "regexPatterns": [
+        "^(?!.*let)([a-zA-Z_][a-zA-Z0-9_]*)\\s*="
+      ],
+      "examples": [
+        "x = x + 1;",
+        "y = 50;"
+      ],
+      "relatedFunctions": [
+        "variableDeclaration",
+        "mathematicalOperations"
+      ],
+      "prerequisites": [
+        "variableDeclaration"
+      ],
+      "concepts": [
+        "variables"
+      ]
+    },
+    {
+      "id": "canvasSizeConstants",
+      "name": "Canvas size constants",
+      "description": "Using p5.js canvas size",
+      "category": "p5Core",
+      "subcategory": "constants",
+      "type": "p5Function",
+      "signatures": [
+        "width, height"
+      ],
+      "regexPatterns": [
+        "\\bwidth\\b",
+        "\\bheight\\b"
+      ],
+      "examples": [
+        "let centerX = width / 2;",
+        "let centerY = height / 2;"
+      ],
+      "relatedFunctions": [
+        "setupAndDraw"
+      ],
+      "prerequisites": [
+        "setupAndDraw"
+      ],
+      "concepts": [
+        "variables"
+      ]
+    },
+    {
+      "id": "mathematicalOperations",
+      "name": "Mathematical operations",
+      "description": "Performing calculations with variables",
+      "category": "jsLanguage",
+      "subcategory": "operators",
+      "type": "jsLanguage",
+      "signatures": [
+        "+, -, *, /, %"
+      ],
+      "regexPatterns": [
+        "[a-zA-Z0-9_)\\]]+\\s*[+\\-*/%]\\s*[a-zA-Z0-9_(\\[]"
+      ],
+      "examples": [
+        "let sum = a + b;",
+        "let product = x * y;",
+        "let remainder = n % 2;"
+      ],
+      "relatedFunctions": [
+        "variableDeclaration",
+        "variableModification"
+      ],
+      "prerequisites": [
+        "variableDeclaration"
+      ],
+      "concepts": [
+        "variables"
+      ]
+    },
+    {
+      "id": "colorValues",
+      "name": "Color values",
+      "description": "Creating and storing color variables",
+      "category": "p5Colors",
+      "subcategory": "colorSystems",
+      "type": "p5Function",
+      "signatures": [
+        "const x = color(...)"
+      ],
+      "regexPatterns": [
+        "const\\s+[a-zA-Z_][a-zA-Z0-9_]*\\s*=\\s*color\\s*\\([^)]*\\)"
+      ],
+      "examples": [
+        "const myColor = color(255, 0, 0)",
+        "const c = color(100, 150, 200, 200)"
+      ],
+      "relatedFunctions": [
+        "fill",
+        "stroke",
+        "lerpColor"
+      ],
+      "prerequisites": [
+        "fill",
+        "stroke"
+      ],
+      "concepts": [
+        "variables"
+      ]
+    },
+    {
+      "id": "colorInterpolation",
+      "name": "Color interpolation",
+      "description": "Blending between two colors",
+      "category": "p5Colors",
+      "subcategory": "colorSystems",
+      "type": "p5Function",
+      "signatures": [
+        "lerpColor(c1, c2, amt)"
+      ],
+      "regexPatterns": [
+        "lerpColor\\s*\\([^)]*\\)"
+      ],
+      "examples": [
+        "lerpColor(color1, color2, 0.5)",
+        "const mid = lerpColor(red, blue, 0.5)"
+      ],
+      "relatedFunctions": [
+        "colorValues",
+        "fill",
+        "stroke"
+      ],
+      "prerequisites": [
+        "colorValues"
+      ],
+      "concepts": [
+        "variables"
+      ]
+    },
+    {
+      "id": "ifStatement",
+      "name": "If statement",
+      "description": "Making basic visual decisions",
+      "category": "jsLanguage",
+      "subcategory": "conditionals",
+      "type": "jsLanguage",
+      "signatures": [
+        "if (condition) { }"
+      ],
+      "regexPatterns": [
+        "if\\s*\\([^{]*\\)\\s*\\{"
+      ],
+      "examples": [
+        "if (x > 50) { ... }",
+        "if (mouseIsPressed) { background(220); }"
+      ],
+      "relatedFunctions": [
+        "ifElseStatement",
+        "comparisonOperators",
+        "logicalOperators"
+      ],
+      "prerequisites": [
+        "comparisonOperators"
+      ],
+      "concepts": [
+        "conditionals"
+      ]
+    },
+    {
+      "id": "ifElseStatement",
+      "name": "If/else statement",
+      "description": "Creating binary visual alternatives",
+      "category": "jsLanguage",
+      "subcategory": "conditionals",
+      "type": "jsLanguage",
+      "signatures": [
+        "if (condition) { } else { }"
+      ],
+      "regexPatterns": [
+        "if\\s*\\([^{]*\\)\\s*\\{[^}]*\\}\\s*else\\s*\\{"
+      ],
+      "examples": [
+        "if (x > 50) { ... } else { ... }",
+        "if (condition) { doA(); } else { doB(); }"
+      ],
+      "relatedFunctions": [
+        "ifStatement",
+        "multipleConditions"
+      ],
+      "prerequisites": [
+        "ifStatement"
+      ],
+      "concepts": [
+        "conditionals"
+      ]
+    },
+    {
+      "id": "multipleConditions",
+      "name": "Multiple conditions",
+      "description": "Making complex visual decisions with multiple outcomes",
+      "category": "jsLanguage",
+      "subcategory": "conditionals",
+      "type": "jsLanguage",
+      "signatures": [
+        "if (condition) { } else if (anotherCondition) { } else { }"
+      ],
+      "regexPatterns": [
+        "else\\s+(if\\s*\\([^{]*\\))?\\s*\\{"
+      ],
+      "examples": [
+        "if (a) { ... } else if (b) { ... } else { ... }"
+      ],
+      "relatedFunctions": [
+        "ifStatement",
+        "ifElseStatement",
+        "logicalOperators"
+      ],
+      "prerequisites": [
+        "ifElseStatement"
+      ],
+      "concepts": [
+        "conditionals"
+      ]
+    },
+    {
+      "id": "comparisonOperators",
+      "name": "Comparison operators",
+      "description": "Comparing values to make decisions",
+      "category": "jsLanguage",
+      "subcategory": "operators",
+      "type": "jsLanguage",
+      "signatures": [
+        ">",
+        "<",
+        ">=",
+        "<=",
+        "==",
+        "===",
+        "!=",
+        "!=="
+      ],
+      "regexPatterns": [
+        "[a-zA-Z0-9_)\\]\"']+\\s*([<>]=?|[=!]=|===|!==)\\s*[a-zA-Z0-9_(\\[\"']"
+      ],
+      "examples": [
+        "x > 50",
+        "y <= 100",
+        "name === \"Alice\""
+      ],
+      "relatedFunctions": [
+        "ifStatement",
+        "logicalOperators"
+      ],
+      "prerequisites": [
+        "variableDeclaration"
+      ],
+      "concepts": [
+        "conditionals"
+      ]
+    },
+    {
+      "id": "logicalOperators",
+      "name": "Logical operators",
+      "description": "Combining multiple conditions",
+      "category": "jsLanguage",
+      "subcategory": "operators",
+      "type": "jsLanguage",
+      "signatures": [
+        "&&, ||, !"
+      ],
+      "regexPatterns": [
+        "&&",
+        "\\|\\|",
+        "!\\s*[a-zA-Z0-9_(]"
+      ],
+      "examples": [
+        "x > 50 && y < 100",
+        "a || b",
+        "!condition"
+      ],
+      "relatedFunctions": [
+        "comparisonOperators",
+        "ifStatement"
+      ],
+      "prerequisites": [
+        "comparisonOperators"
+      ],
+      "concepts": [
+        "conditionals"
+      ]
+    },
+    {
+      "id": "random",
+      "name": "Random",
+      "description": "Generating random values within a range",
+      "category": "p5Randomness",
+      "subcategory": "randomness",
+      "type": "p5Function",
+      "signatures": [
+        "random(min, max)"
+      ],
+      "regexPatterns": [
+        "random\\s*\\([^)]*\\)"
+      ],
+      "examples": [
+        "random(0, 100)",
+        "random(width)"
+      ],
+      "relatedFunctions": [
+        "randomSeed",
+        "perlinNoise"
+      ],
+      "prerequisites": [
+        "variableDeclaration"
+      ],
+      "concepts": [
+        "randomness"
+      ]
+    },
+    {
+      "id": "randomSeed",
+      "name": "Random seed",
+      "description": "Creating reproducible randomness",
+      "category": "p5Randomness",
+      "subcategory": "randomness",
+      "type": "p5Function",
+      "signatures": [
+        "randomSeed(seed)"
+      ],
+      "regexPatterns": [
+        "randomSeed\\s*\\([^)]*\\)"
+      ],
+      "examples": [
+        "randomSeed(42)",
+        "randomSeed(millis())"
+      ],
+      "relatedFunctions": [
+        "random",
+        "noiseSeed"
+      ],
+      "prerequisites": [
+        "random"
+      ],
+      "concepts": [
+        "randomness"
+      ]
+    },
+    {
+      "id": "perlinNoise",
+      "name": "Perlin noise",
+      "description": "Generating smooth, natural-looking randomness",
+      "category": "p5Randomness",
+      "subcategory": "noise",
+      "type": "p5Function",
+      "signatures": [
+        "noise(x), noise(x, y), noise(x, y, z)"
+      ],
+      "regexPatterns": [
+        "noise\\s*\\([^)]*\\)"
+      ],
+      "examples": [
+        "noise(x)",
+        "noise(x, y, z)",
+        "let value = noise(t);"
+      ],
+      "relatedFunctions": [
+        "noiseSeed",
+        "random"
+      ],
+      "prerequisites": [
+        "random"
+      ],
+      "concepts": [
+        "randomness"
+      ]
+    },
+    {
+      "id": "noiseSeed",
+      "name": "Noise seed",
+      "description": "Creating reproducible noise patterns",
+      "category": "p5Randomness",
+      "subcategory": "noise",
+      "type": "p5Function",
+      "signatures": [
+        "noiseSeed(seed)"
+      ],
+      "regexPatterns": [
+        "noiseSeed\\s*\\([^)]*\\)"
+      ],
+      "examples": [
+        "noiseSeed(42)",
+        "noiseSeed(random(1000))"
+      ],
+      "relatedFunctions": [
+        "perlinNoise",
+        "randomSeed"
+      ],
+      "prerequisites": [
+        "perlinNoise"
+      ],
+      "concepts": [
+        "randomness"
+      ]
+    },
+    {
+      "id": "frameRate",
+      "name": "Frame rate",
+      "description": "Controlling animation speed",
+      "category": "p5Animation",
+      "subcategory": "timing",
+      "type": "p5Function",
+      "signatures": [
+        "frameRate(fps)"
+      ],
+      "regexPatterns": [
+        "frameRate\\s*\\([^)]*\\)"
+      ],
+      "examples": [
+        "frameRate(30)",
+        "frameRate(60)"
+      ],
+      "relatedFunctions": [
+        "frameCounter",
+        "milliseconds"
+      ],
+      "prerequisites": [
+        "setupAndDraw"
+      ],
+      "concepts": [
+        "animation"
+      ]
+    },
+    {
+      "id": "frameCounter",
+      "name": "Frame counter",
+      "description": "Tracking frames for time-based animation",
+      "category": "p5Animation",
+      "subcategory": "timing",
+      "type": "p5Function",
+      "signatures": [
+        "frameCount"
+      ],
+      "regexPatterns": [
+        "\\bframeCount\\b"
+      ],
+      "examples": [
+        "if (frameCount % 10 === 0) { ... }",
+        "let x = frameCount * 2;"
+      ],
+      "relatedFunctions": [
+        "frameRate",
+        "milliseconds"
+      ],
+      "prerequisites": [
+        "frameRate"
+      ],
+      "concepts": [
+        "animation"
+      ]
+    },
+    {
+      "id": "milliseconds",
+      "name": "Milliseconds",
+      "description": "Getting elapsed time for precise timing",
+      "category": "p5Animation",
+      "subcategory": "timing",
+      "type": "p5Function",
+      "signatures": [
+        "millis()"
+      ],
+      "regexPatterns": [
+        "millis\\s*\\(\\)"
+      ],
+      "examples": [
+        "let elapsed = millis()",
+        "let seconds = millis() / 1000"
+      ],
+      "relatedFunctions": [
+        "frameRate",
+        "frameCounter"
+      ],
+      "prerequisites": [
+        "frameRate"
+      ],
+      "concepts": [
+        "animation"
+      ]
+    },
+    {
+      "id": "mousePosition",
+      "name": "Mouse position",
+      "description": "Reading current mouse coordinates",
+      "category": "p5Interaction",
+      "subcategory": "mouse",
+      "type": "p5Function",
+      "signatures": [
+        "mouseX, mouseY"
+      ],
+      "regexPatterns": [
+        "\\bmouseX\\b",
+        "\\bmouseY\\b"
+      ],
+      "examples": [
+        "ellipse(mouseX, mouseY, 20, 20)",
+        "if (mouseX > 100) { ... }"
+      ],
+      "relatedFunctions": [
+        "previousMousePosition",
+        "mouseButtonState"
+      ],
+      "prerequisites": [
+        "setupAndDraw"
+      ],
+      "concepts": [
+        "interactivity"
+      ]
+    },
+    {
+      "id": "previousMousePosition",
+      "name": "Previous mouse position",
+      "description": "Tracking mouse movement between frames",
+      "category": "p5Interaction",
+      "subcategory": "mouse",
+      "type": "p5Function",
+      "signatures": [
+        "pmouseX, pmouseY"
+      ],
+      "regexPatterns": [
+        "\\bpmouseX\\b",
+        "\\bpmouseY\\b"
+      ],
+      "examples": [
+        "line(pmouseX, pmouseY, mouseX, mouseY)",
+        "let dx = mouseX - pmouseX;"
+      ],
+      "relatedFunctions": [
+        "mousePosition",
+        "line"
+      ],
+      "prerequisites": [
+        "mousePosition"
+      ],
+      "concepts": [
+        "interactivity"
+      ]
+    },
+    {
+      "id": "mouseButtonState",
+      "name": "Mouse button state",
+      "description": "Detecting if mouse button is down",
+      "category": "p5Interaction",
+      "subcategory": "mouse",
+      "type": "p5Function",
+      "signatures": [
+        "mouseIsPressed"
+      ],
+      "regexPatterns": [
+        "\\bmouseIsPressed\\b"
+      ],
+      "examples": [
+        "if (mouseIsPressed) { fill(255); }",
+        "rect(mouseX, mouseY, 50, 50);"
+      ],
+      "relatedFunctions": [
+        "mousePosition",
+        "keyState"
+      ],
+      "prerequisites": [
+        "mousePosition"
+      ],
+      "concepts": [
+        "interactivity"
+      ]
+    },
+    {
+      "id": "keyState",
+      "name": "Key state",
+      "description": "Detecting if any key is pressed",
+      "category": "p5Interaction",
+      "subcategory": "keyboard",
+      "type": "p5Function",
+      "signatures": [
+        "keyIsPressed"
+      ],
+      "regexPatterns": [
+        "\\bkeyIsPressed\\b"
+      ],
+      "examples": [
+        "if (keyIsPressed) { ... }",
+        "if (keyIsPressed && key === \"a\") { ... }"
+      ],
+      "relatedFunctions": [
+        "currentKey",
+        "keyCode",
+        "mouseButtonState"
+      ],
+      "prerequisites": [
+        "setupAndDraw"
+      ],
+      "concepts": [
+        "interactivity"
+      ]
+    },
+    {
+      "id": "currentKey",
+      "name": "Current key",
+      "description": "Identifying which key is being pressed",
+      "category": "p5Interaction",
+      "subcategory": "keyboard",
+      "type": "p5Function",
+      "signatures": [
+        "key"
+      ],
+      "regexPatterns": [
+        "\\bkey\\b"
+      ],
+      "examples": [
+        "if (key === \"a\") { ... }",
+        "print(key);"
+      ],
+      "relatedFunctions": [
+        "keyState",
+        "keyCode"
+      ],
+      "prerequisites": [
+        "keyState"
+      ],
+      "concepts": [
+        "interactivity"
+      ]
+    },
+    {
+      "id": "keyCode",
+      "name": "Key code",
+      "description": "Reading special keys like arrows and modifiers",
+      "category": "p5Interaction",
+      "subcategory": "keyboard",
+      "type": "p5Function",
+      "signatures": [
+        "keyCode"
+      ],
+      "regexPatterns": [
+        "\\bkeyCode\\b"
+      ],
+      "examples": [
+        "if (keyCode === LEFT_ARROW) { ... }",
+        "if (keyCode === 32) { ... }"
+      ],
+      "relatedFunctions": [
+        "currentKey",
+        "keyState"
+      ],
+      "prerequisites": [
+        "currentKey"
+      ],
+      "concepts": [
+        "interactivity"
+      ]
+    },
+    {
+      "id": "forLoop",
+      "name": "For loop",
+      "description": "Creating repetition with counter variables",
+      "category": "jsLanguage",
+      "subcategory": "loops",
+      "type": "jsLanguage",
+      "signatures": [
+        "for (let i = 0; i < n; i++) { }"
+      ],
+      "regexPatterns": [
+        "for\\s*\\([^;]*;[^;]*;[^)]*\\)\\s*\\{"
+      ],
+      "examples": [
+        "for (let i = 0; i < 10; i++) { ... }",
+        "for (let i = 0; i < width; i += 10) { ... }"
+      ],
+      "relatedFunctions": [
+        "nestedLoops",
+        "whileLoop"
+      ],
+      "prerequisites": [
+        "variableDeclaration"
+      ],
+      "concepts": [
+        "repetition"
+      ]
+    },
+    {
+      "id": "nestedLoops",
+      "name": "Nested loops",
+      "description": "Creating 2D grids and complex patterns",
+      "category": "jsLanguage",
+      "subcategory": "loops",
+      "type": "jsLanguage",
+      "signatures": [
+        "for (let x = 0; x < width; x += 10) { for (let y = 0; y < height; y += 10) { } }"
+      ],
+      "regexPatterns": [
+        "for\\s*\\([^{]*\\)\\s*\\{[^{]*for\\s*\\([^{]*\\)\\s*\\{"
+      ],
+      "examples": [
+        "for (let x = 0; x < 10; x++) { for (let y = 0; y < 10; y++) { ... } }"
+      ],
+      "relatedFunctions": [
+        "forLoop",
+        "whileLoop"
+      ],
+      "prerequisites": [
+        "forLoop"
+      ],
+      "concepts": [
+        "repetition"
+      ]
+    },
+    {
+      "id": "whileLoop",
+      "name": "While loop",
+      "description": "Creating repetition based on conditions",
+      "category": "jsLanguage",
+      "subcategory": "loops",
+      "type": "jsLanguage",
+      "signatures": [
+        "while (condition) { }"
+      ],
+      "regexPatterns": [
+        "while\\s*\\([^{]*\\)\\s*\\{"
+      ],
+      "examples": [
+        "while (condition) { ... }",
+        "while (x < 100) { x += 10; }"
+      ],
+      "relatedFunctions": [
+        "forLoop"
+      ],
+      "prerequisites": [
+        "variableDeclaration",
+        "comparisonOperators"
+      ],
+      "concepts": [
+        "repetition"
+      ]
+    },
+    {
+      "id": "functionDeclaration",
+      "name": "Function declaration",
+      "description": "Creating custom drawing routines",
+      "category": "jsLanguage",
+      "subcategory": "functions",
+      "type": "jsLanguage",
+      "signatures": [
+        "function drawChar(x, y, size) { }"
+      ],
+      "regexPatterns": [
+        "function (?!.*setup|draw)[a-zA-Z_][a-zA-Z0-9_]*\\s*\\([^)]*\\)\\s*\\{"
+      ],
+      "examples": [
+        "function drawStar(x, y, size) { ... }",
+        "function greet(name) { ... }"
+      ],
+      "relatedFunctions": [
+        "functionCalls",
+        "returnValues"
+      ],
+      "prerequisites": [
+        "setupAndDraw"
+      ],
+      "concepts": [
+        "reusableElements"
+      ]
+    },
+    {
+      "id": "returnValues",
+      "name": "Return values",
+      "description": "Returning results from functions",
+      "category": "jsLanguage",
+      "subcategory": "functions",
+      "type": "jsLanguage",
+      "signatures": [],
+      "regexPatterns": [
+        "return\\s*\\("
+      ],
+      "examples": [
+        "return x * 2;",
+        "return x > 50;"
+      ],
+      "relatedFunctions": [
+        "functionDeclaration",
+        "functionCalls"
+      ],
+      "prerequisites": [
+        "functionDeclaration"
+      ],
+      "concepts": [
+        "reusableElements"
+      ]
+    },
+    {
+      "id": "functionCalls",
+      "name": "Function calls",
+      "description": "Using custom functions to create repeated elements",
+      "category": "jsLanguage",
+      "subcategory": "functions",
+      "type": "jsLanguage",
+      "signatures": [
+        "drawChar(100, 200, 50);"
+      ],
+      "regexPatterns": [],
+      "examples": [
+        "drawStar(100, 100, 50)",
+        "rect(10, 10, 50, 50)"
+      ],
+      "relatedFunctions": [
+        "functionDeclaration",
+        "returnValues"
+      ],
+      "prerequisites": [
+        "functionDeclaration"
+      ],
+      "concepts": [
+        "reusableElements"
+      ]
+    },
+    {
+      "id": "beginEndShape",
+      "name": "Begin/end shape",
+      "description": "Creating custom polygon shapes",
+      "category": "p5Drawing",
+      "subcategory": "customShapes",
+      "type": "p5Function",
+      "signatures": [
+        "beginShape(), endShape()"
+      ],
+      "regexPatterns": [
+        "beginShape\\s*\\(",
+        "endShape\\s*\\("
+      ],
+      "examples": [
+        "beginShape(); vertex(0, 0); vertex(100, 0); vertex(100, 100); endShape();"
+      ],
+      "relatedFunctions": [
+        "vertex",
+        "curveVertex",
+        "bezierVertex"
+      ],
+      "prerequisites": [
+        "setupAndDraw"
+      ],
+      "concepts": [
+        "customShapes"
+      ]
+    },
+    {
+      "id": "vertex",
+      "name": "Vertex",
+      "description": "Adding points to custom shapes",
+      "category": "p5Drawing",
+      "subcategory": "customShapes",
+      "type": "p5Function",
+      "signatures": [
+        "vertex(x, y)"
+      ],
+      "regexPatterns": [
+        "vertex\\s*\\("
+      ],
+      "examples": [
+        "vertex(0, 0)",
+        "vertex(100, 50)"
+      ],
+      "relatedFunctions": [
+        "beginEndShape",
+        "curveVertex",
+        "bezierVertex"
+      ],
+      "prerequisites": [
+        "beginEndShape"
+      ],
+      "concepts": [
+        "customShapes"
+      ]
+    },
+    {
+      "id": "curveVertex",
+      "name": "Curve vertex",
+      "description": "Creating smooth curved shapes",
+      "category": "p5Drawing",
+      "subcategory": "customShapes",
+      "type": "p5Function",
+      "signatures": [
+        "curveVertex(x, y)"
+      ],
+      "regexPatterns": [
+        "curveVertex\\s*\\("
+      ],
+      "examples": [
+        "curveVertex(0, 0)",
+        "curveVertex(50, 50)"
+      ],
+      "relatedFunctions": [
+        "vertex",
+        "bezierVertex",
+        "beginEndShape"
+      ],
+      "prerequisites": [
+        "vertex"
+      ],
+      "concepts": [
+        "customShapes"
+      ]
+    },
+    {
+      "id": "bezierVertex",
+      "name": "Bezier vertex",
+      "description": "Creating precise Bézier curves",
+      "category": "p5Drawing",
+      "subcategory": "customShapes",
+      "type": "p5Function",
+      "signatures": [
+        "bezierVertex(x2, y2, x3, y3, x4, y4)"
+      ],
+      "regexPatterns": [
+        "bezierVertex\\s*\\("
+      ],
+      "examples": [
+        "bezierVertex(50, 100, 150, 100, 200, 0)",
+        "bezierVertex(x2, y2, x3, y3, x4, y4)"
+      ],
+      "relatedFunctions": [
+        "vertex",
+        "curveVertex",
+        "beginEndShape"
+      ],
+      "prerequisites": [
+        "curveVertex"
+      ],
+      "concepts": [
+        "customShapes"
+      ]
+    },
+    {
+      "id": "arc",
+      "name": "Arc",
+      "description": "Drawing partial circles and ellipses",
+      "category": "p5Drawing",
+      "subcategory": "curves",
+      "type": "p5Function",
+      "signatures": [
+        "arc(x, y, w, h, start, stop)"
+      ],
+      "regexPatterns": [
+        "arc\\s*\\("
+      ],
+      "examples": [
+        "arc(50, 50, 80, 80, 0, PI)",
+        "arc(x, y, w, h, start, stop)"
+      ],
+      "relatedFunctions": [
+        "ellipse",
+        "curve"
+      ],
+      "prerequisites": [
+        "setupAndDraw"
+      ],
+      "concepts": [
+        "customShapes"
+      ]
+    },
+    {
+      "id": "translate",
+      "name": "Translate",
+      "description": "Moving the coordinate system",
+      "category": "p5Transforms",
+      "subcategory": "transforms",
+      "type": "p5Function",
+      "signatures": [
+        "translate(x, y)"
+      ],
+      "regexPatterns": [
+        "translate\\s*\\([^)]*\\)"
+      ],
+      "examples": [
+        "translate(50, 50)",
+        "translate(mouseX, mouseY)"
+      ],
+      "relatedFunctions": [
+        "rotate",
+        "scale",
+        "transformationState"
+      ],
+      "prerequisites": [
+        "setupAndDraw"
+      ],
+      "concepts": [
+        "transformations"
+      ]
+    },
+    {
+      "id": "rotate",
+      "name": "Rotate",
+      "description": "Rotating the coordinate system",
+      "category": "p5Transforms",
+      "subcategory": "transforms",
+      "type": "p5Function",
+      "signatures": [
+        "rotate(angle)"
+      ],
+      "regexPatterns": [
+        "rotate\\s*\\([^)]*\\)"
+      ],
+      "examples": [
+        "rotate(PI / 4)",
+        "rotate(angle)"
+      ],
+      "relatedFunctions": [
+        "translate",
+        "scale",
+        "transformationState",
+        "angleMode"
+      ],
+      "prerequisites": [
+        "translate"
+      ],
+      "concepts": [
+        "transformations"
+      ]
+    },
+    {
+      "id": "scale",
+      "name": "Scale",
+      "description": "Scaling the coordinate system",
+      "category": "p5Transforms",
+      "subcategory": "transforms",
+      "type": "p5Function",
+      "signatures": [
+        "scale(x, y)"
+      ],
+      "regexPatterns": [
+        "scale\\s*\\([^)]*\\)"
+      ],
+      "examples": [
+        "scale(2)",
+        "scale(2, 0.5)"
+      ],
+      "relatedFunctions": [
+        "translate",
+        "rotate",
+        "transformationState"
+      ],
+      "prerequisites": [
+        "translate"
+      ],
+      "concepts": [
+        "transformations"
+      ]
+    },
+    {
+      "id": "transformationState",
+      "name": "Transformation state",
+      "description": "Saving and restoring transformation states",
+      "category": "p5Transforms",
+      "subcategory": "transforms",
+      "type": "p5Function",
+      "signatures": [
+        "push(), pop()"
+      ],
+      "regexPatterns": [
+        "push\\s*\\(\\)",
+        "pop\\s*\\(\\)"
+      ],
+      "examples": [
+        "push(); translate(50, 50); rect(0, 0, 50, 50); pop();"
+      ],
+      "relatedFunctions": [
+        "translate",
+        "rotate",
+        "scale"
+      ],
+      "prerequisites": [
+        "translate",
+        "rotate",
+        "scale"
+      ],
+      "concepts": [
+        "transformations"
+      ]
+    },
+    {
+      "id": "angleMode",
+      "name": "Angle mode",
+      "description": "Setting units for rotation angles",
+      "category": "p5Transforms",
+      "subcategory": "transforms",
+      "type": "p5Function",
+      "signatures": [
+        "angleMode(RADIANS) or angleMode(DEGREES)"
+      ],
+      "regexPatterns": [
+        "angleMode\\s*\\([^)]*\\)"
+      ],
+      "examples": [
+        "angleMode(RADIANS)",
+        "angleMode(DEGREES)"
+      ],
+      "relatedFunctions": [
+        "rotate"
+      ],
+      "prerequisites": [
+        "rotate"
+      ],
+      "concepts": [
+        "transformations"
+      ]
+    },
+    {
+      "id": "arrayCreation",
+      "name": "Array creation",
+      "description": "Creating collections of visual elements",
+      "category": "jsLanguage",
+      "subcategory": "collections",
+      "type": "jsLanguage",
+      "signatures": [
+        "let points = [];"
+      ],
+      "regexPatterns": [
+        "let\\s+[a-zA-Z_][a-zA-Z0-9_]*\\s*=\\s*\\[\\]"
+      ],
+      "examples": [
+        "let points = [];",
+        "let colors = [255, 0, 0];"
+      ],
+      "relatedFunctions": [
+        "arrayAccess",
+        "arrayMethods",
+        "arrayIteration"
+      ],
+      "prerequisites": [
+        "variableDeclaration"
+      ],
+      "concepts": [
+        "collections"
+      ]
+    },
+    {
+      "id": "arrayAccess",
+      "name": "Array access",
+      "description": "Accessing individual elements in a collection",
+      "category": "jsLanguage",
+      "subcategory": "collections",
+      "type": "jsLanguage",
+      "signatures": [
+        "points[0]"
+      ],
+      "regexPatterns": [
+        "[a-zA-Z_][a-zA-Z0-9_]*\\s*\\[[^\\]]*\\]"
+      ],
+      "examples": [
+        "points[0]",
+        "let first = colors[0];"
+      ],
+      "relatedFunctions": [
+        "arrayCreation",
+        "arrayMethods"
+      ],
+      "prerequisites": [
+        "arrayCreation"
+      ],
+      "concepts": [
+        "collections"
+      ]
+    },
+    {
+      "id": "arrayMethods",
+      "name": "Array methods",
+      "description": "Modifying and querying collections",
+      "category": "jsLanguage",
+      "subcategory": "collections",
+      "type": "jsLanguage",
+      "signatures": [
+        "push(), splice(), length"
+      ],
+      "regexPatterns": [
+        "[a-zA-Z_][a-zA-Z0-9_]*\\.push\\s*\\(",
+        "[a-zA-Z_][a-zA-Z0-9_]*\\.splice\\s*\\(",
+        "[a-zA-Z_][a-zA-Z0-9_]*\\.length"
+      ],
+      "examples": [
+        "points.push(100)",
+        "points.length",
+        "points.splice(0, 1)"
+      ],
+      "relatedFunctions": [
+        "arrayCreation",
+        "arrayAccess",
+        "arrayIteration"
+      ],
+      "prerequisites": [
+        "arrayAccess"
+      ],
+      "concepts": [
+        "collections"
+      ]
+    },
+    {
+      "id": "arrayIteration",
+      "name": "Array iteration",
+      "description": "Working with all elements in a collection",
+      "category": "jsLanguage",
+      "subcategory": "collections",
+      "type": "jsLanguage",
+      "signatures": [
+        "for (let i = 0; i < points.length; i++) { }"
+      ],
+      "regexPatterns": [
+        "for\\s*\\([^;]*;[^;]*\\.length[^;]*;[^)]*\\)"
+      ],
+      "examples": [
+        "for (let i = 0; i < points.length; i++) { ... }"
+      ],
+      "relatedFunctions": [
+        "arrayCreation",
+        "forLoop",
+        "arrayMethods"
+      ],
+      "prerequisites": [
+        "arrayCreation",
+        "forLoop"
+      ],
+      "concepts": [
+        "collections"
+      ]
+    },
+    {
+      "id": "arrayOfObjects",
+      "name": "Array of objects",
+      "description": "Creating collections of complex visual elements",
+      "category": "jsLanguage",
+      "subcategory": "collections",
+      "type": "jsLanguage",
+      "signatures": [],
+      "regexPatterns": [],
+      "examples": [
+        "let particles = [{x: 10, y: 20}, {x: 50, y: 50}]"
+      ],
+      "relatedFunctions": [
+        "arrayCreation",
+        "arrayMethods"
+      ],
+      "prerequisites": [
+        "arrayIteration"
+      ],
+      "concepts": [
+        "collections"
+      ]
+    }
+  ]
+}

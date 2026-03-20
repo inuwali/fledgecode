@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Coding Instructor - Tests</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #1e1e1e;
+            color: #ffffff;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #2d2d30;
+            border-radius: 8px;
+        }
+        
+        .test-result {
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .test-result.pass {
+            background-color: #0e5c03;
+            color: #c5f7bf;
+        }
+        
+        .test-result.fail {
+            background-color: #5c0e03;
+            color: #f7bfbf;
+        }
+        
+        .test-result.info {
+            background-color: #1e3a5f;
+            color: #bfe3f7;
+        }
+        
+        .test-summary {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #3e3e42;
+            border-radius: 8px;
+        }
+        
+        button {
+            background-color: #0e639c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        
+        button:hover {
+            background-color: #1177bb;
+        }
+        
+        #test-output {
+            margin-top: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Vibe Coding Instructor - Test Suite</h1>
+        <p>Testing core functionality for Phase 1 deliverable.</p>
+        
+        <div class="controls">
+            <button onclick="runAllTests()">Run All Tests</button>
+            <button onclick="runUnitTests()">Unit Tests Only</button>
+            <button onclick="runIntegrationTests()">Integration Tests Only</button>
+            <button onclick="clearOutput()">Clear Output</button>
+        </div>
+        
+        <div id="test-output"></div>
+    </div>
+
+    <!-- Dependencies for testing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@xenova/transformers@2.6.0/dist/transformers.min.js"></script>
+    
+    <!-- Test framework and test suite -->
+    <script type="module" src="tests.js"></script>
+</body>
+</html>

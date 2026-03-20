@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ontology Constraint Testing</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .test-section {
+            margin-bottom: 30px;
+            padding: 15px;
+            border-left: 4px solid #007bff;
+            background: #f8f9fa;
+        }
+        .test-controls {
+            margin: 20px 0;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+        .concept-btn {
+            background: #28a745;
+        }
+        .concept-btn:hover {
+            background: #1e7e34;
+        }
+        .concept-btn.active {
+            background: #155724;
+            transform: scale(0.98);
+        }
+        .test-btn {
+            background: #dc3545;
+        }
+        .test-btn:hover {
+            background: #c82333;
+        }
+        .output {
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-left: 4px solid #007bff;
+            border-radius: 4px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 0.85rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .error {
+            border-left-color: #dc3545;
+            background: #f8d7da;
+        }
+        .success {
+            border-left-color: #28a745;
+            background: #d4edda;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            background: #e9ecef;
+            font-weight: bold;
+        }
+        .constraint-display {
+            background: #e3f2fd;
+            border: 1px solid #1976d2;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .test-results {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        @media (max-width: 768px) {
+            .test-results {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 Ontology Constraint Testing</h1>
+        <p>Test that different learning concepts generate different LLM constraints</p>
+
+        <div class="status" id="status">Loading ontology system...</div>
+
+        <div class="test-section">
+            <h3>Step 1: Select Learning Concept</h3>
+            <p>Choose a concept to set as the current learning focus:</p>
+            <div class="test-controls" id="concept-buttons">
+                <!-- Concept buttons will be populated dynamically -->
+            </div>
+            <div id="current-concept-display" class="constraint-display" style="display: none;">
+                <strong>Current Concept:</strong> <span id="current-concept-name">None</span>
+                <br><strong>Description:</strong> <span id="current-concept-desc">None</span>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3>Step 2: Test Constraint Generation</h3>
+            <p>Generate learning constraints for the selected concept:</p>
+            <div class="test-controls">
+                <button id="generate-constraints-btn" disabled>Generate Constraints</button>
+                <button id="test-prompt-btn" disabled>Test Full Prompt</button>
+                <button id="clear-output-btn">Clear Output</button>
+            </div>
+            
+            <div id="constraints-output" class="output">
+                Select a concept above and click "Generate Constraints" to see the learning constraints that will be sent to the LLM.
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3>Step 3: Compare Different Concepts</h3>
+            <p>Test multiple concepts to verify constraints differ:</p>
+            <div class="test-controls">
+                <button id="compare-concepts-btn" disabled>Compare All Available Concepts</button>
+            </div>
+            
+            <div class="test-results">
+                <div>
+                    <h4>Concept Comparison Results</h4>
+                    <div id="comparison-output" class="output">
+                        Click "Compare All Available Concepts" to see constraint differences.
+                    </div>
+                </div>
+                <div>
+                    <h4>Test Summary</h4>
+                    <div id="test-summary" class="output">
+                        Test results will appear here.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3>Step 4: Live Prompt Testing</h3>
+            <p>Test with actual user requests:</p>
+            <input type="text" id="test-request" placeholder="Enter test request (e.g., 'create a red circle')" style="width: 100%; padding: 8px; margin: 10px 0;">
+            <div class="test-controls">
+                <button id="test-live-prompt-btn" disabled>Generate Live Prompt</button>
+            </div>
+            <div id="live-prompt-output" class="output">
+                Enter a test request and click "Generate Live Prompt" to see the complete prompt with constraints.
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { OntologyEngine } from '../js/ontology.js';
+        import { LearnerProfile } from '../js/learner.js';
+
+        class OntologyConstraintTester {
+            constructor() {
+                this.ontologyEngine = null;
+                this.learnerProfile = null;
+                this.availableConcepts = [];
+                this.currentConcept = null;
+                this.isReady = false;
+            }
+
+            async init() {
+                try {
+                    this.updateStatus('Initializing ontology engine...');
+                    
+                    // Initialize ontology engine
+                    this.ontologyEngine = new OntologyEngine();
+                    const ontologyLoaded = await this.ontologyEngine.loadOntology();
+                    
+                    if (!ontologyLoaded) {
+                        throw new Error('Failed to load ontology');
+                    }
+
+                    this.updateStatus('Initializing learner profile...');
+                    
+                    // Initialize learner profile
+                    this.learnerProfile = new LearnerProfile(this.ontologyEngine);
+                    const profileInitialized = this.learnerProfile.initializeProfile();
+                    
+                    if (!profileInitialized) {
+                        throw new Error('Failed to initialize learner profile');
+                    }
+
+                    // Get available concepts
+                    this.availableConcepts = this.learnerProfile.getAvailableConcepts();
+                    
+                    this.updateStatus(`Ready! Found ${this.availableConcepts.length} available concepts.`, 'success');
+                    this.setupUI();
+                    this.isReady = true;
+
+                } catch (error) {
+                    console.error('Initialization failed:', error);
+                    this.updateStatus(`Initialization failed: ${error.message}`, 'error');
+                }
+            }
+
+            setupUI() {
+                this.createConceptButtons();
+                this.setupEventListeners();
+            }
+
+            createConceptButtons() {
+                const container = document.getElementById('concept-buttons');
+                container.innerHTML = '';
+
+                this.availableConcepts.forEach(concept => {
+                    const button = document.createElement('button');
+                    button.className = 'concept-btn';
+                    button.textContent = concept.name;
+                    button.onclick = () => this.selectConcept(concept);
+                    container.appendChild(button);
+                });
+            }
+
+            setupEventListeners() {
+                document.getElementById('generate-constraints-btn').onclick = () => {
+                    this.generateConstraints();
+                };
+
+                document.getElementById('test-prompt-btn').onclick = () => {
+                    this.testFullPrompt();
+                };
+
+                document.getElementById('clear-output-btn').onclick = () => {
+                    this.clearOutput();
+                };
+
+                document.getElementById('compare-concepts-btn').onclick = () => {
+                    this.compareAllConcepts();
+                };
+
+                document.getElementById('test-live-prompt-btn').onclick = () => {
+                    this.testLivePrompt();
+                };
+            }
+
+            selectConcept(concept) {
+                // Update UI
+                document.querySelectorAll('.concept-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                event.target.classList.add('active');
+
+                // Set current concept in learner profile
+                this.learnerProfile.setCurrentConcept(concept.id);
+                this.currentConcept = concept;
+
+                // Update display
+                document.getElementById('current-concept-name').textContent = concept.name;
+                document.getElementById('current-concept-desc').textContent = concept.description;
+                document.getElementById('current-concept-display').style.display = 'block';
+
+                // Enable buttons
+                document.getElementById('generate-constraints-btn').disabled = false;
+                document.getElementById('test-prompt-btn').disabled = false;
+                document.getElementById('compare-concepts-btn').disabled = false;
+                document.getElementById('test-live-prompt-btn').disabled = false;
+
+                this.updateStatus(`Selected concept: ${concept.name}`, 'success');
+            }
+
+            generateConstraints() {
+                if (!this.currentConcept) {
+                    this.updateStatus('No concept selected', 'error');
+                    return;
+                }
+
+                try {
+                    const constraints = this.buildLearningConstraints();
+                    document.getElementById('constraints-output').textContent = constraints;
+                    document.getElementById('constraints-output').className = 'output success';
+                } catch (error) {
+                    document.getElementById('constraints-output').textContent = `Error: ${error.message}`;
+                    document.getElementById('constraints-output').className = 'output error';
+                }
+            }
+
+            testFullPrompt() {
+                if (!this.currentConcept) {
+                    this.updateStatus('No concept selected', 'error');
+                    return;
+                }
+
+                try {
+                    const prompt = this.buildPrompt("Create a simple test sketch", "// Current code in editor");
+                    document.getElementById('constraints-output').textContent = prompt;
+                    document.getElementById('constraints-output').className = 'output success';
+                } catch (error) {
+                    document.getElementById('constraints-output').textContent = `Error: ${error.message}`;
+                    document.getElementById('constraints-output').className = 'output error';
+                }
+            }
+
+            compareAllConcepts() {
+                let comparison = "=== CONCEPT CONSTRAINT COMPARISON ===\n\n";
+                let summary = "=== TEST SUMMARY ===\n\n";
+                let testsPassed = 0;
+                let testsTotal = 0;
+
+                this.availableConcepts.forEach((concept, index) => {
+                    testsTotal++;
+                    
+                    // Temporarily set concept
+                    const originalConcept = this.learnerProfile.getCurrentConcept();
+                    this.learnerProfile.setCurrentConcept(concept.id);
+
+                    try {
+                        const constraints = this.buildLearningConstraints();
+                        comparison += `${index + 1}. ${concept.name}\n`;
+                        comparison += `${'-'.repeat(concept.name.length + 3)}\n`;
+                        comparison += `${constraints}\n\n`;
+                        
+                        // Test that constraints contain concept name
+                        if (constraints.includes(concept.name)) {
+                            testsPassed++;
+                            summary += `✅ ${concept.name}: Constraints generated successfully\n`;
+                        } else {
+                            summary += `❌ ${concept.name}: Constraints missing concept name\n`;
+                        }
+
+                    } catch (error) {
+                        comparison += `${index + 1}. ${concept.name}: ERROR - ${error.message}\n\n`;
+                        summary += `❌ ${concept.name}: Error generating constraints\n`;
+                    }
+
+                    // Restore original concept
+                    this.learnerProfile.setCurrentConcept(originalConcept);
+                });
+
+                summary += `\nTests Passed: ${testsPassed}/${testsTotal}\n`;
+                summary += testsPassed === testsTotal ? "🎉 All tests passed!" : "⚠️ Some tests failed";
+
+                document.getElementById('comparison-output').textContent = comparison;
+                document.getElementById('test-summary').textContent = summary;
+                
+                if (testsPassed === testsTotal) {
+                    document.getElementById('test-summary').className = 'output success';
+                } else {
+                    document.getElementById('test-summary').className = 'output error';
+                }
+            }
+
+            testLivePrompt() {
+                const userRequest = document.getElementById('test-request').value.trim();
+                if (!userRequest) {
+                    this.updateStatus('Please enter a test request', 'error');
+                    return;
+                }
+
+                if (!this.currentConcept) {
+                    this.updateStatus('No concept selected', 'error');
+                    return;
+                }
+
+                try {
+                    const prompt = this.buildPrompt(userRequest, "// Sample existing code\nfunction setup() {\n  createCanvas(400, 400);\n}");
+                    document.getElementById('live-prompt-output').textContent = prompt;
+                    document.getElementById('live-prompt-output').className = 'output success';
+                } catch (error) {
+                    document.getElementById('live-prompt-output').textContent = `Error: ${error.message}`;
+                    document.getElementById('live-prompt-output').className = 'output error';
+                }
+            }
+
+            clearOutput() {
+                document.getElementById('constraints-output').textContent = 'Output cleared.';
+                document.getElementById('constraints-output').className = 'output';
+                document.getElementById('comparison-output').textContent = 'Output cleared.';
+                document.getElementById('test-summary').textContent = 'Output cleared.';
+                document.getElementById('test-summary').className = 'output';
+                document.getElementById('live-prompt-output').textContent = 'Output cleared.';
+                document.getElementById('live-prompt-output').className = 'output';
+            }
+
+            // Copy constraint generation methods from app.js
+            buildLearningConstraints() {
+                if (!this.learnerProfile?.isReady() || !this.ontologyEngine?.isReady()) {
+                    return "No learning constraints available - generate any appropriate P5.js code.";
+                }
+
+                const currentConceptId = this.learnerProfile.getCurrentConcept();
+                const completedConcepts = this.learnerProfile.getCompletedConcepts();
+                
+                if (!currentConceptId) {
+                    return "No current learning focus - generate any appropriate P5.js code.";
+                }
+
+                const currentConcept = this.ontologyEngine.getConceptById(currentConceptId);
+                const learningObjectives = this.ontologyEngine.getLearningObjectives(currentConceptId);
+                
+                if (!currentConcept) {
+                    return "No learning constraints available - generate any appropriate P5.js code.";
+                }
+
+                let constraints = `## LEARNING CONSTRAINTS - STRICT REQUIREMENTS
+
+**Current Learning Focus:** ${currentConcept.name}
+*${currentConcept.description}*
+
+**Mastered Concepts:** `;
+                
+                if (completedConcepts.length > 0) {
+                    const masteredNames = completedConcepts
+                        .map(id => this.ontologyEngine.getConceptById(id)?.name)
+                        .filter(name => name)
+                        .join(', ');
+                    constraints += masteredNames;
+                } else {
+                    constraints += "None yet - this is a beginner learner";
+                }
+
+                constraints += `
+
+**ALLOWED P5.js Functions for Current Level:**
+`;
+                
+                if (learningObjectives && learningObjectives.length > 0) {
+                    learningObjectives.forEach(objective => {
+                        if (objective.code) {
+                            constraints += `- ${objective.name}: \`${objective.code}\`\n`;
+                        } else {
+                            constraints += `- ${objective.name}\n`;
+                        }
+                    });
+                } else {
+                    constraints += "- Basic P5.js functions only\n";
+                }
+
+                constraints += `
+**CRITICAL RESTRICTIONS:**
+- ONLY use the functions and concepts listed above
+- Stay within the learner's current skill level (${currentConcept.name})
+- Any code using advanced concepts beyond this level will be REJECTED
+- Keep examples simple and focused on current learning objectives`;
+
+                return constraints;
+            }
+
+            buildPrompt(userRequest, currentCode) {
+                const learningConstraints = this.buildLearningConstraints();
+                
+                return `You are a P5.js coding instructor. Generate complete, working P5.js code that respects the learner's current skill level.
+
+${learningConstraints}
+
+CURRENT CODE:
+${currentCode || '// No existing code'}
+
+USER REQUEST: ${userRequest}
+
+INSTRUCTIONS:
+- Generate a complete P5.js sketch with setup() and draw() functions
+- STRICTLY follow the learning constraints above
+- Make the code functional and ready to run
+- Keep it simple and educational for current skill level
+- Return ONLY the code, no explanations or markdown
+- Ensure proper P5.js syntax and conventions
+
+Generated code:`;
+            }
+
+            updateStatus(message, type = 'normal') {
+                const statusEl = document.getElementById('status');
+                statusEl.textContent = message;
+                statusEl.className = `status ${type}`;
+            }
+        }
+
+        // Initialize tester when page loads
+        const tester = new OntologyConstraintTester();
+        tester.init();
+    </script>
+</body>
+</html>

@@ -1,0 +1,1284 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://example.org/creativecoding#"
+     xml:base="http://example.org/creativecoding"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <owl:Ontology rdf:about="http://example.org/creativecoding/instances">
+        <owl:imports rdf:resource="http://example.org/creativecoding"/>
+        <dc:title>Creative Coding Concept Instances</dc:title>
+        <dc:description>Individual instances of creative coding concepts, learning objectives, and artistic pathways</dc:description>
+        <owl:versionInfo>1.0</owl:versionInfo>
+    </owl:Ontology>
+
+    <!-- 
+    //////////////////////////////////////////////////////////////////
+    //
+    //    Creative Coding Concept Instances
+    //
+    //////////////////////////////////////////////////////////////////
+     -->
+
+    <!-- Simple Drawing Concept -->
+    <CreativeCodingConcept rdf:about="http://example.org/creativecoding/instances#simpleDrawing">
+        <hasIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">simpleDrawing</hasIdentifier>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Simple Drawing</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Creating fundamental visual elements like circles, rectangles, and lines</hasDescription>
+        <hasCategory rdf:resource="http://example.org/creativecoding#basics"/>
+        <hasDifficulty rdf:resource="http://example.org/creativecoding#beginner"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#abstractCompositions"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#geometricPatterns"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#characterDesign"/>
+        <supportsExpressionGoal rdf:resource="http://example.org/creativecoding/instances#personalVisualVocabulary"/>
+        <supportsExpressionGoal rdf:resource="http://example.org/creativecoding/instances#canvasCreativeSpace"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#setupDraw"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#namedColorFill"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#namedColorStroke"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#namedColorBackground"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#noFill"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#noStroke"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#ellipse"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#rectangle"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#line"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#triangle"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#point"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#quad"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#strokeWeight"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#rectangleMode"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#ellipseMode"/>
+    </CreativeCodingConcept>
+    
+    <!-- Colors Concept -->
+    <CreativeCodingConcept rdf:about="http://example.org/creativecoding/instances#colors">
+        <hasIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">colors</hasIdentifier>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Colors and Palettes</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Using numeric definitions for colors to create precise hues</hasDescription>
+        <hasCategory rdf:resource="http://example.org/creativecoding#basics"/>
+        <hasDifficulty rdf:resource="http://example.org/creativecoding#beginner"/>
+        <hasPrerequisite rdf:resource="http://example.org/creativecoding/instances#simpleDrawing"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#emotiveColorSchemes"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#gradients"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#colorTheoryExploration"/>
+        <supportsExpressionGoal rdf:resource="http://example.org/creativecoding/instances#emotionsColor"/>
+        <supportsExpressionGoal rdf:resource="http://example.org/creativecoding/instances#personalColorPalette"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#fillRGB"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#strokeRGB"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#backgroundRGB"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#colorMode"/>
+    </CreativeCodingConcept>
+    
+    <!-- Transparency Concept -->
+    <CreativeCodingConcept rdf:about="http://example.org/creativecoding/instances#transparency">
+        <hasIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">transparency</hasIdentifier>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Transparency and Layering</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Creating depth through transparent layers</hasDescription>
+        <hasCategory rdf:resource="http://example.org/creativecoding#basics"/>
+        <hasDifficulty rdf:resource="http://example.org/creativecoding#beginnerIntermediate"/>
+        <hasPrerequisite rdf:resource="http://example.org/creativecoding/instances#colors"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#atmosphericEffects"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#overlappingCompositions"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#watercolorTextures"/>
+        <supportsExpressionGoal rdf:resource="http://example.org/creativecoding/instances#depthAtmosphere"/>
+        <supportsExpressionGoal rdf:resource="http://example.org/creativecoding/instances#visualRelationships"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#alphaChannel"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#clear"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#eraseMode"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#blendMode"/>
+    </CreativeCodingConcept>
+    
+    <!-- Variables Concept -->
+    <CreativeCodingConcept rdf:about="http://example.org/creativecoding/instances#variables">
+        <hasIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">variables</hasIdentifier>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Variables</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Using variables to represent values</hasDescription>
+        <hasCategory rdf:resource="http://example.org/creativecoding#basics"/>
+        <hasDifficulty rdf:resource="http://example.org/creativecoding#beginner"/>
+        <hasPrerequisite rdf:resource="http://example.org/creativecoding/instances#simpleDrawing"/>
+        <hasPrerequisite rdf:resource="http://example.org/creativecoding/instances#colors"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#animatedElements"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#growingShrinkingShapes"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#movingObjects"/>
+        <supportsExpressionGoal rdf:resource="http://example.org/creativecoding/instances#staticToLife"/>
+        <supportsExpressionGoal rdf:resource="http://example.org/creativecoding/instances#changeExpressive"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#variableDeclaration"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#variableModification"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#canvasSizeConstants"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#mathematicalOperations"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#colorValues"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#colorInterpolation"/>
+    </CreativeCodingConcept>
+    
+    <!-- Conditionals Concept -->
+    <CreativeCodingConcept rdf:about="http://example.org/creativecoding/instances#conditionals">
+        <hasIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">conditionals</hasIdentifier>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Visual Decision Making</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Creating different visuals based on conditions</hasDescription>
+        <hasCategory rdf:resource="http://example.org/creativecoding#expressivity"/>
+        <hasDifficulty rdf:resource="http://example.org/creativecoding#intermediate"/>
+        <hasPrerequisite rdf:resource="http://example.org/creativecoding/instances#variables"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#responsiveElements"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#dayNightTransitions"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#moodBasedColorSchemes"/>
+        <supportsExpressionGoal rdf:resource="http://example.org/creativecoding/instances#changeAdapt"/>
+        <supportsExpressionGoal rdf:resource="http://example.org/creativecoding/instances#visualCauseEffect"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#ifStatement"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#ifElseStatement"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#multipleConditions"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#comparisonOperators"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#logicalOperators"/>
+    </CreativeCodingConcept>
+    
+    <!-- Randomness Concept -->
+    <CreativeCodingConcept rdf:about="http://example.org/creativecoding/instances#randomness">
+        <hasIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">randomness</hasIdentifier>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Creative Randomness</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Using chance to create organic variety and spontaneity</hasDescription>
+        <hasCategory rdf:resource="http://example.org/creativecoding#expressivity"/>
+        <hasDifficulty rdf:resource="http://example.org/creativecoding#beginnerIntermediate"/>
+        <hasPrerequisite rdf:resource="http://example.org/creativecoding/instances#variables"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#organicPatterns"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#generativeArt"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#naturalVariation"/>
+        <supportsExpressionGoal rdf:resource="http://example.org/creativecoding/instances#controlChance"/>
+        <supportsExpressionGoal rdf:resource="http://example.org/creativecoding/instances#uniqueOutputs"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#random"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#randomSeed"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#perlinNoise"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#noiseSeed"/>
+    </CreativeCodingConcept>
+    
+    <!-- Animation Concept -->
+    <CreativeCodingConcept rdf:about="http://example.org/creativecoding/instances#animation">
+        <hasIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">animation</hasIdentifier>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Basic Animation</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Creating movement over time</hasDescription>
+        <hasCategory rdf:resource="http://example.org/creativecoding#expressivity"/>
+        <hasDifficulty rdf:resource="http://example.org/creativecoding#intermediate"/>
+        <hasPrerequisite rdf:resource="http://example.org/creativecoding/instances#variables"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#movingCharacters"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#kineticTypography"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#animatedPatterns"/>
+        <supportsExpressionGoal rdf:resource="http://example.org/creativecoding/instances#movementIdeas"/>
+        <supportsExpressionGoal rdf:resource="http://example.org/creativecoding/instances#visualNarratives"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#frameRate"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#frameCounter"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#milliseconds"/>
+    </CreativeCodingConcept>
+    
+    <!-- Interactivity Concept -->
+    <CreativeCodingConcept rdf:about="http://example.org/creativecoding/instances#interactivity">
+        <hasIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">interactivity</hasIdentifier>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">User Interaction</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Making art that responds to the viewer</hasDescription>
+        <hasCategory rdf:resource="http://example.org/creativecoding#expressivity"/>
+        <hasDifficulty rdf:resource="http://example.org/creativecoding#intermediate"/>
+        <hasPrerequisite rdf:resource="http://example.org/creativecoding/instances#variables"/>
+        <hasPrerequisite rdf:resource="http://example.org/creativecoding/instances#animation"/>
+        <hasPrerequisite rdf:resource="http://example.org/creativecoding/instances#conditionals"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#interactiveDrawings"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#viewerControlledExperiences"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#responsiveEnvironments"/>
+        <supportsExpressionGoal rdf:resource="http://example.org/creativecoding/instances#artworkViewerDialogue"/>
+        <supportsExpressionGoal rdf:resource="http://example.org/creativecoding/instances#designExperiences"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#mousePosition"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#previousMousePosition"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#mouseButtonState"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#keyState"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#currentKey"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#keyCode"/>
+    </CreativeCodingConcept>
+    
+    <!-- Repetition Concept -->
+    <CreativeCodingConcept rdf:about="http://example.org/creativecoding/instances#repetition">
+        <hasIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">repetition</hasIdentifier>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Patterns and Repetition</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Creating complex visuals through repeated elements</hasDescription>
+        <hasCategory rdf:resource="http://example.org/creativecoding#patterns"/>
+        <hasDifficulty rdf:resource="http://example.org/creativecoding#intermediate"/>
+        <hasPrerequisite rdf:resource="http://example.org/creativecoding/instances#variables"/>
+        <hasPrerequisite rdf:resource="http://example.org/creativecoding/instances#conditionals"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#texturedBackgrounds"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#patternDesign"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#complexMandalas"/>
+        <supportsExpressionGoal rdf:resource="http://example.org/creativecoding/instances#repetitionVariation"/>
+        <supportsExpressionGoal rdf:resource="http://example.org/creativecoding/instances#complexFromSimple"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#forLoop"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#nestedLoops"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#whileLoop"/>
+    </CreativeCodingConcept>
+    
+    <!-- Reusable Elements Concept -->
+    <CreativeCodingConcept rdf:about="http://example.org/creativecoding/instances#reusableElements">
+        <hasIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">reusableElements</hasIdentifier>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Reusable Drawing Functions</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Creating modular, reusable elements for complex compositions</hasDescription>
+        <hasCategory rdf:resource="http://example.org/creativecoding#patterns"/>
+        <hasDifficulty rdf:resource="http://example.org/creativecoding#intermediate"/>
+        <hasPrerequisite rdf:resource="http://example.org/creativecoding/instances#simpleDrawing"/>
+        <hasPrerequisite rdf:resource="http://example.org/creativecoding/instances#colors"/>
+        <hasPrerequisite rdf:resource="http://example.org/creativecoding/instances#variables"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#customBrushes"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#repeatedCharacterElements"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#modularScenes"/>
+        <supportsExpressionGoal rdf:resource="http://example.org/creativecoding/instances#personalElementLibrary"/>
+        <supportsExpressionGoal rdf:resource="http://example.org/creativecoding/instances#complexScenesModular"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#functionDeclaration"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#returnValues"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#functionCalls"/>
+    </CreativeCodingConcept>
+    
+    <!-- Custom Shapes Concept -->
+    <CreativeCodingConcept rdf:about="http://example.org/creativecoding/instances#customShapes">
+        <hasIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">customShapes</hasIdentifier>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Custom Shapes and Drawing</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Creating your own visual elements beyond basic shapes</hasDescription>
+        <hasCategory rdf:resource="http://example.org/creativecoding#patterns"/>
+        <hasDifficulty rdf:resource="http://example.org/creativecoding#intermediate"/>
+        <hasPrerequisite rdf:resource="http://example.org/creativecoding/instances#simpleDrawing"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#organicForms"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#customCharacters"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#complexIllustrations"/>
+        <supportsExpressionGoal rdf:resource="http://example.org/creativecoding/instances#beyondGeometric"/>
+        <supportsExpressionGoal rdf:resource="http://example.org/creativecoding/instances#uniqueVisualStyle"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#beginEndShape"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#vertex"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#curveVertex"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#bezierVertex"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#arc"/>
+    </CreativeCodingConcept>
+    
+    <!-- Transformations Concept -->
+    <CreativeCodingConcept rdf:about="http://example.org/creativecoding/instances#transformations">
+        <hasIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">transformations</hasIdentifier>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Visual Transformations</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Manipulating elements with rotation, scaling, and translation</hasDescription>
+        <hasCategory rdf:resource="http://example.org/creativecoding#patterns"/>
+        <hasDifficulty rdf:resource="http://example.org/creativecoding#intermediate"/>
+        <hasPrerequisite rdf:resource="http://example.org/creativecoding/instances#simpleDrawing"/>
+        <hasPrerequisite rdf:resource="http://example.org/creativecoding/instances#variables"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#kaleidoscopeEffects"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#spirals"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#complexCompositions"/>
+        <supportsExpressionGoal rdf:resource="http://example.org/creativecoding/instances#dynamicVisualRelationships"/>
+        <supportsExpressionGoal rdf:resource="http://example.org/creativecoding/instances#spatialComposition"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#translate"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#rotate"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#scale"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#transformationState"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#angleMode"/>
+    </CreativeCodingConcept>
+    
+    <!-- Collections Concept -->
+    <CreativeCodingConcept rdf:about="http://example.org/creativecoding/instances#collections">
+        <hasIdentifier rdf:datatype="http://www.w3.org/2001/XMLSchema#string">collections</hasIdentifier>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Visual Collections</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Managing multiple elements as unified groups</hasDescription>
+        <hasCategory rdf:resource="http://example.org/creativecoding#advancedExpression"/>
+        <hasDifficulty rdf:resource="http://example.org/creativecoding#intermediateAdvanced"/>
+        <hasPrerequisite rdf:resource="http://example.org/creativecoding/instances#variables"/>
+        <hasPrerequisite rdf:resource="http://example.org/creativecoding/instances#repetition"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#particleSystems"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#flockingBehaviors"/>
+        <enablesCreativeApplication rdf:resource="http://example.org/creativecoding/instances#multipleCharacters"/>
+        <supportsExpressionGoal rdf:resource="http://example.org/creativecoding/instances#emergentBehaviors"/>
+        <supportsExpressionGoal rdf:resource="http://example.org/creativecoding/instances#complexitySystems"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#arrayCreation"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#arrayAccess"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#arrayMethods"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#arrayIteration"/>
+        <hasLearningObjective rdf:resource="http://example.org/creativecoding/instances#arrayOfObjects"/>
+    </CreativeCodingConcept>
+
+    <!-- 
+    //////////////////////////////////////////////////////////////////
+    //
+    //    Learning Objective Instances
+    //
+    //////////////////////////////////////////////////////////////////
+     -->
+     
+    <!-- Simple Drawing Learning Objectives -->
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#setupDraw">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">setup and draw</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Core functions</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">setup(), draw()</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">function\s+setup\s*\(\)</hasRegexPattern>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">function\s+draw\s*\(\)</hasRegexPattern>
+    </LearningObjective>
+ 
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#namedColorFill">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">namedColorFill</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Setting the fill color for shapes using CSS color names</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">fill('CSSColor')</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">fill\s*\('[a-zA-Z]+'\)</hasRegexPattern>
+    </LearningObjective>
+ 
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#namedColorStroke">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">namedColorStroke</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Setting the outline color for shapes using CSS color names</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">stroke('CSSColor')</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">stroke\s*\('[a-zA-Z]+'\)</hasRegexPattern>
+    </LearningObjective>
+ 
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#namedColorBackground">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">namedColorBackground</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Setting the background using CSS color names</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">background('CSSColor')</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">background\s*\('[a-zA-Z]+'\)</hasRegexPattern>
+    </LearningObjective>
+ 
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#noFill">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">no fill</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Disabling shape filling</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">noFill()</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">noFill\s*\(\)</hasRegexPattern>
+    </LearningObjective>
+ 
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#noStroke">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">no stroke</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Disabling shape outlines</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">noStroke()</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">noStroke\s*\(\)</hasRegexPattern>
+    </LearningObjective>
+ 
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#ellipse">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ellipse</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Drawing circles and ellipses</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ellipse(x, y, width, height)</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ellipse\s*\([^)]*\)</hasRegexPattern>
+    </LearningObjective>
+ 
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#rectangle">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rectangle</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Drawing rectangles and squares</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rect(x, y, width, height)</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rect\s*\([^)]*\)</hasRegexPattern>
+    </LearningObjective>
+ 
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#line">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">line</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Drawing straight lines between points</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">line(x1, y1, x2, y2)</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">line\s*\([^)]*\)</hasRegexPattern>
+    </LearningObjective>
+ 
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#triangle">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">triangle</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Drawing triangles between three points</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">triangle(x1, y1, x2, y2, x3, y3)</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">triangle\s*\([^)]*\)</hasRegexPattern>
+    </LearningObjective>
+ 
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#point">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">point</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Drawing a single point</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">point(x, y)</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">point\s*\([^)]*\)</hasRegexPattern>
+    </LearningObjective>
+ 
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#quad">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">quad</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Drawing quadrilaterals between four points</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">quad(x1, y1, x2, y2, x3, y3, x4, y4)</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">quad\s*\([^)]*\)</hasRegexPattern>
+    </LearningObjective>
+ 
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#strokeWeight">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">stroke weight</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Setting the thickness of lines and outlines</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">strokeWeight(weight)</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">strokeWeight\s*\([^)]*\)</hasRegexPattern>
+    </LearningObjective>
+ 
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#rectangleMode">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rectangle mode</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Changing how rectangle coordinates are interpreted (CENTER, CORNER, etc.)</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rectMode(mode)</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rectMode\s*\([^)]*\)</hasRegexPattern>
+    </LearningObjective>
+ 
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#ellipseMode">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ellipse mode</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Changing how ellipse coordinates are interpreted (CENTER, RADIUS, etc.)</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ellipseMode(mode)</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ellipseMode\s*\([^)]*\)</hasRegexPattern>
+    </LearningObjective>
+ 
+    <!-- Colors Learning Objectives -->
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#fillRGB">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">fill</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Setting the fill color for shapes</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">fill(r, g, b)</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">fill\s*\([0-9]+\s*,\s*[0-9]+\s*,\s*[0-9]+\)</hasRegexPattern>
+    </LearningObjective>
+ 
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#strokeRGB">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">stroke</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Setting the outline color for shapes</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">stroke(r, g, b)</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">stroke\s*\([0-9]+\s*,\s*[0-9]+\s*,\s*[0-9]+\)</hasRegexPattern>
+    </LearningObjective>
+ 
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#backgroundRGB">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">background</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Setting the canvas background color</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">background(r, g, b)</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">background\s*\([0-9]+\s*,\s*[0-9]+\s*,\s*[0-9]+\)</hasRegexPattern>
+    </LearningObjective>
+ 
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#colorMode">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">color mode</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Switching between color systems (RGB, HSB)</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">colorMode(RGB) or colorMode(HSB)</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">colorMode\s*\([^)]*\)</hasRegexPattern>
+    </LearningObjective>
+ 
+    <!-- Transparency Learning Objectives -->
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#alphaChannel">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">alpha channel</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Using transparency in colors</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">fill(r, g, b, a), stroke(r, g, b, a), background(r, g, b, a)</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">(fill|stroke|background)\s*\([0-9]+\s*,\s*[0-9]+\s*,\s*[0-9]+\s*,\s*[0-9]+\)</hasRegexPattern>
+    </LearningObjective>
+ 
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#clear">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">clear</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Clearing specific portions of the canvas</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">clear()</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">clear\s*\(\)</hasRegexPattern>
+    </LearningObjective>
+ 
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#eraseMode">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">erase mode</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Erasing portions of already drawn elements</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">erase(), noErase()</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">erase\s*\(\)</hasRegexPattern>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">noErase\s*\(\)</hasRegexPattern>
+    </LearningObjective>
+ 
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#blendMode">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">blend mode</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Controlling how colors blend when layered</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">blendMode(BLEND/ADD/MULTIPLY/etc)</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">blendMode\s*\([^)]*\)</hasRegexPattern>
+    </LearningObjective>
+ 
+    <!-- Variables Learning Objectives -->
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#variableDeclaration">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">variable declaration</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Creating and initializing variables</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">let x = 100;</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">let\s+[a-zA-Z_][a-zA-Z0-9_]*\s*=</hasRegexPattern>
+    </LearningObjective>
+ 
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#variableModification">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">variable modification</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Changing variable values over time</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">x = x + 1;</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">^(?!.*let)([a-zA-Z_][a-zA-Z0-9_]*)\s*=</hasRegexPattern>
+    </LearningObjective>
+ 
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#canvasSizeConstants">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">canvas size constants</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Using p5.js canvas size</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">width, height</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">\bwidth\b</hasRegexPattern>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">\bheight\b</hasRegexPattern>
+    </LearningObjective>
+ 
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#mathematicalOperations">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">mathematical operations</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Performing calculations with variables</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">+, -, *, /, %</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">[a-zA-Z0-9_)\]]+\s*[+\-*/%]\s*[a-zA-Z0-9_([]</hasRegexPattern>
+    </LearningObjective>
+ 
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#colorValues">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">color values</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Creating and storing color variables</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">const x = color(...)</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">const\s+[a-zA-Z_][a-zA-Z0-9_]*\s*=\s*color\s*\([^)]*\)</hasRegexPattern>
+    </LearningObjective>
+ 
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#colorInterpolation">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">color interpolation</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Blending between two colors</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">lerpColor(c1, c2, amt)</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">lerpColor\s*\([^)]*\)</hasRegexPattern>
+    </LearningObjective>
+        
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#ifStatement">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">if statement</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Making basic visual decisions</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">if (condition) { }</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">if\s*\([^{]*\)\s*\{</hasRegexPattern>
+    </LearningObjective>
+
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#ifElseStatement">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">if/else statement</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Creating binary visual alternatives</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">if (condition) { } else { }</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">if\s*\([^{]*\)\s*\{[^}]*\}\s*else\s*\{</hasRegexPattern>
+    </LearningObjective>
+
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#multipleConditions">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">multiple conditions</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Making complex visual decisions with multiple outcomes</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">if (condition) { } else if (anotherCondition) { } else { }</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">else\s+(if\s*\([^{]*\))?\s*\{</hasRegexPattern>
+    </LearningObjective>
+
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#comparisonOperators">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">comparison operators</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Comparing values to make decisions</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">&gt;, &lt;, &gt;=, &lt;=, ==, ===, !=, !==</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">[a-zA-Z0-9_)\]"']+\s*([&lt;&gt;]=?|[=!]=|===|!==)\s*[a-zA-Z0-9_(["']</hasRegexPattern>
+    </LearningObjective>
+
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#logicalOperators">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">logical operators</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Combining multiple conditions</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">&amp;&amp;, ||, !</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">&amp;&amp;</hasRegexPattern>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">\|\|</hasRegexPattern>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">!\s*[a-zA-Z0-9_(]</hasRegexPattern>
+    </LearningObjective>
+
+    <!-- Missing Learning Objectives from Randomness Concept -->
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#random">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">random</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Generating random values within a range</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">random(min, max)</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">random\s*\([^)]*\)</hasRegexPattern>
+    </LearningObjective>
+
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#randomSeed">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">random seed</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Creating reproducible randomness</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">randomSeed(seed)</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">randomSeed\s*\([^)]*\)</hasRegexPattern>
+    </LearningObjective>
+
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#perlinNoise">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">perlin noise</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Generating smooth, natural-looking randomness</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">noise(x), noise(x, y), noise(x, y, z)</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">noise\s*\([^)]*\)</hasRegexPattern>
+    </LearningObjective>
+
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#noiseSeed">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">noise seed</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Creating reproducible noise patterns</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">noiseSeed(seed)</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">noiseSeed\s*\([^)]*\)</hasRegexPattern>
+    </LearningObjective>
+
+    <!-- Missing Learning Objectives from Animation Concept -->
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#frameRate">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">frame rate</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Controlling animation speed</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">frameRate(fps)</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">frameRate\s*\([^)]*\)</hasRegexPattern>
+    </LearningObjective>
+
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#frameCounter">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">frame counter</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tracking frames for time-based animation</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">frameCount</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">\bframeCount\b</hasRegexPattern>
+    </LearningObjective>
+
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#milliseconds">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">milliseconds</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Getting elapsed time for precise timing</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">millis()</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">millis\s*\(\)</hasRegexPattern>
+    </LearningObjective>
+
+    <!-- Missing Learning Objectives from Interactivity Concept -->
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#mousePosition">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">mouse position</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Reading current mouse coordinates</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">mouseX, mouseY</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">\bmouseX\b</hasRegexPattern>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">\bmouseY\b</hasRegexPattern>
+    </LearningObjective>
+
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#previousMousePosition">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">previous mouse position</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Tracking mouse movement between frames</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">pmouseX, pmouseY</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">\bpmouseX\b</hasRegexPattern>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">\bpmouseY\b</hasRegexPattern>
+    </LearningObjective>
+
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#mouseButtonState">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">mouse button state</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Detecting if mouse button is down</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">mouseIsPressed</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">\bmouseIsPressed\b</hasRegexPattern>
+    </LearningObjective>
+
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#keyState">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">key state</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Detecting if any key is pressed</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">keyIsPressed</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">\bkeyIsPressed\b</hasRegexPattern>
+    </LearningObjective>
+
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#currentKey">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">current key</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Identifying which key is being pressed</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">key</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">\bkey\b</hasRegexPattern>
+    </LearningObjective>
+
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#keyCode">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">key code</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Reading special keys like arrows and modifiers</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">keyCode</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">\bkeyCode\b</hasRegexPattern>
+    </LearningObjective>
+
+    <!-- Missing Learning Objectives from Repetition Concept -->
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#forLoop">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">for loop</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Creating repetition with counter variables</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">for (let i = 0; i &lt; n; i++) { }</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">for\s*\([^;]*;[^;]*;[^)]*\)\s*\{</hasRegexPattern>
+    </LearningObjective>
+
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#nestedLoops">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">nested loops</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Creating 2D grids and complex patterns</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">for (let x = 0; x &lt; width; x += 10) { for (let y = 0; y &lt; height; y += 10) { } }</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">for\s*\([^{]*\)\s*\{[^{]*for\s*\([^{]*\)\s*\{</hasRegexPattern>
+    </LearningObjective>
+
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#whileLoop">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">while loop</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Creating repetition based on conditions</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">while (condition) { }</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">while\s*\([^{]*\)\s*\{</hasRegexPattern>
+    </LearningObjective>
+
+    <!-- Missing Learning Objectives from Reusable Elements Concept -->
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#functionDeclaration">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">function declaration</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Creating custom drawing routines</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">function drawChar(x, y, size) { }</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">function (?!.*setup|draw)[a-zA-Z_][a-zA-Z0-9_]*\s*\([^)]*\)\s*\{</hasRegexPattern>
+    </LearningObjective>
+
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#returnValues">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">return values</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Returning results from functions</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">return value;</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">return\s*\(</hasRegexPattern>
+    </LearningObjective>
+
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#functionCalls">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">function calls</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Using custom functions to create repeated elements</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">drawChar(100, 200, 50);</hasCode>
+    </LearningObjective>
+
+    <!-- Missing Learning Objectives from Custom Shapes Concept -->
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#beginEndShape">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">begin/end shape</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Creating custom polygon shapes</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">beginShape(), endShape()</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">beginShape\s*\(</hasRegexPattern>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">endShape\s*\(</hasRegexPattern>
+    </LearningObjective>
+
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#vertex">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">vertex</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Adding points to custom shapes</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">vertex(x, y)</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">vertex\s*\(</hasRegexPattern>
+    </LearningObjective>
+
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#curveVertex">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">curve vertex</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Creating smooth curved shapes</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">curveVertex(x, y)</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">curveVertex\s*\(</hasRegexPattern>
+    </LearningObjective>
+
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#bezierVertex">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bezier vertex</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Creating precise Bézier curves</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bezierVertex(x2, y2, x3, y3, x4, y4)</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">bezierVertex\s*\(</hasRegexPattern>
+    </LearningObjective>
+
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#arc">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">arc</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Drawing partial circles and ellipses</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">arc(x, y, w, h, start, stop)</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">arc\s*\(</hasRegexPattern>
+    </LearningObjective>
+
+    <!-- Missing Learning Objectives from Transformations Concept -->
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#translate">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">translate</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Moving the coordinate system</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">translate(x, y)</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">translate\s*\([^)]*\)</hasRegexPattern>
+    </LearningObjective>
+
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#rotate">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rotate</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rotating the coordinate system</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rotate(angle)</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">rotate\s*\([^)]*\)</hasRegexPattern>
+    </LearningObjective>
+
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#scale">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">scale</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Scaling the coordinate system</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">scale(x, y)</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">scale\s*\([^)]*\)</hasRegexPattern>
+    </LearningObjective>
+
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#transformationState">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">transformation state</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Saving and restoring transformation states</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">push(), pop()</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">push\s*\(\)</hasRegexPattern>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">pop\s*\(\)</hasRegexPattern>
+    </LearningObjective>
+
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#angleMode">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">angle mode</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Setting units for rotation angles</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">angleMode(RADIANS) or angleMode(DEGREES)</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">angleMode\s*\([^)]*\)</hasRegexPattern>
+    </LearningObjective>
+
+    <!-- Missing Learning Objectives from Collections Concept -->
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#arrayCreation">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">array creation</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Creating collections of visual elements</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">let points = [];</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">let\s+[a-zA-Z_][a-zA-Z0-9_]*\s*=\s*\[\]</hasRegexPattern>
+    </LearningObjective>
+
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#arrayAccess">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">array access</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Accessing individual elements in a collection</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">points[0]</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">[a-zA-Z_][a-zA-Z0-9_]*\.length</hasRegexPattern>
+    </LearningObjective>
+
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#arrayIteration">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">array iteration</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Working with all elements in a collection</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">for (let i = 0; i &lt; points.length; i++) { }</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">for\s*\([^;]*;[^;]*\.length[^;]*;[^)]*\)</hasRegexPattern>
+    </LearningObjective>
+
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#arrayOfObjects">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">array of objects</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Creating collections of complex visual elements</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">let particles = [{x: 0, y: 0}];</hasCode>
+    </LearningObjective>
+        
+    <LearningObjective rdf:about="http://example.org/creativecoding/instances#arrayMethods">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">array methods</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Modifying and querying collections</hasDescription>
+        <hasCode rdf:datatype="http://www.w3.org/2001/XMLSchema#string">push(), splice(), length</hasCode>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">[a-zA-Z_][a-zA-Z0-9_]*\.push\s*\(</hasRegexPattern>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">[a-zA-Z_][a-zA-Z0-9_]*\.splice\s*\(</hasRegexPattern>
+        <hasRegexPattern rdf:datatype="http://www.w3.org/2001/XMLSchema#string">[a-zA-Z_][a-zA-Z0-9_]*\s*\[[^\]]*\]</hasRegexPattern>
+    </LearningObjective>
+
+    <!-- 
+    //////////////////////////////////////////////////////////////////
+    //
+    //    Creative Application Instances
+    //
+    //////////////////////////////////////////////////////////////////
+     -->
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#abstractCompositions">
+        <rdfs:label>abstract compositions</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#geometricPatterns">
+        <rdfs:label>geometric patterns</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#characterDesign">
+        <rdfs:label>character design</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#emotiveColorSchemes">
+        <rdfs:label>emotive color schemes</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#gradients">
+        <rdfs:label>gradients</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#colorTheoryExploration">
+        <rdfs:label>color theory exploration</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#atmosphericEffects">
+        <rdfs:label>atmospheric effects</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#overlappingCompositions">
+        <rdfs:label>overlapping compositions</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#watercolorTextures">
+        <rdfs:label>watercolor-like textures</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#animatedElements">
+        <rdfs:label>animated elements</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#growingShrinkingShapes">
+        <rdfs:label>growing/shrinking shapes</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#movingObjects">
+        <rdfs:label>moving objects</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#responsiveElements">
+        <rdfs:label>responsive elements</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#dayNightTransitions">
+        <rdfs:label>day/night transitions</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#moodBasedColorSchemes">
+        <rdfs:label>mood-based color schemes</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#organicPatterns">
+        <rdfs:label>organic patterns</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#generativeArt">
+        <rdfs:label>generative art</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#naturalVariation">
+        <rdfs:label>natural-looking variation</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#movingCharacters">
+        <rdfs:label>moving characters</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#kineticTypography">
+        <rdfs:label>kinetic typography</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#animatedPatterns">
+        <rdfs:label>animated patterns</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#interactiveDrawings">
+        <rdfs:label>interactive drawings</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#viewerControlledExperiences">
+        <rdfs:label>viewer-controlled experiences</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#responsiveEnvironments">
+        <rdfs:label>responsive environments</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#texturedBackgrounds">
+        <rdfs:label>textured backgrounds</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#patternDesign">
+        <rdfs:label>pattern design</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#complexMandalas">
+        <rdfs:label>complex mandalas</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#customBrushes">
+        <rdfs:label>custom brushes</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#repeatedCharacterElements">
+        <rdfs:label>repeated character elements</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#modularScenes">
+        <rdfs:label>modular scenes</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#organicForms">
+        <rdfs:label>organic forms</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#customCharacters">
+        <rdfs:label>custom characters</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#complexIllustrations">
+        <rdfs:label>complex illustrations</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#kaleidoscopeEffects">
+        <rdfs:label>kaleidoscope effects</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#spirals">
+        <rdfs:label>spirals</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#complexCompositions">
+        <rdfs:label>complex compositions</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#particleSystems">
+        <rdfs:label>particle systems</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#flockingBehaviors">
+        <rdfs:label>flocking behaviors</rdfs:label>
+    </CreativeApplication>
+
+    <CreativeApplication rdf:about="http://example.org/creativecoding/instances#multipleCharacters">
+        <rdfs:label>multiple characters</rdfs:label>
+    </CreativeApplication>
+
+    <!-- 
+    //////////////////////////////////////////////////////////////////
+    //
+    //    Expression Goal Instances
+    //
+    //////////////////////////////////////////////////////////////////
+     -->
+
+    <ExpressionGoal rdf:about="http://example.org/creativecoding/instances#personalVisualVocabulary">
+        <rdfs:label>Creating a personal visual vocabulary</rdfs:label>
+    </ExpressionGoal>
+
+    <ExpressionGoal rdf:about="http://example.org/creativecoding/instances#canvasCreativeSpace">
+        <rdfs:label>Understanding the canvas as a creative space</rdfs:label>
+    </ExpressionGoal>
+
+    <ExpressionGoal rdf:about="http://example.org/creativecoding/instances#emotionsColor">
+        <rdfs:label>Expressing emotions through color</rdfs:label>
+    </ExpressionGoal>
+
+    <ExpressionGoal rdf:about="http://example.org/creativecoding/instances#personalColorPalette">
+        <rdfs:label>Developing a personal color palette</rdfs:label>
+    </ExpressionGoal>
+
+    <ExpressionGoal rdf:about="http://example.org/creativecoding/instances#depthAtmosphere">
+        <rdfs:label>Creating depth and atmosphere</rdfs:label>
+    </ExpressionGoal>
+
+    <ExpressionGoal rdf:about="http://example.org/creativecoding/instances#visualRelationships">
+        <rdfs:label>Exploring visual relationships between elements</rdfs:label>
+    </ExpressionGoal>
+
+    <ExpressionGoal rdf:about="http://example.org/creativecoding/instances#staticToLife">
+        <rdfs:label>Bringing static compositions to life</rdfs:label>
+    </ExpressionGoal>
+
+    <ExpressionGoal rdf:about="http://example.org/creativecoding/instances#changeExpressive">
+        <rdfs:label>Understanding change as an expressive element</rdfs:label>
+    </ExpressionGoal>
+
+    <ExpressionGoal rdf:about="http://example.org/creativecoding/instances#changeAdapt">
+        <rdfs:label>Creating works that change and adapt</rdfs:label>
+    </ExpressionGoal>
+
+    <ExpressionGoal rdf:about="http://example.org/creativecoding/instances#visualCauseEffect">
+        <rdfs:label>Exploring visual cause and effect</rdfs:label>
+    </ExpressionGoal>
+
+    <ExpressionGoal rdf:about="http://example.org/creativecoding/instances#controlChance">
+        <rdfs:label>Balancing control with chance</rdfs:label>
+    </ExpressionGoal>
+
+    <ExpressionGoal rdf:about="http://example.org/creativecoding/instances#uniqueOutputs">
+        <rdfs:label>Creating unique outputs each time</rdfs:label>
+    </ExpressionGoal>
+
+    <ExpressionGoal rdf:about="http://example.org/creativecoding/instances#movementIdeas">
+        <rdfs:label>Expressing ideas through movement</rdfs:label>
+    </ExpressionGoal>
+
+    <ExpressionGoal rdf:about="http://example.org/creativecoding/instances#visualNarratives">
+        <rdfs:label>Creating visual narratives through time</rdfs:label>
+    </ExpressionGoal>
+
+    <ExpressionGoal rdf:about="http://example.org/creativecoding/instances#artworkViewerDialogue">
+        <rdfs:label>Creating dialogue between artwork and viewer</rdfs:label>
+    </ExpressionGoal>
+
+    <ExpressionGoal rdf:about="http://example.org/creativecoding/instances#designExperiences">
+        <rdfs:label>Designing experiences rather than static pieces</rdfs:label>
+    </ExpressionGoal>
+
+    <ExpressionGoal rdf:about="http://example.org/creativecoding/instances#repetitionVariation">
+        <rdfs:label>Finding beauty in repetition and variation</rdfs:label>
+    </ExpressionGoal>
+
+    <ExpressionGoal rdf:about="http://example.org/creativecoding/instances#complexFromSimple">
+        <rdfs:label>Creating complex outputs from simple rules</rdfs:label>
+    </ExpressionGoal>
+
+    <ExpressionGoal rdf:about="http://example.org/creativecoding/instances#personalElementLibrary">
+        <rdfs:label>Building a personal library of visual elements</rdfs:label>
+    </ExpressionGoal>
+
+    <ExpressionGoal rdf:about="http://example.org/creativecoding/instances#complexScenesModular">
+        <rdfs:label>Creating complex scenes from modular parts</rdfs:label>
+    </ExpressionGoal>
+
+    <ExpressionGoal rdf:about="http://example.org/creativecoding/instances#beyondGeometric">
+        <rdfs:label>Moving beyond geometric primitives</rdfs:label>
+    </ExpressionGoal>
+
+    <ExpressionGoal rdf:about="http://example.org/creativecoding/instances#uniqueVisualStyle">
+        <rdfs:label>Developing a unique visual style</rdfs:label>
+    </ExpressionGoal>
+
+    <ExpressionGoal rdf:about="http://example.org/creativecoding/instances#dynamicVisualRelationships">
+        <rdfs:label>Creating dynamic visual relationships</rdfs:label>
+    </ExpressionGoal>
+
+    <ExpressionGoal rdf:about="http://example.org/creativecoding/instances#spatialComposition">
+        <rdfs:label>Understanding spatial composition</rdfs:label>
+    </ExpressionGoal>
+
+    <ExpressionGoal rdf:about="http://example.org/creativecoding/instances#emergentBehaviors">
+        <rdfs:label>Creating emergent visual behaviors</rdfs:label>
+    </ExpressionGoal>
+
+    <ExpressionGoal rdf:about="http://example.org/creativecoding/instances#complexitySystems">
+        <rdfs:label>Managing complexity through systems</rdfs:label>
+    </ExpressionGoal>
+
+    <!-- 
+    //////////////////////////////////////////////////////////////////
+    //
+    //    Creative Pathway Instances
+    //
+    //////////////////////////////////////////////////////////////////
+     -->
+
+    <CreativePathway rdf:about="http://example.org/creativecoding/instances#characterAnimation">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Character Animation</hasName>
+        <includesConcept rdf:resource="http://example.org/creativecoding/instances#simpleDrawing"/>
+        <includesConcept rdf:resource="http://example.org/creativecoding/instances#colors"/>
+        <includesConcept rdf:resource="http://example.org/creativecoding/instances#variables"/>
+        <includesConcept rdf:resource="http://example.org/creativecoding/instances#animation"/>
+        <includesConcept rdf:resource="http://example.org/creativecoding/instances#customShapes"/>
+        <includesConcept rdf:resource="http://example.org/creativecoding/instances#reusableElements"/>
+    </CreativePathway>
+
+    <CreativePathway rdf:about="http://example.org/creativecoding/instances#generativeArtPathway">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Generative Art</hasName>
+        <includesConcept rdf:resource="http://example.org/creativecoding/instances#simpleDrawing"/>
+        <includesConcept rdf:resource="http://example.org/creativecoding/instances#colors"/>
+        <includesConcept rdf:resource="http://example.org/creativecoding/instances#randomness"/>
+        <includesConcept rdf:resource="http://example.org/creativecoding/instances#repetition"/>
+        <includesConcept rdf:resource="http://example.org/creativecoding/instances#transformations"/>
+        <includesConcept rdf:resource="http://example.org/creativecoding/instances#collections"/>
+    </CreativePathway>
+
+    <CreativePathway rdf:about="http://example.org/creativecoding/instances#interactiveExperiences">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Interactive Experiences</hasName>
+        <includesConcept rdf:resource="http://example.org/creativecoding/instances#simpleDrawing"/>
+        <includesConcept rdf:resource="http://example.org/creativecoding/instances#colors"/>
+        <includesConcept rdf:resource="http://example.org/creativecoding/instances#variables"/>
+        <includesConcept rdf:resource="http://example.org/creativecoding/instances#animation"/>
+        <includesConcept rdf:resource="http://example.org/creativecoding/instances#interactivity"/>
+        <includesConcept rdf:resource="http://example.org/creativecoding/instances#conditionals"/>
+    </CreativePathway>
+
+    <CreativePathway rdf:about="http://example.org/creativecoding/instances#visualStories">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Visual Stories</hasName>
+        <includesConcept rdf:resource="http://example.org/creativecoding/instances#simpleDrawing"/>
+        <includesConcept rdf:resource="http://example.org/creativecoding/instances#colors"/>
+        <includesConcept rdf:resource="http://example.org/creativecoding/instances#animation"/>
+        <includesConcept rdf:resource="http://example.org/creativecoding/instances#customShapes"/>
+        <includesConcept rdf:resource="http://example.org/creativecoding/instances#conditionals"/>
+        <includesConcept rdf:resource="http://example.org/creativecoding/instances#reusableElements"/>
+    </CreativePathway>
+
+    <CreativePathway rdf:about="http://example.org/creativecoding/instances#abstractPatterns">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Abstract Patterns</hasName>
+        <includesConcept rdf:resource="http://example.org/creativecoding/instances#simpleDrawing"/>
+        <includesConcept rdf:resource="http://example.org/creativecoding/instances#colors"/>
+        <includesConcept rdf:resource="http://example.org/creativecoding/instances#transparency"/>
+        <includesConcept rdf:resource="http://example.org/creativecoding/instances#repetition"/>
+        <includesConcept rdf:resource="http://example.org/creativecoding/instances#transformations"/>
+        <includesConcept rdf:resource="http://example.org/creativecoding/instances#randomness"/>
+    </CreativePathway>
+
+    <!-- 
+    //////////////////////////////////////////////////////////////////
+    //
+    //    Artistic Goal Instances
+    //
+    //////////////////////////////////////////////////////////////////
+     -->
+
+    <ArtisticGoal rdf:about="http://example.org/creativecoding/instances#selfExpression">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Self Expression</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Creating art that expresses personal emotions, ideas, or identity</hasDescription>
+        <suggestsConcept rdf:resource="http://example.org/creativecoding/instances#colors"/>
+        <suggestsConcept rdf:resource="http://example.org/creativecoding/instances#customShapes"/>
+        <suggestsConcept rdf:resource="http://example.org/creativecoding/instances#interactivity"/>
+        <suggestsConcept rdf:resource="http://example.org/creativecoding/instances#conditionals"/>
+        <hasProjectIdea rdf:resource="http://example.org/creativecoding/instances#interactiveSelfPortrait"/>
+        <hasProjectIdea rdf:resource="http://example.org/creativecoding/instances#emotionalLandscape"/>
+        <hasProjectIdea rdf:resource="http://example.org/creativecoding/instances#visualDiary"/>
+    </ArtisticGoal>
+
+    <ArtisticGoal rdf:about="http://example.org/creativecoding/instances#visualStorytelling">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Visual Storytelling</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Using code to tell stories or narratives</hasDescription>
+        <suggestsConcept rdf:resource="http://example.org/creativecoding/instances#animation"/>
+        <suggestsConcept rdf:resource="http://example.org/creativecoding/instances#customShapes"/>
+        <suggestsConcept rdf:resource="http://example.org/creativecoding/instances#conditionals"/>
+        <suggestsConcept rdf:resource="http://example.org/creativecoding/instances#reusableElements"/>
+        <hasProjectIdea rdf:resource="http://example.org/creativecoding/instances#animatedCharacterEnvironment"/>
+        <hasProjectIdea rdf:resource="http://example.org/creativecoding/instances#interactiveStorybook"/>
+        <hasProjectIdea rdf:resource="http://example.org/creativecoding/instances#generativeComicStrip"/>
+    </ArtisticGoal>
+
+    <ArtisticGoal rdf:about="http://example.org/creativecoding/instances#environmentalAwareness">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Environmental Awareness</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Creating works that connect to nature or environmental themes</hasDescription>
+        <suggestsConcept rdf:resource="http://example.org/creativecoding/instances#randomness"/>
+        <suggestsConcept rdf:resource="http://example.org/creativecoding/instances#collections"/>
+        <suggestsConcept rdf:resource="http://example.org/creativecoding/instances#animation"/>
+        <hasProjectIdea rdf:resource="http://example.org/creativecoding/instances#ecosystemSimulation"/>
+        <hasProjectIdea rdf:resource="http://example.org/creativecoding/instances#weatherResponsiveLandscape"/>
+        <hasProjectIdea rdf:resource="http://example.org/creativecoding/instances#growingPlantSystem"/>
+    </ArtisticGoal>
+
+    <ArtisticGoal rdf:about="http://example.org/creativecoding/instances#socialConnection">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Social Connection</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Art that facilitates connection or communication</hasDescription>
+        <suggestsConcept rdf:resource="http://example.org/creativecoding/instances#interactivity"/>
+        <suggestsConcept rdf:resource="http://example.org/creativecoding/instances#conditionals"/>
+        <suggestsConcept rdf:resource="http://example.org/creativecoding/instances#animation"/>
+        <suggestsConcept rdf:resource="http://example.org/creativecoding/instances#colors"/>
+        <hasProjectIdea rdf:resource="http://example.org/creativecoding/instances#visualChatSystem"/>
+        <hasProjectIdea rdf:resource="http://example.org/creativecoding/instances#collaborativeDrawingCanvas"/>
+        <hasProjectIdea rdf:resource="http://example.org/creativecoding/instances#emotionTranslator"/>
+    </ArtisticGoal>
+
+    <ArtisticGoal rdf:about="http://example.org/creativecoding/instances#visualExploration">
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Visual Exploration</hasName>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Exploring visual concepts and aesthetics for their own sake</hasDescription>
+        <suggestsConcept rdf:resource="http://example.org/creativecoding/instances#transformations"/>
+        <suggestsConcept rdf:resource="http://example.org/creativecoding/instances#repetition"/>
+        <suggestsConcept rdf:resource="http://example.org/creativecoding/instances#randomness"/>
+        <suggestsConcept rdf:resource="http://example.org/creativecoding/instances#transparency"/>
+        <hasProjectIdea rdf:resource="http://example.org/creativecoding/instances#colorRelationshipExplorer"/>
+        <hasProjectIdea rdf:resource="http://example.org/creativecoding/instances#patternGenerator"/>
+        <hasProjectIdea rdf:resource="http://example.org/creativecoding/instances#visualMusicInterpreter"/>
+    </ArtisticGoal>
+
+    <!-- 
+    //////////////////////////////////////////////////////////////////
+    //
+    //    Project Idea Instances
+    //
+    //////////////////////////////////////////////////////////////////
+     -->
+
+    <ProjectIdea rdf:about="http://example.org/creativecoding/instances#interactiveSelfPortrait">
+        <hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Interactive self-portrait that changes with mouse movement</hasTitle>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Interactive self-portrait that changes with mouse movement</hasDescription>
+    </ProjectIdea>
+
+    <ProjectIdea rdf:about="http://example.org/creativecoding/instances#emotionalLandscape">
+        <hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Emotional landscape that reflects different moods</hasTitle>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Emotional landscape that reflects different moods</hasDescription>
+    </ProjectIdea>
+
+    <ProjectIdea rdf:about="http://example.org/creativecoding/instances#visualDiary">
+        <hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Visual diary that generates unique patterns each day</hasTitle>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Visual diary that generates unique patterns each day</hasDescription>
+    </ProjectIdea>
+
+    <ProjectIdea rdf:about="http://example.org/creativecoding/instances#animatedCharacterEnvironment">
+        <hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Animated character that responds to environment</hasTitle>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Animated character that responds to environment</hasDescription>
+    </ProjectIdea>
+
+    <ProjectIdea rdf:about="http://example.org/creativecoding/instances#interactiveStorybook">
+        <hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Interactive storybook with scene transitions</hasTitle>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Interactive storybook with scene transitions</hasDescription>
+    </ProjectIdea>
+
+    <ProjectIdea rdf:about="http://example.org/creativecoding/instances#generativeComicStrip">
+        <hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Generative comic strip with variable elements</hasTitle>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Generative comic strip with variable elements</hasDescription>
+    </ProjectIdea>
+
+    <ProjectIdea rdf:about="http://example.org/creativecoding/instances#ecosystemSimulation">
+        <hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ecosystem simulation with interdependent elements</hasTitle>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ecosystem simulation with interdependent elements</hasDescription>
+    </ProjectIdea>
+
+    <ProjectIdea rdf:about="http://example.org/creativecoding/instances#weatherResponsiveLandscape">
+        <hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Weather-responsive landscape that changes with real data</hasTitle>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Weather-responsive landscape that changes with real data</hasDescription>
+    </ProjectIdea>
+
+    <ProjectIdea rdf:about="http://example.org/creativecoding/instances#growingPlantSystem">
+        <hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Growing plant system that responds to user care</hasTitle>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Growing plant system that responds to user care</hasDescription>
+    </ProjectIdea>
+
+    <ProjectIdea rdf:about="http://example.org/creativecoding/instances#visualChatSystem">
+        <hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Visual chat system where messages become part of a composition</hasTitle>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Visual chat system where messages become part of a composition</hasDescription>
+    </ProjectIdea>
+
+    <ProjectIdea rdf:about="http://example.org/creativecoding/instances#collaborativeDrawingCanvas">
+        <hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Collaborative drawing canvas</hasTitle>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Collaborative drawing canvas</hasDescription>
+    </ProjectIdea>
+
+    <ProjectIdea rdf:about="http://example.org/creativecoding/instances#emotionTranslator">
+        <hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Emotion translator that converts text to visual expression</hasTitle>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Emotion translator that converts text to visual expression</hasDescription>
+    </ProjectIdea>
+
+    <ProjectIdea rdf:about="http://example.org/creativecoding/instances#colorRelationshipExplorer">
+        <hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Color relationship explorer</hasTitle>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Color relationship explorer</hasDescription>
+    </ProjectIdea>
+
+    <ProjectIdea rdf:about="http://example.org/creativecoding/instances#patternGenerator">
+        <hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pattern generator with adjustable parameters</hasTitle>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Pattern generator with adjustable parameters</hasDescription>
+    </ProjectIdea>
+
+    <ProjectIdea rdf:about="http://example.org/creativecoding/instances#visualMusicInterpreter">
+        <hasTitle rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Visual music interpreter that translates sound to image</hasTitle>
+        <hasDescription rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Visual music interpreter that translates sound to image</hasDescription>
+    </ProjectIdea>
+
+</rdf:RDF>

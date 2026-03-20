@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P5.js Compatibility Test</title>
+    <style>
+        body {
+            font-family: 'Consolas', 'Monaco', 'Lucida Console', monospace;
+            padding: 20px;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            background-color: #252526;
+        }
+        .test-code {
+            background-color: #1e1e1e;
+            padding: 10px;
+            border-radius: 3px;
+            font-family: 'Consolas', 'Monaco', 'Lucida Console', monospace;
+            white-space: pre-wrap;
+            margin: 10px 0;
+        }
+        .test-result {
+            padding: 5px 10px;
+            border-radius: 3px;
+            margin: 5px 0;
+        }
+        .pass {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .fail {
+            background-color: #f44336;
+            color: white;
+        }
+        .warning {
+            background-color: #ff9800;
+            color: white;
+        }
+        #canvas-container {
+            width: 400px;
+            height: 400px;
+            border: 1px solid #555;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>P5.js Vocabulary Compatibility Test</h1>
+    <p>Testing our expanded P5.js vocabulary against common examples from the P5.js website.</p>
+    
+    <div id="test-results"></div>
+    <div id="canvas-container"></div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <script type="module">
+        import { P5_FUNCTIONS, P5_VARIABLES, P5_CONSTANTS, getAllP5Identifiers } from './src/js/p5-vocabulary.js';
+        import { Canvas } from './src/js/canvas.js';
+        
+        // Test cases based on common P5.js examples
+        const testCases = [
+            {
+                name: "Basic Setup and Draw",
+                code: `function setup() {
+  createCanvas(400, 400);
+}
+
+function draw() {
+  background(220);
+  ellipse(mouseX, mouseY, 50, 50);
+}`,
+                expectedFunctions: ['createCanvas', 'background', 'ellipse'],
+                expectedVariables: ['mouseX', 'mouseY']
+            },
+            {
+                name: "Animation with frameCount",
+                code: `function setup() {
+  createCanvas(400, 400);
+}
+
+function draw() {
+  background(0);
+  fill(255);
+  ellipse(width/2 + sin(frameCount * 0.05) * 100, height/2, 50, 50);
+}`,
+                expectedFunctions: ['createCanvas', 'background', 'fill', 'ellipse', 'sin'],
+                expectedVariables: ['width', 'height', 'frameCount']
+            },
+            {
+                name: "Color and Math Functions",
+                code: `function setup() {
+  createCanvas(400, 400);
+  colorMode(HSB);
+}
+
+function draw() {
+  background(0);
+  for (let i = 0; i < 10; i++) {
+    fill(map(i, 0, 9, 0, 360), 100, 100);
+    ellipse(random(width), random(height), 30, 30);
+  }
+}`,
+                expectedFunctions: ['createCanvas', 'colorMode', 'background', 'fill', 'map', 'ellipse', 'random'],
+                expectedConstants: ['HSB'],
+                expectedVariables: ['width', 'height']
+            },
+            {
+                name: "Typography and Text",
+                code: `let font;
+
+function preload() {
+  // Note: loadFont would need actual font file
+}
+
+function setup() {
+  createCanvas(400, 400);
+  textAlign(CENTER, CENTER);
+  textSize(32);
+}
+
+function draw() {
+  background(220);
+  fill(0);
+  text("Hello P5.js!", width/2, height/2);
+}`,
+                expectedFunctions: ['preload', 'createCanvas', 'textAlign', 'textSize', 'background', 'fill', 'text'],
+                expectedConstants: ['CENTER'],
+                expectedVariables: ['width', 'height']
+            },
+            {
+                name: "Mouse Interaction",
+                code: `function setup() {
+  createCanvas(400, 400);
+}
+
+function draw() {
+  background(220);
+  if (mouseIsPressed) {
+    fill(0);
+  } else {
+    fill(255);
+  }
+  ellipse(mouseX, mouseY, 80, 80);
+}
+
+function mousePressed() {
+  print("Mouse clicked at:", mouseX, mouseY);
+}`,
+                expectedFunctions: ['createCanvas', 'background', 'fill', 'ellipse', 'print'],
+                expectedVariables: ['mouseIsPressed', 'mouseX', 'mouseY']
+            },
+            {
+                name: "Transformations and Push/Pop",
+                code: `function setup() {
+  createCanvas(400, 400);
+}
+
+function draw() {
+  background(220);
+  
+  push();
+  translate(width/2, height/2);
+  rotate(frameCount * 0.02);
+  fill(255, 0, 0);
+  rect(-25, -25, 50, 50);
+  pop();
+  
+  fill(0, 0, 255);
+  ellipse(width/2, height/2, 10, 10);
+}`,
+                expectedFunctions: ['createCanvas', 'background', 'push', 'translate', 'rotate', 'fill', 'rect', 'pop', 'ellipse'],
+                expectedVariables: ['width', 'height', 'frameCount']
+            },
+            {
+                name: "Noise and Random",
+                code: `let noiseScale = 0.01;
+
+function setup() {
+  createCanvas(400, 400);
+  noiseDetail(4, 0.5);
+}
+
+function draw() {
+  background(0);
+  
+  for (let x = 0; x < width; x += 10) {
+    for (let y = 0; y < height; y += 10) {
+      let noiseVal = noise(x * noiseScale, y * noiseScale, frameCount * 0.01);
+      fill(noiseVal * 255);
+      rect(x, y, 10, 10);
+    }
+  }
+}`,
+                expectedFunctions: ['createCanvas', 'noiseDetail', 'background', 'noise', 'fill', 'rect'],
+                expectedVariables: ['width', 'height', 'frameCount']
+            }
+        ];
+        
+        // Test runner
+        class P5CompatibilityTest {
+            constructor() {
+                this.results = [];
+                this.canvas = new Canvas('canvas-container');
+            }
+            
+            async runTests() {
+                const resultsContainer = document.getElementById('test-results');
+                resultsContainer.innerHTML = '<h2>Running Compatibility Tests...</h2>';
+                
+                for (const testCase of testCases) {
+                    const result = await this.runSingleTest(testCase);
+                    this.results.push(result);
+                    this.displayResult(result, resultsContainer);
+                }
+                
+                this.displaySummary(resultsContainer);
+            }
+            
+            async runSingleTest(testCase) {
+                const result = {
+                    name: testCase.name,
+                    code: testCase.code,
+                    passed: true,
+                    errors: [],
+                    warnings: [],
+                    coverage: {
+                        functions: 0,
+                        variables: 0,
+                        constants: 0
+                    }
+                };
+                
+                try {
+                    // Check function coverage
+                    if (testCase.expectedFunctions) {
+                        for (const func of testCase.expectedFunctions) {
+                            if (P5_FUNCTIONS.includes(func)) {
+                                result.coverage.functions++;
+                            } else {
+                                result.errors.push(`Missing function: ${func}`);
+                                result.passed = false;
+                            }
+                        }
+                    }
+                    
+                    // Check variable coverage
+                    if (testCase.expectedVariables) {
+                        for (const variable of testCase.expectedVariables) {
+                            if (P5_VARIABLES.includes(variable)) {
+                                result.coverage.variables++;
+                            } else {
+                                result.errors.push(`Missing variable: ${variable}`);
+                                result.passed = false;
+                            }
+                        }
+                    }
+                    
+                    // Check constant coverage
+                    if (testCase.expectedConstants) {
+                        for (const constant of testCase.expectedConstants) {
+                            if (P5_CONSTANTS.includes(constant)) {
+                                result.coverage.constants++;
+                            } else {
+                                result.errors.push(`Missing constant: ${constant}`);
+                                result.passed = false;
+                            }
+                        }
+                    }
+                    
+                    // Try to validate the code
+                    const validation = this.canvas.validateP5Code(testCase.code);
+                    if (!validation.success) {
+                        result.warnings.push(`Validation issues: ${validation.errors.join(', ')}`);
+                    }
+                    
+                    // Try to execute the code (briefly)
+                    try {
+                        await this.canvas.executeCode(testCase.code);
+                        await new Promise(resolve => setTimeout(resolve, 100)); // Let it run briefly
+                        this.canvas.stop();
+                    } catch (error) {
+                        result.warnings.push(`Execution issue: ${error.message}`);
+                    }
+                    
+                } catch (error) {
+                    result.passed = false;
+                    result.errors.push(`Test error: ${error.message}`);
+                }
+                
+                return result;
+            }
+            
+            displayResult(result, container) {
+                const testDiv = document.createElement('div');
+                testDiv.className = 'test-section';
+                
+                const statusClass = result.passed ? 'pass' : 'fail';
+                const statusText = result.passed ? 'PASS' : 'FAIL';
+                
+                let html = `
+                    <h3>${result.name} <span class="test-result ${statusClass}">${statusText}</span></h3>
+                    <div class="test-code">${result.code}</div>
+                `;
+                
+                if (result.coverage.functions > 0 || result.coverage.variables > 0 || result.coverage.constants > 0) {
+                    html += `<p><strong>Coverage:</strong> ${result.coverage.functions} functions, ${result.coverage.variables} variables, ${result.coverage.constants} constants</p>`;
+                }
+                
+                if (result.errors.length > 0) {
+                    html += '<div><strong>Errors:</strong><ul>';
+                    result.errors.forEach(error => {
+                        html += `<li class="test-result fail">${error}</li>`;
+                    });
+                    html += '</ul></div>';
+                }
+                
+                if (result.warnings.length > 0) {
+                    html += '<div><strong>Warnings:</strong><ul>';
+                    result.warnings.forEach(warning => {
+                        html += `<li class="test-result warning">${warning}</li>`;
+                    });
+                    html += '</ul></div>';
+                }
+                
+                testDiv.innerHTML = html;
+                container.appendChild(testDiv);
+            }
+            
+            displaySummary(container) {
+                const passed = this.results.filter(r => r.passed).length;
+                const total = this.results.length;
+                const percentage = Math.round((passed / total) * 100);
+                
+                const summaryDiv = document.createElement('div');
+                summaryDiv.className = 'test-section';
+                summaryDiv.innerHTML = `
+                    <h2>Test Summary</h2>
+                    <p><strong>Results:</strong> ${passed}/${total} tests passed (${percentage}%)</p>
+                    <p><strong>Total P5.js Functions:</strong> ${P5_FUNCTIONS.length}</p>
+                    <p><strong>Total P5.js Variables:</strong> ${P5_VARIABLES.length}</p>
+                    <p><strong>Total P5.js Constants:</strong> ${P5_CONSTANTS.length}</p>
+                    <p><strong>Total P5.js Identifiers:</strong> ${getAllP5Identifiers().length}</p>
+                `;
+                
+                container.appendChild(summaryDiv);
+            }
+        }
+        
+        // Run tests when page loads
+        window.addEventListener('load', async () => {
+            const tester = new P5CompatibilityTest();
+            await tester.runTests();
+        });
+    </script>
+</body>
+</html>
